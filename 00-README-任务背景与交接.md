@@ -12,8 +12,9 @@
 | 夜间预跑②内容策略分析 | ✅ | `02-竞对内容策略分析.md` |
 | 夜间预跑③页面内容提炼 | ✅ | `03-页面内容提炼与骨架.md`（16 页规划） |
 | 夜间预跑④范本自审 | ✅ | `04-范本-blog-what-is-a-pressure-transducer.md`（1635 词通过） |
-| **建站** | ✅ **已上线** | **https://t48-pressure-transducer.pages.dev**（24 页） |
-| 内容增量（缺失页补齐） | 🔄 | products 总览/explosion-proof/oil-gas/automation/blog 索引/calibration 6 页 delegate 中 |
+| **建站** | ✅ **已上线** | **https://t48-pressure-transducer.pages.dev**（31 页） |
+| 内容增量（缺失页补齐） | ✅ | products 总览/explosion-proof/oil-gas/automation/blog 索引/calibration 6 页（已上线） |
+| **内容增量③深度指南** | ✅ **已上线** | **37 页**：selection-guide 3016 词范本 + 差压/平膜/精度/微型/液位 5 篇（2000-3100 词），blog 索引 11 篇，sitemap 37，0 死链 |
 
 ## 二、建站信息
 
@@ -46,9 +47,10 @@
 
 - [x] M1 三查报告（2026-08-23）
 - [x] 夜间预跑①-④（2026-08-23 夜）
-- [x] 建站 24 页上线（2026-08-24）
-- [ ] 缺失页 6 页补齐（delegate 运行中）
-- [ ] 核心词 3000+ 字深度指南（内容增量③）
+- [x] 建站 31 页上线（2026-08-24）
+- [x] 缺失页 6 页补齐（2026-08-24 上线）
+- [x] 核心词 3000+ 字深度指南 6 篇（内容增量③，2026-08-25 上线，37 页）
 - [ ] on-page + technical SEO 检查（上线前收尾）
 - [ ] 域名注册（待主人定，走 CF Registrar）
 - [ ] logo 定稿（Trae 指令，色板后置）
+- [ ] git push 待网络恢复（commit f733d7d 已本地，wrangler 已直部署）
