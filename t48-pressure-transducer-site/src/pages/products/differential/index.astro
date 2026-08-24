@@ -1,0 +1,69 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CategoryPageTemplate from '../../../components/CategoryPageTemplate.astro';
+
+const longtail = ["differential pressure transducer", "differential pressure transmitter 4-20ma", "wet/wet differential pressure transducer", "differential pressure sensor for air", "filter differential pressure monitoring", "differential pressure transducer for flow measurement", "DP transmitter HVAC", "differential pressure sensor for filters"];
+const faqs = [
+  { q: 'What is the difference between wet/wet and wet/dry differential pressure transducers?', a: 'Wet/wet models have both pressure ports wetted, so liquid or gas can be connected to both sides. Wet/dry models wetted one side only, with the other side open to atmosphere — they suit air and gas systems where you compare line pressure against ambient.' },
+  { q: 'Can a differential pressure transducer measure flow?', a: 'Yes, when used with an orifice plate, venturi or pitot tube. The pressure drop across the restriction is proportional to the square of the flow rate, so the DP signal is converted to flow in the controller or recorder.' },
+  { q: 'What range do I need for filter monitoring?', a: 'Filter and strainer monitoring typically uses small spans such as 0-0.5 bar or 0-1 bar, because the pressure drop across a clean filter is small and you want to see the rise as the element loads. Choose a span that covers the clean-element drop with margin.' },
+  { q: 'Can both sides of a wet/wet transducer handle high line pressure?', a: 'Yes — check the static line pressure rating separately from the differential span. A transducer may measure a 0-1 bar differential while both ports sit on a 100 bar process line.' },
+  { q: 'Which outputs and connections are available?', a: '4-20mA two-wire, 0-10V and RS485 Modbus outputs, with G1/4, G1/2, NPT or barbed connections for tubing. CE marked, IP65/IP67 rated, 316L wetted parts for wet/wet models.' },
+];
+---
+
+<Layout title="Differential Pressure Transducers | Wet/Wet & Wet/Dry, 4-20mA — PRESSUREPOINT" description="Differential pressure transducers and transmitters in wet/wet and wet/dry versions. 4-20mA, 0-10V and RS485 outputs for filter monitoring, flow measurement and level. Factory-direct.">
+  <CategoryPageTemplate
+    title="Differential Pressure Transducers"
+    kw="differential pressure transducer"
+    desc="Differential pressure transducers measure the pressure difference between two ports rather than a single gauge pressure, which makes them the standard tool for filter and strainer monitoring, flow measurement across restrictions, and level measurement in pressurized tanks. PRESSUREPOINT offers wet/wet models with both ports wetted for liquid service, and wet/dry models for air and gas systems compared against atmosphere. Outputs include 4-20mA, 0-10V and RS485 Modbus, with small spans from 0-0.5 bar for clean filter elements up to higher ranges for flow and level duty. Stainless 316L wetted parts, G1/4, G1/2, NPT or barbed connections, CE marked and factory-direct with custom spans and static line pressure ratings."
+    points={[
+      'Wet/wet models for liquid on both ports, wet/dry models for air and gas vs atmosphere',
+      'Small spans from 0-0.5 bar for filter and strainer monitoring, higher ranges for flow and level',
+      '4-20mA two-wire, 0-10V and RS485 Modbus outputs for PLC, SCADA and building control',
+      'Stainless 316L wetted parts on wet/wet models, high static line pressure ratings available',
+      'G1/4, G1/2, NPT and barbed connections for tubing, IP65/IP67 rated, CE marked',
+      'Custom spans and static pressure ratings configured at the factory',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-vs-transmitter/', title: 'Transducer vs Transmitter: Key Differences' },
+      { href: '/blog/pressure-transducer-working-principle/', title: 'How a Pressure Transducer Works' },
+      { href: '/blog/differential-pressure-measurement/', title: 'Differential Pressure Measurement Basics' },
+    ]}
+    recommended={[
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'General-purpose transducers, ±0.25% FS standard' },
+      { title: 'High Accuracy Series', href: '/products/high-accuracy/', desc: '±0.1% FS for precision measurement' },
+      { title: 'Submersible Series', href: '/products/submersible/', desc: 'Hydrostatic level transmitters, IP68' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Specifying a Differential Pressure Transducer</h2>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Key specification decisions</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Wet/wet vs wet/dry</strong> — liquid on both sides needs wet/wet; air ducts and gas lines against atmosphere work with wet/dry.</li>
+              <li><strong>Span</strong> — match the span to the expected pressure drop: small spans for clean filters, larger spans for flow elements and tank level.</li>
+              <li><strong>Static line pressure</strong> — confirm the transducer can sit on the system pressure while measuring a small differential.</li>
+              <li><strong>Media compatibility</strong> — 316L wetted parts handle water, oil and air; confirm materials for corrosive or slurry service.</li>
+              <li><strong>Output & wiring</strong> — 4-20mA for long runs and PLCs, 0-10V for local controllers, RS485 for multi-drop buses.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Typical applications</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Filter & strainer monitoring</strong> — track the rising pressure drop across bag filters, cartridge filters and pump strainers to schedule cleaning.</li>
+              <li><strong>Flow measurement</strong> — differential pressure across orifice plates, venturis and pitot tubes for liquid and gas flow.</li>
+              <li><strong>HVAC & cleanroom</strong> — duct static pressure and room differential monitoring for building control systems.</li>
+              <li><strong>Liquid level</strong> — level in closed tanks and condensate pots measured from the pressure difference between bottom and top taps.</li>
+              <li><strong>Leak detection</strong> — pressure decay and cross-line difference monitoring on vessels and pipework.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </CategoryPageTemplate>
+</Layout>

@@ -1,0 +1,144 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import IndustryPageTemplate from '../../../components/IndustryPageTemplate.astro';
+
+const longtail = [
+  "sanitary pressure transducer",
+  "hygienic pressure sensor food industry",
+  "chemical pressure transmitter",
+  "flush diaphragm pressure sensor",
+  "pharmaceutical pressure transmitter",
+  "explosion proof pressure transmitter",
+  "pressure transmitter hastelloy",
+  "sanitary process connection pressure sensor",
+];
+
+const faqs = [
+  { q: "What makes a transducer suitable for hygienic service?", a: "A flush diaphragm with no dead volume, wetted materials suited to food, dairy and pharmaceutical media, and a process connection that matches your line standard — Tri-Clamp, DIN 11851 or similar. Surface finish and crevice-free design are what make a flush diaphragm cleanable. Send us your standard and media and we will confirm a model." },
+  { q: "Which wetted materials suit aggressive chemicals?", a: "316L stainless covers a wide range of fluids. For chlorides, acids and other aggressive media, alternatives such as Hastelloy or ceramic diaphragm designs are worth reviewing. A diaphragm that suits the product may not suit the cleaning chemical, so both belong in the specification — share the chemical, concentration and temperature and we will recommend a combination." },
+  { q: "Can sensors survive CIP/SIP cleaning?", a: "Cleaning cycles expose sensors to temperature and chemical transients beyond normal process duty — they frequently run hotter than the process itself. Confirm your CIP/SIP temperature profile and duration so we can check the model rating against the hottest point in your cycle, not just the operating pressure." },
+  { q: "Do you support hazardous-area installations?", a: "Yes — models designed for hazardous-area duty are available. Confirm your zone classification and certificate requirements and we will match a suitable model. Area classification applies to the sensor location, so confirm it before choosing the housing." },
+];
+---
+
+<Layout title="Process Pressure Transducers | Sanitary & Chemical | PRESSUREPOINT" description="Pressure measurement for chemical, pharmaceutical and food & beverage plants. Sanitary flush-diaphragm designs, corrosion-resistant wetted parts and explosion-proof options, with ranges from vacuum to 600 bar.">
+  <IndustryPageTemplate
+    title="Process Industry"
+    kw="process pressure transducer"
+    desc="Pressure measurement for chemical, pharmaceutical and food & beverage plants: sanitary flush-diaphragm designs, corrosion-resistant wetted parts and explosion-proof options, with ranges from vacuum to 600 bar."
+    points={[
+      'Flush-diaphragm designs for hygienic and viscous media',
+      'Corrosion-resistant wetted parts for aggressive chemicals',
+      'Explosion-proof models for hazardous process areas',
+      'Ranges from -1 bar vacuum to 600 bar',
+      '4-20mA two-wire output for DCS and PLC integration',
+      'High-accuracy options for batch and recipe control',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-vs-transmitter/', title: 'Transducer vs Transmitter: Key Differences' },
+      { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle: How It Works' },
+    ]}
+    recommended={[
+      { title: 'Flush Diaphragm Series', href: '/products/flush-diaphragm/', desc: 'Hygienic and viscous-media duty' },
+      { title: 'High Accuracy Series', href: '/products/high-accuracy/', desc: '±0.1% FS for batch and recipe control' },
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'Line and vessel pressure monitoring' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">What Process Industries Measure</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Process plants live or die by repeatability: the same recipe, the same conditions, every batch. Pressure is one of the core process variables, and the transducer's job is to report it faithfully through cleaning cycles, temperature swings and aggressive media. The same sensor may see product at process temperature in the morning and cleaning chemicals at higher temperature in the afternoon — the specification has to survive both.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Reactor & vessel pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Chemical reactors operate under pressure control for reaction rate, safety interlocks and venting logic. A reliable reading is part of the safety chain — and on batch reactors it also feeds the batch record, so accuracy is a documentation issue as much as a safety one.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Line & transfer pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Product transfer, dosing and filtration lines need continuous pressure for pump protection and stable flow. Dosing skids in particular depend on pressure stability to keep flow rates repeatable batch after batch.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Filter & membrane differential</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Pressure drop across process filters and membranes signals fouling and triggers cleaning cycles before throughput suffers. In pharmaceutical lines, the differential reading is part of the validation record for the filtration step.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Food & beverage lines</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Product lines, homogenisers and filling machines monitor pressure for yield, quality and equipment protection. Homogenisers run at high pressure and high cycle counts, so sensor robustness is the selection driver there.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Pharmaceutical processes</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">WFI loops, buffer tanks and process vessels use pressure for batch control and the documentation that goes with it. Cleanability and documented materials matter as much as the pressure range itself.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Tank level via hydrostatic</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Bulk chemical and ingredient storage uses hydrostatic pressure for inventory and transfer control — and for hazardous liquids, a level reading without opening the tank is a safety advantage in itself.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-slate-50">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Choosing a Transducer for Process Duty</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Process selection is driven by the media, the cleaning regime and the area classification. The cheapest transducer is the one that survives the process and the cleaning cycle — which is rarely the one with the lowest price. These six points cover most of the risk.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Media, design and range</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Wetted materials</strong> — 316L covers many fluids; chlorides, acids and other aggressive media may need Hastelloy or ceramic diaphragm alternatives. A diaphragm that suits the product may not suit the cleaning chemical — both belong in the specification.</li>
+              <li><strong>Sanitary design</strong> — flush-diaphragm models eliminate dead volume and are cleanable, suiting food, dairy and pharma lines; confirm your clamp or threaded standard with your quality team.</li>
+              <li><strong>Range & vacuum</strong> — process duty spans vacuum to 600 bar. Reactor cycles often pull vacuum during purging, so the range must cover the whole cycle — if the line pulls vacuum, specify a range that covers it.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Temperature, area and signal</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Temperature</strong> — process temperature, ambient temperature and cleaning cycles (CIP/SIP) all matter. Cleaning cycles frequently run hotter than the process itself, so confirm the full profile and check the model rating against the hottest point.</li>
+              <li><strong>Hazardous areas</strong> — explosion-proof models are available for classified zones; confirm zone and certificate requirements with the site engineer before choosing the housing.</li>
+              <li><strong>Output & accuracy</strong> — 4-20mA two-wire is the standard DCS/PLC input; high-accuracy options at ±0.1% FS suit batch- and recipe-critical loops, where the difference shows up directly in batch yield.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Common Process Measurement Problems</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Six problems dominate process instrument failures, and each one traces back to a gap in the specification rather than a fault in the sensor.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Clogging with viscous or fibrous media</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Flush-diaphragm designs keep the sensing face clean where threaded ports would block.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Corrosion of wetted parts</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Match the diaphragm material to the chemical, not the pipe material — and confirm concentration and temperature with the supplier.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Temperature transients during cleaning</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Check the model rating against your CIP/SIP profile before installation, not after a failure.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Hygiene dead legs</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Flush mounting removes the pockets where product can collect and spoil.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Vibration on agitated vessels</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Support the mounting and confirm the sensor's vibration rating for the location.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Drift in harsh duty</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Plan calibration intervals around the accuracy class you actually need — not the best one on the datasheet.</p>
+          </div>
+        </div>
+        <div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <h3 class="text-lg font-bold text-navy-950">Start with the right specification</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">Send us the media (chemical, concentration and temperature), the process connection standard, the pressure and vacuum range, the cleaning cycle and the area classification. We will confirm wetted materials, range and housing — and for hygienic duty, a flush-diaphragm design matched to your line. Every unit is individually calibrated and pressure-tested before shipping.</p>
+        </div>
+      </div>
+    </section>
+  </IndustryPageTemplate>
+</Layout>

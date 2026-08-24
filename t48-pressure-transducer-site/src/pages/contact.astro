@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact PRESSUREPOINT — Pressure Transducer Quote" description="Contact PRESSUREPOINT for pressure transducer and transmitter pricing. Send your range, media, output signal and volume for a quote within 24 hours. Factory-direct with OEM/ODM support.">
+  <section class="bg-navy-950 text-white">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <p class="text-sm font-semibold text-night-green">CONTACT</p>
+      <h1 class="mt-2 text-4xl font-extrabold tracking-tight">Get a Quote in 24 Hours</h1>
+      <p class="mt-3 max-w-2xl text-lg text-slate-300">Tell us your working conditions — pressure range, media, output signal, process connection and volume — and our engineers will recommend the right transducer, with datasheet and pricing.</p>
+    </div>
+  </section>
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <div class="grid gap-12 lg:grid-cols-5">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-extrabold text-navy-950">Contact Information</h2>
+          <ul class="mt-6 space-y-4 text-sm text-slate-600">
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-lg">📧</span>
+              <a href="mailto:cj226144@gmail.com" class="hover:text-brand-blue">cj226144@gmail.com</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-lg">💬</span>
+              <a href="https://wa.me/8613710860663" target="_blank" rel="noopener" class="hover:text-brand-blue">WhatsApp: +86 137 1086 0663</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-lg">⏱️</span>
+              <span>Replies within 24 hours, Mon–Sat</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-lg">🏭</span>
+              <span>Factory-direct — every unit individually calibrated against NIST-traceable standards before shipping</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-lg">📦</span>
+              <span>Worldwide shipping with CE declarations and calibration certificates on request</span>
+            </li>
+          </ul>
+          <div class="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <h3 class="text-base font-bold text-navy-950">Send a complete spec for the fastest quote</h3>
+            <ul class="mt-3 space-y-1.5 text-sm text-slate-600">
+              <li>• Pressure range (e.g. 0-16 bar, or vacuum)</li>
+              <li>• Output signal (4-20mA / 0-10V / RS485)</li>
+              <li>• Process medium and temperature</li>
+              <li>• Process connection (G1/4, NPT, M20×1.5…)</li>
+              <li>• Quantity and target lead time</li>
+            </ul>
+          </div>
+        </div>
+        <div class="lg:col-span-3">
+          <form id="inquiry-form" class="space-y-5" method="post" action="/api/contact">
+            <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input type="hidden" name="form_source" value="contact page" />
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="name" class="mb-1.5 block text-sm font-semibold text-navy-950">Name *</label>
+                <input id="name" name="name" type="text" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-brand-blue focus:outline-none" />
+              </div>
+              <div>
+                <label for="email" class="mb-1.5 block text-sm font-semibold text-navy-950">Email *</label>
+                <input id="email" name="email" type="email" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-brand-blue focus:outline-none" />
+              </div>
+            </div>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="company" class="mb-1.5 block text-sm font-semibold text-navy-950">Company</label>
+                <input id="company" name="company" type="text" class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-brand-blue focus:outline-none" />
+              </div>
+              <div>
+                <label for="product" class="mb-1.5 block text-sm font-semibold text-navy-950">Product / Service *</label>
+                <select id="product" name="product" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-brand-blue focus:outline-none">
+                  <option value="">Select product</option>
+                  <option>Industrial Pressure Transducer</option>
+                  <option>High Accuracy Transducer (±0.1% FS)</option>
+                  <option>Miniature Pressure Sensor</option>
+                  <option>Differential Pressure Transducer</option>
+                  <option>Flush Diaphragm Transducer</option>
+                  <option>Submersible Level Transmitter</option>
+                  <option>Explosion-Proof Transmitter</option>
+                  <option>Custom OEM / ODM Build</option>
+                  <option>Calibration / Documentation Request</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="quantity" class="mb-1.5 block text-sm font-semibold text-navy-950">Quantity</label>
+                <input id="quantity" name="quantity" type="text" class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-brand-blue focus:outline-none" placeholder="e.g. 50 pcs / annual volume" />
+              </div>
+              <div>
+                <label for="industry" class="mb-1.5 block text-sm font-semibold text-navy-950">Industry</label>
+                <select id="industry" name="industry" class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-brand-blue focus:outline-none">
+                  <option value="">Select industry</option>
+                  <option>Hydraulics & Machine Tools</option>
+                  <option>HVAC & Refrigeration</option>
+                  <option>Water & Pumps</option>
+                  <option>Compressed Air & Pneumatics</option>
+                  <option>Process & Chemical</option>
+                  <option>Oil & Gas</option>
+                  <option>Food & Beverage</option>
+                  <option>OEM / Machine Building</option>
+                  <option>Distribution / Wholesale</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="message" class="mb-1.5 block text-sm font-semibold text-navy-950">Specification / Message *</label>
+              <textarea id="message" name="message" rows="5" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-brand-blue focus:outline-none" placeholder="e.g. Need 0-16 bar transducer, 4-20mA output, G1/4 connection, media: water, 200 pcs/year, with calibration certificate"></textarea>
+            </div>
+            <button type="submit" class="rounded-lg bg-cta-orange px-8 py-3 font-semibold text-white transition hover:bg-orange-600">Send Inquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    document.getElementById('inquiry-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type=submit]');
+      const original = btn.textContent;
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        const data = await res.json();
+        if (data.ok) {
+          window.location.href = '/thank-you/';
+        } else {
+          alert('Something went wrong: ' + (data.error || 'unknown error'));
+        }
+      } catch (err) {
+        alert('Network error, please email us directly at cj226144@gmail.com');
+      } finally {
+        btn.textContent = original;
+        btn.disabled = false;
+      }
+    });
+  </script>
+</Layout>

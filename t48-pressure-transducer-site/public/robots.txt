@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /thank-you/
+
+Sitemap: https://t48-pressure-transducer.pages.dev/sitemap.xml

@@ -1,0 +1,140 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import IndustryPageTemplate from '../../../components/IndustryPageTemplate.astro';
+
+const longtail = [
+  "submersible pressure transducer",
+  "water pressure transmitter 4-20ma",
+  "hydrostatic level sensor",
+  "pump discharge pressure sensor",
+  "ip68 pressure transmitter",
+  "water level pressure sensor",
+  "booster pump pressure sensor",
+  "borehole pressure sensor",
+];
+
+const faqs = [
+  { q: "How does hydrostatic level measurement work?", a: "A transducer at a known depth reads the weight of the water column above it — roughly 1 bar per 10 metres of water. Convert the pressure reading to level in your controller; for open tanks use a gauge-reference (vented) sensor so atmospheric changes do not shift the reading. Because the sensor sits at the bottom, foam, turbulence and surface debris do not affect it." },
+  { q: "Submersible or in-line transducer?", a: "Use submersible for level in tanks, wells and reservoirs, with the cable running to the surface; use in-line for pipe pressure. If the tank is closed or pressurised, tell us — the reference and venting requirements change. For open tanks the vented gauge reference is standard because it cancels barometric changes." },
+  { q: "What about water hammer and pressure surges?", a: "Pump start/stop and fast-closing valves can create transients well above normal working pressure. Size the range with the worst-case surge in mind and share your measured or expected surge pressure so we can confirm the right model — a sensor sized on steady-state pressure alone is the one that fails first on surge-prone networks." },
+  { q: "How long can a 4-20mA cable run?", a: "Two-wire 4-20mA is current-based, so it is effectively immune to voltage drop over long runs — the standard choice for pump stations where sensors sit hundreds of metres from the control room. A broken cable is also instantly visible, because the loop current falls to zero." },
+];
+---
+
+<Layout title="Water Pressure Transducers | Pump Stations & Level | PRESSUREPOINT" description="Pressure and level measurement for water treatment, pump stations and distribution networks. Inlet and discharge pressure monitoring, hydrostatic tank level and IP68 submersible transducers with 4-20mA output for SCADA.">
+  <IndustryPageTemplate
+    title="Water & Pumping"
+    kw="water pressure transducer"
+    desc="Pressure and level measurement for water treatment, pump stations and distribution networks: inlet and discharge pressure, hydrostatic tank level and IP68 submersible transducers with 4-20mA output for SCADA."
+    points={[
+      'IP68 submersible models for tanks, wells and reservoirs',
+      '4-20mA two-wire output for long cable runs to SCADA and PLCs',
+      'Ranges from 0-1 bar up to 25 bar for pump and distribution duty',
+      '316L stainless wetted parts for clean, raw and wastewater service',
+      'G1/2, NPT and custom connections for pipes, tanks and boreholes',
+      'Surge-aware selection for water hammer environments',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle: How It Works' },
+      { href: '/blog/pressure-transducer-4-20ma/', title: 'Pressure Transducer 4-20 mA Output: Wiring, Scaling and Selection' },
+    ]}
+    recommended={[
+      { title: 'Submersible Level Series', href: '/products/submersible/', desc: 'IP68 hydrostatic level for tanks and wells' },
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'Pump discharge and distribution monitoring' },
+      { title: 'Flush Diaphragm Series', href: '/products/flush-diaphragm/', desc: 'Sludge and viscous-media duty' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">What Water Systems Measure</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Water networks are pressure-driven systems: pumps create head, pipes carry it and tanks store it. Pressure transducers measure each part of that chain, and the same hydrostatic principle measures level in tanks, wells and reservoirs. Because water is incompressible, pressure is the fastest indicator of what is happening in the network — which is why control rooms are built around it.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Pump discharge pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Discharge pressure confirms delivered head, protects the pump against closed-valve operation and gives VFD controllers the feedback they need for speed control in booster stations. A discharge reading that does not rise when the pump starts is an early sign of a failed check valve or an air lock.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Suction pressure & cavitation risk</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Falling suction pressure is the earliest sign of cavitation, a blocked suction strainer or a dropping supply level — catch it before the impeller suffers. On municipal intake pumps, suction pressure trending is part of the data used to plan strainer cleaning.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Tank & reservoir level</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">A submersible or tank-bottom transducer converts water depth directly to level for inventory, dosing and transfer control — and because the sensor sits at the bottom, foam, turbulence and surface debris do not affect the reading.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Borehole & well monitoring</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Submersible transducers track drawdown during pumping and recovery when idle, supporting yield testing and pump protection. Recovery rate after shutdown is the standard field test for well yield, and it needs a stable submersible reading.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Filter differential pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Treatment plants monitor pressure drop across filters and membranes to schedule backwash before water quality suffers. Differential trending also predicts when a membrane needs chemical cleaning, not just when it is blocked.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Distribution & leak detection</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Night-line pressure logging and pressure decay monitoring reveal leaks and burst risk in distribution networks. A steady overnight decay on a closed zone points to a leak; a step change points to an open drain or a faulty valve.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-slate-50">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Choosing a Transducer for Water Duty</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Water is a forgiving media but an unforgiving installation: sensors live outdoors, underground or underwater for years. The main decisions are reference type, protection rating and range, and each one is easy to get wrong in a hurry.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Reference, protection and range</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Gauge vs absolute</strong> — level in open tanks uses gauge pressure with a vented reference; closed or pressurised vessels need the reference matched to your control scheme. For open tanks the vented (gauge) reference is standard because it cancels barometric changes.</li>
+              <li><strong>IP rating & installation</strong> — submersible duty calls for IP68 with a cable rated for continuous immersion; in-line pipe mounting typically needs IP65 or IP67. Check the cable assembly rating as well as the housing — the cable is the weak point in submersible installations.</li>
+              <li><strong>Range</strong> — match range to static head plus margin: 0-1 bar suits shallow tanks, while 0-10, 0-16 and 0-25 bar cover most pump and distribution duty. Keep working pressure in the middle third — a 25 bar sensor on a 5 metre tank reads less than a fifth of scale and wastes most of its resolution.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Signal, materials and connections</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Output & cable length</strong> — 4-20mA two-wire carries over long distances without voltage-drop errors — the standard for pump stations and SCADA integration. A broken cable is instantly visible because the loop current falls to zero.</li>
+              <li><strong>Materials</strong> — 316L stainless wetted parts suit clean and raw water; for abrasive or sludge-laden media, discuss diaphragm and port design with us. For potable networks, confirm the wetted materials against your local water quality requirements before ordering.</li>
+              <li><strong>Connections</strong> — G1/2, 1/2" NPT and other standard threads cover most manifolds and tee fittings; custom connections are available for OEM skids.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Common Water Measurement Problems</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">The failures in water instrumentation are rarely exotic — they are specification and installation mistakes repeated across sites. These are the ones we see most often.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Water hammer & surges</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Size the range with headroom above the worst surge and confirm the overpressure rating; if you are not sure what the transients are, record them with a data logger first.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Moisture in submersible cables</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Submersible cables are vented so the gauge reference stays at atmospheric pressure — keep the vent end dry and above water level.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Blocked ports on dirty water</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Raw and wastewater can clog small ports. Confirm the port and diaphragm design against your media and cleaning regime before ordering.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Temperature drift outdoors</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Install away from heat sources and direct sun where possible, and include a zero check in routine maintenance.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Signal problems over long runs</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Stay with 4-20mA and shielded cable — voltage outputs lose accuracy over the distances common in water networks.</p>
+          </div>
+        </div>
+        <div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <h3 class="text-lg font-bold text-navy-950">Start with the right specification</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">Send us the duty — pipe pressure or level, tank depth or head, media (clean, raw or wastewater), cable length and output signal — and we will confirm a model, range and IP rating to match, with surge and overpressure checked against your figures. Standard models ship in 7-15 days, and submersible cable lengths are made to your requirement.</p>
+        </div>
+      </div>
+    </section>
+  </IndustryPageTemplate>
+</Layout>

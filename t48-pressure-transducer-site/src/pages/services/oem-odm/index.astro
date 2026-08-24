@@ -1,0 +1,130 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ServicePageTemplate from '../../../components/ServicePageTemplate.astro';
+
+const longtail = [
+  "oem pressure transducer",
+  "custom pressure sensor manufacturer",
+  "private label pressure transmitter",
+  "custom pressure range sensor",
+  "pressure sensor oem odm",
+  "custom 4-20ma pressure sensor",
+  "pressure transmitter private label",
+  "custom process connection pressure sensor",
+  "pressure sensor with custom connector",
+  "odm pressure transmitter factory",
+];
+
+const points = [
+  {
+    title: 'Custom Pressure Ranges',
+    desc: 'From vacuum (-1 bar) to 600 bar, with custom intermediate ranges scaled to your working point — accuracy is % of full scale, so a range matched to your process gives you the most usable resolution.',
+  },
+  {
+    title: 'Output Signals',
+    desc: '4-20mA two-wire, 0-10V / 0-5V three-wire, RS485 Modbus and HART — matched to your PLC, controller or bus architecture.',
+  },
+  {
+    title: 'Process Connections',
+    desc: 'G1/4, G1/2, 1/4" and 1/2" NPT, M20×1.5, M12×1.5, flush diaphragm and custom threads produced to your drawing.',
+  },
+  {
+    title: 'Wetted Materials',
+    desc: 'Stainless 316L as standard; Hastelloy C-276 or ceramic diaphragms for corrosive and hygienic media, with media-isolated construction.',
+  },
+  {
+    title: 'Cables & Connectors',
+    desc: 'PVC or PUR cables in custom lengths, ventilation tube for level transmitters, M12 and DIN 43650 (Hirschmann) connectors, IP65/IP67/IP68 ratings.',
+  },
+  {
+    title: 'Private Label & Branding',
+    desc: 'Your logo, housing marking, custom datasheet and packaging. NDAs are available before drawings are shared.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Requirements review',
+    desc: 'Send your range, media, output signal, connection, accuracy and target volume. Our engineers confirm feasibility, recommend options and prepare a formal quotation with datasheet.',
+  },
+  {
+    title: 'Prototype sampling',
+    desc: 'Tooling and fixtures are prepared, samples are built and individually calibrated, then shipped for your testing and approval. Typical sample lead time: 15-20 days after spec confirmation.',
+  },
+  {
+    title: 'Pilot run & mass production',
+    desc: 'After sample approval, a pilot batch verifies process stability, then production runs at your confirmed volume with agreed inspection points.',
+  },
+  {
+    title: '100% calibration & QC',
+    desc: 'Every unit is calibrated against NIST-traceable reference standards, proof-pressure tested and final-inspected before shipment, with calibration certificates on request.',
+  },
+];
+
+const challenges = [
+  {
+    title: 'Catalog ranges don\u2019t match your working point',
+    desc: 'Off-the-shelf ranges force you to oversize, which wastes accuracy. Custom ranges are scaled to your process.',
+  },
+  {
+    title: 'Distributor markup on volume programs',
+    desc: 'Buying private-label or branded sensors direct from the manufacturer removes the reseller margin from your BOM.',
+  },
+  {
+    title: 'Branding and packaging consistency',
+    desc: 'You need your own part number, logo, datasheet and packaging for your catalog or machine documentation.',
+  },
+  {
+    title: 'Traceability for regulated customers',
+    desc: 'Calibration certificates, material certificates and test reports per serial number are required for many end customers.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is your MOQ for OEM/ODM orders?',
+    a: 'Standard catalog models can be ordered from 10 pieces. Custom OEM builds (custom range, connection, output or branding) typically start at 50-100 pieces per order depending on the options, and we always begin with samples before mass production.',
+  },
+  {
+    q: 'What are your lead times?',
+    a: 'Samples ship 15-20 days after specification confirmation. Mass production is 15-25 days after sample approval, depending on volume and material availability. We confirm a schedule in writing with every quotation.',
+  },
+  {
+    q: 'Can you match an existing pressure sensor we already use?',
+    a: 'Yes. Send us a drawing or a sample unit and we confirm the mounting dimensions, output, range and electrical interface. We then build to the same envelope so it is a drop-in replacement.',
+  },
+  {
+    q: 'Do you sign NDAs?',
+    a: 'Yes. We sign NDAs before receiving your drawings, and your tooling and specifications are kept confidential for the duration of the project.',
+  },
+  {
+    q: 'What documentation do you provide?',
+    a: 'Calibration certificates, CE declarations, material certificates, test reports and 2D drawings — the package is agreed up front per project.',
+  },
+  {
+    q: 'Can you print our brand on the sensor?',
+    a: 'Yes. Housing laser marking, label printing, custom datasheets and branded packaging are all part of the ODM service.',
+  },
+];
+
+const products = [
+  { href: '/products/industrial/', title: 'Industrial Transducers', desc: 'General-purpose 4-20mA / 0-10V base platform for OEM builds' },
+  { href: '/products/high-accuracy/', title: 'High Accuracy Series', desc: '±0.1% FS platform for precision OEM instruments' },
+  { href: '/products/miniature/', title: 'Miniature Sensors', desc: 'Compact OEM modules from 12mm diameter' },
+  { href: '/products/flush-diaphragm/', title: 'Flush Diaphragm', desc: 'Hygienic and viscous-media OEM builds' },
+];
+---
+
+<Layout title="OEM & ODM Pressure Transducer Manufacturer | Custom & Private Label" description="OEM/ODM pressure transducer manufacturing from PRESSUREPOINT: custom ranges, outputs, process connections, materials and private label. Prototype in 15-20 days, NIST-traceable calibration on every unit.">
+  <ServicePageTemplate
+    title="OEM & ODM Pressure Transducer Manufacturing"
+    kw="oem pressure transducer"
+    desc="Custom and private-label pressure transducers built to your specification — custom ranges from vacuum to 600 bar, any output signal, your process connection, your brand. From prototype to production volumes with NIST-traceable calibration on every unit."
+    points={points}
+    steps={steps}
+    challenges={challenges}
+    faqs={faqs}
+    longtail={longtail}
+    products={products}
+  />
+</Layout>

@@ -1,0 +1,224 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogPostTemplate from '../../../components/BlogPostTemplate.astro';
+
+const toc = [
+  { id: 'basics', label: 'What 4-20 mA Means for Pressure Measurement' },
+  { id: 'why-standard', label: 'Why Two-Wire 4-20 mA Is the Industrial Standard' },
+  { id: 'loop-wiring', label: 'How the 4-20 mA Loop Is Wired' },
+  { id: 'scaling', label: 'Scaling 4-20 mA to Pressure: The Conversion Formula' },
+  { id: 'vs-0-10v', label: '4-20 mA vs 0-10 V: Which Output to Choose' },
+  { id: 'troubleshooting', label: 'Common Wiring and Installation Mistakes' },
+  { id: 'faq', label: 'Frequently Asked Questions' },
+  { id: 'conclusion', label: 'Conclusion' },
+];
+
+const related = [
+  { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle', readTime: 9 },
+  { href: '/blog/pressure-transducer-vs-transmitter/', title: 'Transducer vs Transmitter: Key Differences', readTime: 9 },
+  { href: '/blog/pressure-sensor-types/', title: 'Pressure Sensor Types: A Complete Guide', readTime: 9 },
+];
+---
+
+<Layout
+  title="Pressure Transducer 4-20 mA Output: Wiring, Scaling and Selection | PRESSUREPOINT"
+  description="Pressure transducer 4-20 mA output explained: two-wire loop wiring, scaling 4 mA to 20 mA into pressure readings, 4-20 mA vs 0-10 V, and common wiring mistakes."
+>
+  <BlogPostTemplate
+    title="Pressure Transducer 4-20 mA Output: How the Loop Works, Scaling and Wiring"
+    category="Technical Guides"
+    date="2026-08-27"
+    readTime={9}
+    author="PRESSUREPOINT Team"
+    toc={toc}
+    related={related}
+  >
+    <p>
+      A <strong>pressure transducer with 4-20 mA output</strong> is the most common pressure instrument in industry: two wires, a 24 VDC supply, and a current that varies linearly with pressure. This guide explains what the signal actually means, how the loop is wired, how to convert milliamps into pressure readings, and when 4-20 mA beats (or loses to) 0-10 V.
+    </p>
+
+    <h2 id="basics">What 4-20 mA Means for Pressure Measurement</h2>
+    <p>
+      In a 4-20 mA system, the transducer's output current represents pressure across its calibrated range:
+    </p>
+    <ul>
+      <li><strong>4 mA = 0% of span</strong> — the lower range value (for example 0 bar on a 0-10 bar unit).</li>
+      <li><strong>20 mA = 100% of span</strong> — the upper range value (10 bar in the same example).</li>
+      <li><strong>12 mA = 50% of span</strong> — mid-scale (5 bar).</li>
+    </ul>
+    <p>
+      The 4 mA "live zero" is deliberate: because the minimum signal is above 0 mA, a broken wire or failed transducer drops the loop to 0 mA and is immediately visible as a fault. A healthy loop stays at 4 mA or above, so 0 mA clearly signals a problem. A 0-10 V output has no equivalent safety margin — 0 V could mean zero pressure or a dead sensor.
+    </p>
+    <p>
+      The relationship between current and pressure is linear, which keeps scaling simple: a 0-16 bar transducer reads 8 bar at 12 mA, and a -1 to 3 bar compound unit reads 0 bar at 12 mA (4 mA = -1 bar, 20 mA = 3 bar).
+    </p>
+
+    <h2 id="why-standard">Why Two-Wire 4-20 mA Is the Industrial Standard</h2>
+    <p>
+      Four properties make the current loop the default for industrial pressure measurement:
+    </p>
+    <ul>
+      <li><strong>Immunity to voltage drop</strong> — the signal is a current, so cable resistance does not attenuate it. A 4-20 mA loop can run hundreds of meters without loss of accuracy, where a voltage output would sag.</li>
+      <li><strong>Loop power</strong> — two-wire transducers draw their operating power from the same loop, so no separate supply wire is needed.</li>
+      <li><strong>Wiring simplicity</strong> — two conductors, one shield. No polarity confusion beyond plus and minus at each end.</li>
+      <li><strong>Fault visibility</strong> — 0 mA, a current below 4 mA, or a saturated 20+ mA signal all indicate a problem that a controller can alarm on.</li>
+    </ul>
+    <p>
+      These properties are why every PLC analog input card accepts 4-20 mA as standard, and why most OEM pressure transducers — <a href="/products/industrial/">industrial pressure transducers</a> included — offer it as the first output option.
+    </p>
+
+    <h2 id="loop-wiring">How the 4-20 mA Loop Is Wired</h2>
+    <p>
+      A two-wire loop has three elements in series: the transducer, the supply, and the controller input. A simplified schematic:
+    </p>
+    <pre>24 VDC supply (+) ──► transducer (+) terminal
+                           │
+transducer (−) terminal ──► PLC current input (+)   [often a 250 Ω resistor inside]
+                                │
+PLC input (−) ────────────────► 24 VDC supply (−)
+
+Current path: supply → transducer → PLC input → back to supply</pre>
+    <p>
+      The PLC current input is usually a precision shunt resistor — 250 Ω is common — across which the controller measures a 1-5 VDC drop at 4-20 mA. The transducer must be able to drive the total loop resistance (cable plus shunt plus any series devices) at 20 mA. A practical check: at a 24 VDC supply, most two-wire transmitters drive a total loop resistance of roughly 500-650 Ω, which comfortably covers typical cable runs and a 250 Ω input. If you add barriers, isolators or long cable, confirm the loop resistance stays within the datasheet limit.
+    </p>
+
+    <h2 id="scaling">Scaling 4-20 mA to Pressure: The Conversion Formula</h2>
+    <p>
+      To convert a current reading into pressure, use the linear mapping:
+    </p>
+    <pre>Pressure = Lower range value + ((I − 4) / 16) × (Upper range value − Lower range value)
+
+Example, 0-10 bar transducer:
+  I = 4 mA  → 0 + (0/16) × 10 = 0 bar
+  I = 12 mA → 0 + (8/16) × 10 = 5 bar
+  I = 20 mA → 0 + (16/16) × 10 = 10 bar</pre>
+    <p>
+      Most controllers do this internally — you enter the range into the analog input card and it displays engineering units directly. When checking values by hand, remember the span is 16 mA (20 − 4), so each 1 mA step equals 6.25% of full scale.
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Loop current</th>
+            <th>% of span</th>
+            <th>0-10 bar unit</th>
+            <th>0-16 bar unit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>4 mA</td>
+            <td>0%</td>
+            <td>0 bar</td>
+            <td>0 bar</td>
+          </tr>
+          <tr>
+            <td>8 mA</td>
+            <td>25%</td>
+            <td>2.5 bar</td>
+            <td>4 bar</td>
+          </tr>
+          <tr>
+            <td>12 mA</td>
+            <td>50%</td>
+            <td>5 bar</td>
+            <td>8 bar</td>
+          </tr>
+          <tr>
+            <td>16 mA</td>
+            <td>75%</td>
+            <td>7.5 bar</td>
+            <td>12 bar</td>
+          </tr>
+          <tr>
+            <td>20 mA</td>
+            <td>100%</td>
+            <td>10 bar</td>
+            <td>16 bar</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Unit conversions come up constantly on site: 1 bar = 100 kPa = 14.5 psi. A 0-10 bar unit at 12 mA is therefore 5 bar, 500 kPa, or roughly 72.5 psi. Choose the unit of the scale you are comparing against before converting, and keep the transducer and the display set to the same unit.
+    </p>
+
+    <h2 id="vs-0-10v">4-20 mA vs 0-10 V: Which Output to Choose</h2>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>4-20 mA (two-wire)</th>
+            <th>0-10 V (three-wire)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Wiring</td>
+            <td>2 wires, loop-powered</td>
+            <td>3 wires: supply, signal, common</td>
+          </tr>
+          <tr>
+            <td>Signal type</td>
+            <td>Current — immune to cable resistance</td>
+            <td>Voltage — drops over long cable runs</td>
+          </tr>
+          <tr>
+            <td>Practical distance</td>
+            <td>Hundreds of meters</td>
+            <td>Typically well under 100 m</td>
+          </tr>
+          <tr>
+            <td>Fault detection</td>
+            <td>0 mA / below 4 mA indicates a problem</td>
+            <td>0 V is ambiguous (zero or fault)</td>
+          </tr>
+          <tr>
+            <td>Best for</td>
+            <td>PLC/DCS inputs, plants, remote monitoring</td>
+            <td>HVAC, local displays, short runs, OEM boards</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      There is no universal winner — the choice depends on the controller and the distance. If your PLC has current inputs (most do), 4-20 mA is the safer default. If the device feeds a local meter or a controller with voltage inputs only, and the cable run is short, 0-10 V works well and simplifies the power supply. For digital plants, RS485/Modbus adds multi-drop capability on top of the same physical installation.
+    </p>
+
+    <h2 id="troubleshooting">Common Wiring and Installation Mistakes</h2>
+    <ul>
+      <li><strong>Loop resistance too high</strong> — long cable plus multiple series devices can push the loop beyond the transducer's drive capability; the output saturates below 20 mA. Measure total loop resistance and keep it inside the datasheet limit.</li>
+      <li><strong>Supply voltage too low</strong> — a 24 VDC nominal supply that sags under load may starve the loop. Check voltage at the transducer terminals under operating conditions.</li>
+      <li><strong>Reversed polarity</strong> — a reversed two-wire loop simply does not work; verify plus-to-plus and minus-to-minus before applying power.</li>
+      <li><strong>Ungrounded or incorrectly grounded shield</strong> — leave the shield grounded at one end only, typically at the controller side, to avoid ground loops and induced noise.</li>
+      <li><strong>Wrong range assumption</strong> — confirm whether the transducer is 0-10 bar or 0-16 bar before trusting a reading; the same 12 mA means 5 bar on one and 8 bar on the other.</li>
+    </ul>
+
+    <h2 id="faq">Frequently Asked Questions</h2>
+    <h3>Why does a 4-20 mA transducer output 4 mA at zero pressure instead of 0 mA?</h3>
+    <p>
+      The 4 mA live zero powers the electronics and provides fault detection. A healthy loop never drops below 4 mA, so 0 mA clearly signals a broken wire, a dead supply or a failed instrument.
+    </p>
+    <h3>Can I run a 4-20 mA loop over 500 m of cable?</h3>
+    <p>
+      In most installations, yes — current signals are not attenuated by cable resistance the way voltage signals are. The limiting factors are total loop resistance and supply voltage; check the transducer datasheet for the maximum loop resistance at your supply voltage.
+    </p>
+    <h3>How do I convert 12 mA on a 0-10 bar transducer to psi?</h3>
+    <p>
+      12 mA equals 50% of span, so the reading is 5 bar. Using 1 bar = 14.5 psi, that is approximately 72.5 psi. Apply the conversion formula to the pressure value, not to the current.
+    </p>
+    <h3>Is 4-20 mA compatible with all PLCs?</h3>
+    <p>
+      Virtually all industrial PLCs, DCSs and process controllers accept 4-20 mA on analog input cards. It is the most universally supported analog signal in industrial automation. Confirm whether your card expects two-wire (loop-powered) or three-wire transmitters before wiring.
+    </p>
+
+    <h2 id="conclusion">Conclusion</h2>
+    <p>
+      4-20 mA is the backbone of industrial pressure measurement because it is simple, noise-immune, long-distance capable and universally supported. Wire the loop correctly, keep total loop resistance within limits, and scale with the linear formula — and a 4-20 mA pressure transducer will give you dependable readings for years. For the underlying sensing technology, see our <a href="/blog/pressure-transducer-working-principle/">working principle guide</a>.
+    </p>
+    <p>
+      PRESSUREPOINT supplies factory-direct pressure transducers with 4-20 mA two-wire output, 316L wetted parts, ranges from -1 bar vacuum to 600 bar, and CE marking as standard. Tell us your range, media and connection, and we will confirm a model with datasheet and pricing — usually within one working day.
+    </p>
+  </BlogPostTemplate>
+</Layout>

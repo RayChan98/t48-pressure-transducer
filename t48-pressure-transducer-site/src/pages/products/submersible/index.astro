@@ -1,0 +1,69 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CategoryPageTemplate from '../../../components/CategoryPageTemplate.astro';
+
+const longtail = ["submersible pressure transducer", "hydrostatic level transmitter", "submersible level sensor 4-20ma", "water level transducer", "tank level transmitter IP68", "hydrostatic level measurement", "submersible pressure sensor for boreholes", "open channel level transmitter"];
+const faqs = [
+  { q: 'How does a submersible level transmitter work?', a: 'It measures the hydrostatic pressure of the liquid column above the sensing diaphragm. Pressure equals liquid density multiplied by gravity and by the liquid height, so the output signal is a direct measure of level once the density is known.' },
+  { q: 'Why does a submersible transmitter need a vented cable?', a: 'The cable carries a small vent tube that connects the reference side of the sensor to atmosphere. This cancels atmospheric pressure changes so the reading reflects true liquid level rather than gauge pressure plus weather effects.' },
+  { q: 'What IP rating and immersion depth can it handle?', a: 'The sensor body is IP68 rated and the vented cable is rated for continuous immersion, with cable lengths commonly available up to hundreds of meters. Confirm the required cable length and range with the factory.' },
+  { q: 'Which liquids can it measure?', a: 'Fresh water, wastewater, seawater and most industrial liquids with a 316L stainless steel sensing diaphragm. Confirm wetted materials for corrosive or high-solids media before ordering.' },
+  { q: 'What ranges are typical for level measurement?', a: 'Ranges are usually specified in meters of water column, from 0-1 m up to 0-100 m, corresponding to 0-0.1 bar up to 0-10 bar. Outputs include 4-20mA, 0-10V and RS485 Modbus.' },
+];
+---
+
+<Layout title="Submersible Pressure Transducers & Hydrostatic Level Transmitters — PRESSUREPOINT" description="Submersible pressure transducers and hydrostatic level transmitters with IP68 rating and vented cable. 4-20mA, 0-10V and RS485 outputs for tank, well and open-channel level measurement.">
+  <CategoryPageTemplate
+    title="Submersible Pressure Transducers & Hydrostatic Level Transmitters"
+    kw="submersible pressure transducer"
+    desc="Submersible pressure transducers measure liquid level by hydrostatic pressure: the sensor hangs at the bottom of the tank, well or channel and the liquid column above it produces a pressure directly proportional to level. Each PRESSUREPOINT unit uses a vented cable that carries a reference tube to atmosphere, so atmospheric pressure changes are cancelled and the reading stays true. The stainless steel body is IP68 rated for continuous immersion, with ranges from 0-1 m to 0-100 m water column and 4-20mA, 0-10V or RS485 Modbus output. Typical applications include groundwater and borehole monitoring, tank farms, wastewater basins, river and reservoir gauging, and open-channel flow stations. Factory-direct with custom cable lengths and ranges."
+    points={[
+      'IP68 rated stainless steel body for continuous immersion in water, wastewater and tanks',
+      'Vented cable with reference tube to atmosphere — atmospheric changes are cancelled automatically',
+      'Hydrostatic level measurement from 0-1 m to 0-100 m water column (0-0.1 to 0-10 bar)',
+      '4-20mA two-wire, 0-10V and RS485 Modbus outputs for PLC and SCADA systems',
+      '316L stainless steel sensing diaphragm, custom cable lengths available',
+      'Suitable for boreholes, tanks, basins, rivers and open-channel stations',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-vs-transmitter/', title: 'Transducer vs Transmitter: Key Differences' },
+      { href: '/blog/pressure-transducer-working-principle/', title: 'How a Pressure Transducer Works' },
+      { href: '/blog/hydrostatic-level-measurement/', title: 'Hydrostatic Level Measurement Explained' },
+    ]}
+    recommended={[
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'General-purpose transducers, ±0.25% FS standard' },
+      { title: 'Differential Series', href: '/products/differential/', desc: 'Pressure difference & filter monitoring' },
+      { title: 'Flush Diaphragm Series', href: '/products/flush-diaphragm/', desc: 'Hygienic & clog-resistant designs' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Specifying a Submersible Level Transmitter</h2>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Key specification decisions</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Range</strong> — the range must cover the full liquid depth plus headroom; a 0-5 m range suits a tank about 4 m deep, keeping accuracy meaningful across the span.</li>
+              <li><strong>Vented vs absolute</strong> — vented (gauge reference) is the standard for open tanks and wells; absolute models are only needed for sealed vessels with controlled gas space.</li>
+              <li><strong>Cable & suspension</strong> — specify cable length, material and whether the cable is load-bearing or the sensor hangs on a separate support.</li>
+              <li><strong>Media compatibility</strong> — 316L wetted parts suit water and wastewater; confirm materials for seawater, chemical or high-solids duty.</li>
+              <li><strong>Output & distance</strong> — 4-20mA two-wire carries the signal over long cable runs; RS485 suits multi-drop networks of level sensors.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Typical applications</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Groundwater & boreholes</strong> — continuous water level monitoring in wells and piezometers for hydrogeological surveys.</li>
+              <li><strong>Tanks & tank farms</strong> — level in storage tanks, day tanks and bunds for water, fuel and industrial liquids.</li>
+              <li><strong>Wastewater & sewage</strong> — level in basins, sumps and wet wells where solids and debris rule out other sensor types.</li>
+              <li><strong>Rivers, reservoirs & dams</strong> — water level gauging for flood monitoring and water resource management.</li>
+              <li><strong>Open-channel flow stations</strong> — level measurement converted to flow via weirs and flumes in discharge monitoring.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </CategoryPageTemplate>
+</Layout>

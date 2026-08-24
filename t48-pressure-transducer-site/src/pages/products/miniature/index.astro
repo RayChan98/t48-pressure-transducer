@@ -1,0 +1,69 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CategoryPageTemplate from '../../../components/CategoryPageTemplate.astro';
+
+const longtail = ["miniature pressure sensor", "small pressure sensor", "miniature pressure transducer", "OEM pressure sensor module", "compact pressure transmitter", "miniature pressure sensor 12mm", "micro pressure sensor 4-20ma", "embedded pressure sensor"];
+const faqs = [
+  { q: 'How small does a miniature pressure sensor get?', a: 'Body diameters from 12 mm are available depending on range and output. Compact OEM modules keep the sensing element, signal conditioning and process connection in a short, light package that fits into machine sub-assemblies and portable equipment.' },
+  { q: 'Can a miniature sensor provide the same outputs as a full-size transducer?', a: 'Yes. 4-20mA, 0-10V and RS485 Modbus are available in small housings. For customer-conditioned designs we also supply mV-output variants where your electronics do the amplification.' },
+  { q: 'What pressure ranges fit in a miniature package?', a: 'From vacuum (-1 bar) up to 600 bar depending on the model. Small ranges suit pneumatic controls and low-pressure monitoring; high ranges suit compact hydraulic tools. Send your working range and we will confirm a suitable build.' },
+  { q: 'How do I integrate a miniature sensor into my product?', a: 'Choose the process thread (G1/4, G1/8, NPT, M12×1.5 and others), output signal and cable or connector termination. Custom ranges and calibration points are set at the factory so the sensor arrives matched to your application.' },
+  { q: 'What is the minimum order quantity for OEM builds?', a: 'Standard models start from 10 pcs. Custom OEM builds (range, connection, output, cable) typically run 15-25 days after drawing confirmation, with quantity pricing discussed per project.' },
+];
+---
+
+<Layout title="Miniature Pressure Sensors | Compact OEM Modules from 12 mm — PRESSUREPOINT" description="Miniature pressure sensors and compact OEM transducer modules with body diameters from 12 mm. 4-20mA, 0-10V and RS485 outputs, vacuum to 600 bar, custom ranges for embedded designs.">
+  <CategoryPageTemplate
+    title="Miniature Pressure Sensors"
+    kw="miniature pressure sensor"
+    desc="Miniature pressure sensors are compact OEM transducer modules designed to be embedded inside machinery, portable equipment and instrument sub-assemblies where space is limited. Body diameters from 12 mm keep the sensing element, signal conditioning and process connection in a light package, with 4-20mA, 0-10V, RS485 or mV output to suit your controller. PRESSUREPOINT builds these factory-direct with custom ranges from vacuum to 600 bar, standard G1/4, G1/8, NPT and M12 threads, and your choice of cable or connector termination. Typical applications include pneumatic controls, medical devices, hydraulic tools, compressors, robotics and test equipment where a standard-size transducer will not fit."
+    points={[
+      'Compact OEM modules with body diameters from 12 mm, short overall length for tight installations',
+      '4-20mA, 0-10V, RS485 Modbus and mV output variants for customer-conditioned designs',
+      'Pressure ranges from vacuum (-1 bar) to 600 bar, custom ranges and calibration points set at the factory',
+      '316L stainless steel wetted parts, CE marked, IP65/IP67 rated options',
+      'G1/4, G1/8, NPT, M12×1.5 and other threads, cable or connector termination',
+      'Small MOQ from 10 pcs for standard models, custom OEM builds supported',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-vs-transmitter/', title: 'Transducer vs Transmitter: Key Differences' },
+      { href: '/blog/pressure-transducer-working-principle/', title: 'How a Pressure Transducer Works' },
+      { href: '/blog/miniature-pressure-sensor-selection/', title: 'Selecting a Miniature Pressure Sensor for OEM' },
+    ]}
+    recommended={[
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'General-purpose transducers, ±0.25% FS standard' },
+      { title: 'High Accuracy Series', href: '/products/high-accuracy/', desc: '±0.1% FS for precision measurement' },
+      { title: 'Differential Series', href: '/products/differential/', desc: 'Pressure difference & airflow' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Designing a Miniature Sensor Into Your Product</h2>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Integration decisions</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Size vs performance</strong> — smaller bodies trade a little on mounting options, not on output or media compatibility; confirm thread size and overall length against your envelope.</li>
+              <li><strong>Output</strong> — mV output keeps cost and size down when your board does the conditioning; 4-20mA and RS485 simplify wiring and immunity in noisy machines.</li>
+              <li><strong>Mounting</strong> — G1/4 and G1/8 threads suit manifolds and valve blocks; M12×1.5 suits hydraulic tooling; confirm seal type for your port.</li>
+              <li><strong>Environment</strong> — choose IP rating and connector style for the operating environment; vibration, splash and washdown all affect termination choice.</li>
+              <li><strong>Calibration</strong> — factory-set range and zero points remove field adjustment from your production line and keep quality consistent.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Typical applications</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Pneumatic controls</strong> — manifold pressure and actuator monitoring in compact valve islands.</li>
+              <li><strong>Hydraulic tools</strong> — force and pressure feedback inside torque wrenches, pumps and portable power units.</li>
+              <li><strong>Medical & laboratory devices</strong> — gas and liquid pressure in analyzers, dialysis and infusion equipment.</li>
+              <li><strong>Compressors & pumps</strong> — embedded monitoring in packaged units where the controller lives beside the sensor.</li>
+              <li><strong>Robotics & automation</strong> — grip force and clamp pressure sensing in end effectors and tooling.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </CategoryPageTemplate>
+</Layout>

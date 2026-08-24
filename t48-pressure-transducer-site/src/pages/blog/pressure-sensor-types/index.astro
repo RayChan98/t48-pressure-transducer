@@ -1,0 +1,195 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogPostTemplate from '../../../components/BlogPostTemplate.astro';
+
+const toc = [
+  { id: 'piezoresistive', label: 'Piezoresistive Pressure Sensors' },
+  { id: 'strain-gauge', label: 'Strain Gauge Pressure Sensors' },
+  { id: 'capacitive', label: 'Capacitive Pressure Sensors' },
+  { id: 'resonant', label: 'Resonant Pressure Sensors' },
+  { id: 'tech-comparison', label: 'Pressure Sensor Types Compared' },
+  { id: 'reference-types', label: 'Gauge, Absolute, Sealed and Differential Pressure' },
+  { id: 'how-to-choose', label: 'How to Choose the Right Pressure Sensor Type' },
+  { id: 'faq', label: 'Frequently Asked Questions' },
+];
+
+const related = [
+  { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle', readTime: 9 },
+  { href: '/blog/pressure-transducer-4-20ma/', title: 'Pressure Transducer 4-20 mA Output: Wiring, Scaling and Selection', readTime: 9 },
+  { href: '/blog/pressure-transducer-vs-transmitter/', title: 'Transducer vs Transmitter: Key Differences', readTime: 9 },
+];
+---
+
+<Layout
+  title="Pressure Sensor Types: Complete Guide by Technology and Reference | PRESSUREPOINT"
+  description="Pressure sensor types explained: piezoresistive, strain gauge, capacitive and resonant technologies, plus gauge, absolute, sealed and differential pressure references, with a selection table."
+>
+  <BlogPostTemplate
+    title="Pressure Sensor Types: A Complete Guide to Technologies and Reference Types"
+    category="Technical Guides"
+    date="2026-08-28"
+    readTime={9}
+    author="PRESSUREPOINT Team"
+    toc={toc}
+    related={related}
+  >
+    <p>
+      Pressure sensors are classified two ways: by <strong>measurement principle</strong> (how the element converts pressure into an electrical change) and by <strong>pressure reference</strong> (what the measurement is compared against). Both matter when you buy — the principle determines accuracy, media compatibility and cost, while the reference determines whether the sensor suits gauge, absolute, differential or sealed service. This guide covers the four main sensing technologies and the four reference types, with a comparison table to narrow your options.
+    </p>
+
+    <h2 id="piezoresistive">Piezoresistive Pressure Sensors</h2>
+    <p>
+      Piezoresistive sensors use a silicon chip with diffused resistors arranged on a diaphragm. Applied pressure stresses the chip, the resistors change value, and a Wheatstone bridge converts the change into a voltage. Because silicon is highly sensitive to mechanical stress, these sensors produce strong signals and work exceptionally well at low pressures — from a few millibar up to tens of bar.
+    </p>
+    <p>
+      Most industrial versions are media-isolated: a thin 316L stainless steel diaphragm transfers pressure through a silicone oil fill to the chip, protecting the silicon from the process fluid. This construction gives high accuracy — typically ±0.1% to ±0.25% FS — in a small package, which is why piezoresistive elements dominate OEM, miniature and low-range pressure transducers. The main consideration is temperature sensitivity, which good transducers correct with built-in compensation across the rated range.
+    </p>
+
+    <h2 id="strain-gauge">Strain Gauge Pressure Sensors</h2>
+    <p>
+      Strain gauge sensors bond or deposit a resistive pattern directly onto a metal diaphragm. Pressure deflects the diaphragm, the gauge stretches, and its resistance changes in proportion to the strain. Gauges are connected in a Wheatstone bridge, producing a small output — typically 1-3 mV per volt of excitation — that conditioning electronics amplify to a standard signal.
+    </p>
+    <p>
+      Two forms are common: <strong>bonded foil gauges</strong> (glued to the diaphragm, cost-effective, general duty) and <strong>sputtered thin-film gauges</strong> (vacuum-deposited on the steel, with better long-term stability and lower drift). Strain gauge technology is the workhorse of high-pressure measurement — ranges up to 600 bar and beyond — and it tolerates vibration and shock well, making it the standard choice for hydraulics, presses, injection molding and test rigs.
+    </p>
+
+    <h2 id="capacitive">Capacitive Pressure Sensors</h2>
+    <p>
+      Capacitive sensors measure the change in capacitance between a deflecting diaphragm and a fixed electrode. The most common industrial construction is an aluminum-oxide (Al₂O₃) ceramic cell: pressure moves a ceramic diaphragm closer to the electrode, capacitance rises, and the electronics produce a linear output.
+    </p>
+    <p>
+      Ceramic capacitive cells suit corrosive media, food processing and wastewater because the ceramic is chemically inert and many cells operate "dry" with no oil fill — eliminating a contamination risk if the diaphragm is damaged. Accuracy typically falls in the ±0.2% to ±0.5% FS range, which suits monitoring and control duties rather than precision measurement. These sensors are also common in HVAC and low-pressure industrial applications.
+    </p>
+
+    <h2 id="resonant">Resonant Pressure Sensors</h2>
+    <p>
+      Resonant sensors measure pressure through a change in the natural frequency of a vibrating element — a wire, cylinder or silicon resonator. Pressure changes the mechanical tension of the element, which shifts its resonant frequency; the electronics count frequency rather than measuring a resistance or capacitance. Because frequency can be measured with very high resolution, resonant sensors reach the highest accuracy classes in pressure measurement — around ±0.05% to ±0.1% FS — with excellent long-term stability.
+    </p>
+    <p>
+      These advantages come with trade-offs: resonant designs are more complex, cost more, and can be sensitive to mechanical vibration, so they appear mainly in high-end process transmitters, calibration standards and applications where drift over years matters more than purchase price. For most machine and plant duty, strain gauge or piezoresistive sensors deliver the needed accuracy at a fraction of the cost.
+    </p>
+
+    <h2 id="tech-comparison">Pressure Sensor Types Compared</h2>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Principle</th>
+            <th>Typical accuracy</th>
+            <th>Best for</th>
+            <th>Cost level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Piezoresistive silicon</td>
+            <td>Resistance change of diffused silicon resistors</td>
+            <td>±0.1% to ±0.25% FS</td>
+            <td>Low ranges, OEM, miniature, media-isolated duty</td>
+            <td>Low to medium</td>
+          </tr>
+          <tr>
+            <td>Strain gauge</td>
+            <td>Resistance change of bonded or thin-film gauge</td>
+            <td>±0.1% to ±0.5% FS</td>
+            <td>High pressure, hydraulics, vibration</td>
+            <td>Low to medium</td>
+          </tr>
+          <tr>
+            <td>Capacitive ceramic</td>
+            <td>Capacitance change of ceramic diaphragm</td>
+            <td>±0.2% to ±0.5% FS</td>
+            <td>Corrosive media, food, wastewater, dry cell</td>
+            <td>Medium</td>
+          </tr>
+          <tr>
+            <td>Resonant</td>
+            <td>Frequency change of vibrating element</td>
+            <td>±0.05% to ±0.1% FS</td>
+            <td>High-end process transmitters, calibration</td>
+            <td>High</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Technology is only half the selection. The other half is the pressure reference, because "10 bar" means something different in gauge, absolute and differential service.
+    </p>
+
+    <h2 id="reference-types">Gauge, Absolute, Sealed and Differential Pressure</h2>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Reference type</th>
+            <th>What it measures against</th>
+            <th>Typical use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gauge (relative)</td>
+            <td>Atmospheric pressure (vented reference)</td>
+            <td>Most industrial duty: tanks, pipes, pumps, hydraulics, compressed air</td>
+          </tr>
+          <tr>
+            <td>Absolute</td>
+            <td>Full vacuum (0 bar abs)</td>
+            <td>Barometric pressure, vacuum processes, altitude, vapor pressure</td>
+          </tr>
+          <tr>
+            <td>Sealed gauge</td>
+            <td>A sealed reference chamber, typically ~1 bar</td>
+            <td>High-pressure hydraulics where a vented reference is impractical</td>
+          </tr>
+          <tr>
+            <td>Differential</td>
+            <td>The difference between two process ports</td>
+            <td>Filter condition, flow measurement, tank level via DP, HVAC duct pressure</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      A gauge sensor reads 0 bar at atmospheric pressure; an absolute sensor reads roughly 1 bar (about 100 kPa or 14.5 psi) at atmosphere because it measures against vacuum. The difference matters most in low-pressure and vacuum service, where a gauge-versus-absolute mix-up produces readings that are off by a full atmosphere. Sealed gauge sensors avoid venting issues in high-pressure hydraulic systems, and differential sensors expose the process to two ports — the diaphragm senses the difference, which is how filter clogging and tank level are monitored. Compound ranges such as -1 to 3 bar combine vacuum and positive pressure in one gauge sensor for applications that cross zero.
+    </p>
+
+    <h2 id="how-to-choose">How to Choose the Right Pressure Sensor Type</h2>
+    <p>
+      Work through these five questions in order, and the sensor type narrows itself:
+    </p>
+    <ol>
+      <li><strong>What is the pressure reference?</strong> Gauge for most plant and machine duty; absolute for vacuum and barometric work; differential for filters, flow and level; sealed gauge for high-pressure hydraulics.</li>
+      <li><strong>What is the media?</strong> 316L stainless handles water, oil and most hydraulic fluids; ceramic capacitive suits corrosive and food media; specify a compatible diaphragm for aggressive chemicals.</li>
+      <li><strong>What range and accuracy?</strong> ±0.25% FS is a common industrial standard; choose ±0.1% FS for test and precision duty. Pick a range where the working pressure sits in the middle third, roughly 1.5-2 times the maximum operating pressure.</li>
+      <li><strong>What output does the controller need?</strong> 4-20 mA two-wire for PLCs and long runs, 0-10 V for short local runs, RS485/Modbus for multi-drop digital systems.</li>
+      <li><strong>What are the environmental conditions?</strong> Check media and ambient temperature, ingress protection (IP65 or IP67 for washdown areas) and any hazardous-area certification requirements.</li>
+    </ol>
+    <p>
+      Most industrial applications land on a 316L gauge sensor with strain gauge or piezoresistive technology and 4-20 mA output — exactly the configuration of our <a href="/products/industrial/">industrial pressure transducers</a> line. For the signal side of the spec, see our <a href="/blog/pressure-transducer-4-20ma/">4-20 mA guide</a>, and for the full instrument chain, the <a href="/blog/pressure-transducer-working-principle/">working principle article</a>.
+    </p>
+
+    <h2 id="faq">Frequently Asked Questions</h2>
+    <h3>What is the most common pressure sensor type in industry?</h3>
+    <p>
+      Strain gauge and piezoresistive sensors together cover the large majority of industrial applications. Strain gauge dominates high-pressure and hydraulic duty; piezoresistive silicon dominates low-range, OEM and miniature designs. Capacitive ceramic follows for corrosive media, and resonant sensors are reserved for high-accuracy process service.
+    </p>
+    <h3>What is the difference between gauge and absolute pressure sensors?</h3>
+    <p>
+      A gauge sensor measures against atmospheric pressure and reads 0 bar at atmosphere. An absolute sensor measures against full vacuum and reads about 1 bar (100 kPa, 14.5 psi) at atmosphere. Choose absolute for vacuum and barometric measurements, gauge for most plant and machine duty.
+    </p>
+    <h3>When should I use a differential pressure sensor?</h3>
+    <p>
+      Differential sensors measure the difference between two ports, which makes them the natural choice for filter clogging detection, flow measurement across an orifice, tank level in closed vessels, and HVAC duct pressure. If you only need the pressure in one line, a gauge sensor is simpler and cheaper.
+    </p>
+    <h3>Does sensor type affect output signal?</h3>
+    <p>
+      No — the output signal (4-20 mA, 0-10 V, RS485) is set by the conditioning electronics, not the sensing technology. Any of the four technologies can be packaged with any standard output. Choose the technology for accuracy and media, then the output for your controller and distance.
+    </p>
+
+    <p>
+      Once you have settled the sensor type, reference and output, the remaining decisions are mechanical: process connection (G1/4, G1/2, 1/4 NPT, M20×1.5), electrical connection (M12, cable, DIN plug) and enclosure rating. PRESSUREPOINT manufactures industrial pressure sensors and transducers to order, with 316L wetted parts, ranges from -1 bar vacuum to 600 bar, and CE marking as standard. Send us your media, working pressure, reference and connection — our engineers will confirm a suitable model with datasheet and pricing, usually within one working day.
+    </p>
+  </BlogPostTemplate>
+</Layout>

@@ -1,0 +1,140 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import IndustryPageTemplate from '../../../components/IndustryPageTemplate.astro';
+
+const longtail = [
+  "refrigerant pressure sensor",
+  "hvac pressure transducer 4-20ma",
+  "duct static pressure sensor",
+  "differential pressure transmitter hvac",
+  "air pressure sensor for hvac",
+  "refrigerant pressure transmitter",
+  "chiller pressure sensor",
+  "filter pressure drop sensor",
+];
+
+const faqs = [
+  { q: "What pressure do refrigerant circuits run at?", a: "It depends on the refrigerant and the cycle: many commercial systems run in the low single-digit bar range on the suction side and higher on discharge, while transcritical CO2 systems operate well above that. Give us the refrigerant, the operating envelope and the peak pressure and we will confirm a suitable range — sizing from the peak, not the steady-state figure, is what keeps the sensor out of trouble." },
+  { q: "Gauge, absolute or differential — which do I need?", a: "Refrigerant and chilled-water monitoring is usually gauge pressure; duct static pressure, filter drop and fan monitoring are almost always differential. Tell us what you are measuring and we will match the sensing principle. A 0-10 bar gauge sensor on a millibar-scale duct measurement reads noise, not airflow." },
+  { q: "Can one transducer cover both refrigerant and duct duty?", a: "Rarely. Refrigerant service needs media-compatible wetted parts and pressure-class ranges, while duct airflow uses low-range differential sensing on air. Combining them usually means compromising accuracy on one side, which is why the two duties are normally specified separately." },
+  { q: "How do I connect sensors to the building management system?", a: "4-20mA two-wire is the most common BMS input and is immune to voltage drop over long cable runs. 0-10V suits short runs to local controllers, and RS485 Modbus works when you need many sensors on one bus. Most BMS controllers accept both analogue formats, so the choice usually comes down to cable length." },
+];
+---
+
+<Layout title="HVAC Pressure Transducers | Refrigerant & Duct Pressure | PRESSUREPOINT" description="Pressure transducers for HVAC and refrigeration — refrigerant liquid, suction and discharge pressure, plus duct static and differential pressure for airflow control. Low ranges from 0-10 bar and below, with 4-20mA and 0-10V outputs for BMS integration.">
+  <IndustryPageTemplate
+    title="HVAC & Refrigeration"
+    kw="hvac pressure transducer"
+    desc="Pressure measurement for HVAC and refrigeration: refrigerant liquid, suction and discharge pressure, plus duct static and differential pressure for airflow control. Low ranges from 0-10 bar and below, with 4-20mA and 0-10V outputs for BMS integration."
+    points={[
+      'Low-pressure ranges from 0-10 bar and below for refrigerant and water circuits',
+      'Differential models for duct static pressure, filter and coil monitoring',
+      'Wetted parts selected for refrigerant and compressor oil compatibility',
+      '4-20mA, 0-10V and RS485 outputs for BMS and chiller controllers',
+      'Compact housings for OEM chillers, AHUs and VRF systems',
+      'CE marked, IP65 rated, media temperature rating suited to pipe mounting',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-4-20ma/', title: 'Pressure Transducer 4-20 mA Output: Wiring, Scaling and Selection' },
+      { href: '/blog/pressure-transducer-vs-transmitter/', title: 'Transducer vs Transmitter: Key Differences' },
+    ]}
+    recommended={[
+      { title: 'Differential Series', href: '/products/differential/', desc: 'Wet/wet and wet/dry for air and water' },
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'Refrigerant and chilled-water monitoring' },
+      { title: 'Miniature Series', href: '/products/miniature/', desc: 'Compact modules for OEM chillers and AHUs' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">What HVAC & Refrigeration Systems Measure</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">HVAC and refrigeration plants split into two pressure worlds: refrigerant and water circuits that use media-compatible pressure transducers, and air distribution that relies on low-range differential pressure sensing. Both feed the same goal — keeping the plant efficient, protected and predictable. Chillers, heat pumps, AHUs and VRF systems all need both kinds of measurement, and both connect to the same building management system.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Refrigerant liquid & suction pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Liquid-line pressure confirms the system charge, while suction pressure drives superheat control and protects the compressor from operation outside its envelope. Charge level, superheat and compressor protection all hang on these two readings.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Discharge / high-side pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Discharge pressure guards against high-head conditions and supports condenser fan staging and heat-recovery control. A rising discharge trend is also an early sign of a fouled condenser.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Compressor oil pressure differential</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">The difference between oil and crankcase pressure confirms lubrication; a falling differential signals a blocked filter or a failing oil pump. Compressors are the most expensive component in the plant, and oil pressure is their first line of defence.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Chilled & hot water loops</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Pressure on pump suction and discharge supports pump control, system balancing and early detection of circulation faults before they become comfort complaints.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Duct static pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">VAV boxes and supply fans regulate on duct static pressure. Low-range differential transducers measure it directly and reliably — and because fan speed tracks the reading, accuracy here is an energy issue, not just a comfort one.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Filter & coil differential</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Pressure drop across air filters and coils tracks fouling, so maintenance happens on schedule instead of after a complaint. A filter differential alarm also prevents the airflow starvation that damages coils and fans.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-slate-50">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Choosing a Transducer for HVAC Duty</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">HVAC measurement is low-pressure work, and the margin for error is small. A range that is too large swallows the signal; materials that suit water may not suit refrigerant. Refrigerant circuits reward sensors specified for the actual refrigerant, and air-side measurements reward sensors specified for the actual range — work through these points with your supplier.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Range, reference and media</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Range</strong> — many refrigerant and water applications sit in the 0-10 bar band or below; duct airflow uses millibar-scale differential ranges. Match the range to the measurement, not the pipe size — a 0-10 bar sensor on a duct application reads noise instead of airflow.</li>
+              <li><strong>Gauge vs differential</strong> — refrigerant and water loops use gauge pressure; duct static and velocity pressure is inherently differential. Confirm what you are measuring before selecting.</li>
+              <li><strong>Media compatibility</strong> — refrigerant service needs wetted parts compatible with the refrigerant and the compressor oil — POE oils in particular are aggressive to some materials. Refrigerant manufacturers publish compatibility guidance, and the oil matters as much as the refrigerant itself.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Signal, environment and mounting</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Output</strong> — 4-20mA two-wire is the standard BMS input and carries over long runs without voltage-drop errors; 0-10V suits short runs; RS485 Modbus suits multi-drop integration.</li>
+              <li><strong>Environment</strong> — outdoor condensing units and roof-mounted AHUs expose sensors to rain, sun and wide temperature swings. Condensing units on rooftops can see well below freezing in winter and high heat in summer in the same year — specify an IP-rated housing and confirm the ambient envelope.</li>
+              <li><strong>Mounting</strong> — compact housings and small connections simplify installation on refrigerant lines and ductwork; on vibration-heavy compressor lines, a supported mounting and robust connector save the most callbacks.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Common HVAC Measurement Problems</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Five problems account for most HVAC sensor failures and most bad readings. All of them are avoidable at the specification and installation stage.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Low-range drift</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Low-pressure sensors must hold their zero. Specify accuracy against your requirement and check zero behaviour during commissioning.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Moisture ingress outdoors</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Condensation is a leading cause of failure on outdoor units. IP-rated housings and sealed connectors keep the electronics dry through weather cycles.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Refrigerant leaks damaging sensors</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Confirm wetted-material compatibility before installation and trend the readings — a sudden change is often the first sign of a leak elsewhere in the circuit.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Missed filter maintenance</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Trend differential pressure instead of relying on manual checks; a climbing drop is the early signal that a filter needs replacing.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Noise on long BMS runs</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Use 4-20mA with shielded cable for long distances — it rejects the voltage-drop and interference problems that plague voltage outputs.</p>
+          </div>
+        </div>
+        <div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <h3 class="text-lg font-bold text-navy-950">Start with the right specification</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">Send us the refrigerant type, operating envelope and peak pressure for refrigerant duty, or the range and duct or pipe size for air and water duty, and we will confirm a model and output to match your BMS. Standard models ship in 7-15 days, and OEM variants for chiller and AHU builders are built to your drawing with custom ranges, connections and cables.</p>
+        </div>
+      </div>
+    </section>
+  </IndustryPageTemplate>
+</Layout>

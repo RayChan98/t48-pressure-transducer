@@ -1,0 +1,69 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CategoryPageTemplate from '../../../components/CategoryPageTemplate.astro';
+
+const longtail = ["industrial pressure transducer", "pressure transducer 4-20ma", "pressure transducer 0-10v", "hydraulic pressure transducer", "pressure transducer manufacturer", "pressure sensor for pump", "pressure transmitter for hydraulic", "custom pressure transducer"];
+const faqs = [
+  { q: 'What is the difference between a pressure transducer and a pressure transmitter?', a: 'In practice the terms are used interchangeably in most industrial settings. Strictly, a transmitter includes signal conditioning and produces a standard output (4-20mA, 0-10V), while a transducer can mean the sensing element alone. Every PRESSUREPOINT model ships as a complete, ready-to-wire instrument with the output signal you specify.' },
+  { q: 'Which output signal should I choose: 4-20mA or 0-10V?', a: '4-20mA two-wire is the industrial standard — immune to voltage drop over long cable runs and supported by every PLC. Choose 0-10V for short runs and simple controllers, or RS485 Modbus when you need to daisy-chain many sensors on one bus.' },
+  { q: 'What pressure ranges are available?', a: 'From vacuum (-1 bar) to 600 bar standard, with custom ranges in between. Common standards: 0-1, 0-6, 0-10, 0-16, 0-25, 0-40, 0-100, 0-250, 0-400, 0-600 bar. Tell us your working range and we confirm a model with the best accuracy within it.' },
+  { q: 'Can you customise the process connection?', a: 'Yes — G1/4, G1/2, 1/4" NPT, 1/2" NPT, M20×1.5, M12×1.5, flush diaphragm and custom threads are available. Send your drawing or spec and we produce to it.' },
+  { q: 'What is the typical lead time?', a: 'Standard models ship in 7-15 days. Custom OEM builds (range, connection, output, cable) typically 15-25 days after drawing confirmation. Small MOQ from 10 pcs for standard models.' },
+];
+---
+
+<Layout title="Industrial Pressure Transducers | 4-20mA & 0-10V, Factory Direct" description="Industrial pressure transducers and transmitters from a factory-direct manufacturer. 4-20mA, 0-10V and RS485 outputs, vacuum to 600 bar, stainless steel construction, custom OEM support.">
+  <CategoryPageTemplate
+    title="Industrial Pressure Transducers"
+    kw="industrial pressure transducer"
+    desc="General-purpose industrial pressure transducers with 4-20mA, 0-10V and RS485 outputs, built for hydraulic systems, pumps, compressors and machine tools. Stainless 316L diaphragm, vacuum to 600 bar, factory-direct with custom range and connection options."
+    points={[
+      '4-20mA two-wire, 0-10V, 0-5V and RS485 Modbus outputs — every controller covered',
+      'Stainless steel 316L wetted parts with media-isolated options for aggressive fluids',
+      'Accuracy ±0.25% FS standard, ±0.1% FS on high-accuracy models',
+      'Ranges from -1 bar vacuum to 600 bar, custom ranges available',
+      'G1/4, G1/2, NPT, M20×1.5 and custom process connections',
+      'CE marked, IP65/IP67 rated, -40°C to +125°C media temperature',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/what-is-a-pressure-transducer/', title: 'What Is a Pressure Transducer?' },
+      { href: '/blog/pressure-transducer-vs-transmitter/', title: 'Transducer vs Transmitter: Key Differences' },
+      { href: '/blog/pressure-transducer-4-20ma/', title: 'Understanding 4-20mA Output' },
+    ]}
+    recommended={[
+      { title: 'High Accuracy Series', href: '/products/high-accuracy/', desc: '±0.1% FS for precision measurement' },
+      { title: 'Miniature Series', href: '/products/miniature/', desc: 'Compact OEM sensor modules' },
+      { title: 'Differential Series', href: '/products/differential/', desc: 'Pressure difference & airflow' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Choosing an Industrial Pressure Transducer</h2>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Key specification decisions</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Range</strong> — pick a range where your normal operating pressure sits in the middle third; avoid oversizing (accuracy is % of full scale).</li>
+              <li><strong>Output</strong> — 4-20mA for PLC/SCADA and long runs; 0-10V for local controllers; RS485 for multi-drop digital bus.</li>
+              <li><strong>Media compatibility</strong> — 316L stainless handles water, oil, most hydraulic fluids; chemical media may need Hastelloy or ceramic diaphragm.</li>
+              <li><strong>Connection</strong> — G1/4 and 1/4" NPT are the most common; flush diaphragm for viscous or hygienic media.</li>
+              <li><strong>Accuracy</strong> — ±0.5% for general monitoring, ±0.25% standard, ±0.1% for test & calibration duty.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Typical applications</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Hydraulic systems</strong> — presses, injection molding machines, excavators: measure system and cylinder pressure continuously.</li>
+              <li><strong>Pumps & water supply</strong> — suction/discharge pressure monitoring, booster pump control, tank level via hydrostatic pressure.</li>
+              <li><strong>Compressors & pneumatics</strong> — receiver pressure, line monitoring, leak detection.</li>
+              <li><strong>Process industries</strong> — line and vessel pressure in chemical, food and pharmaceutical plants.</li>
+              <li><strong>OEM machinery</strong> — embedded pressure monitoring for machine builders and equipment manufacturers.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </CategoryPageTemplate>
+</Layout>

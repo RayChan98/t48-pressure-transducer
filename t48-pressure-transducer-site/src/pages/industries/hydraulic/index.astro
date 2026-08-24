@@ -1,0 +1,136 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import IndustryPageTemplate from '../../../components/IndustryPageTemplate.astro';
+
+const longtail = [
+  "hydraulic pressure transducer",
+  "hydraulic pressure sensor 600 bar",
+  "pressure transmitter for hydraulic system",
+  "hydraulic oil pressure sensor",
+  "pressure transducer for excavator",
+  "hydraulic pump pressure sensor",
+  "high pressure transducer 400 bar",
+  "hydraulic pressure sensor 4-20ma",
+];
+
+const faqs = [
+  { q: "What pressure range do hydraulic systems typically run at?", a: "Most industrial and mobile hydraulic circuits work in the 250-400 bar band, with presses, test rigs and special-purpose machines up to 600 bar. Pick a range where your normal working pressure sits in the middle third — accuracy is quoted as a percentage of full scale, so an oversized range wastes resolution. If your system peaks briefly at a higher pressure during cold starts or fast actuation, that peak — not the steady-state figure — is your sizing point." },
+  { q: "Can a transducer survive pressure pulsation from pumps and valves?", a: "Continuous pulsation is one of the most common causes of premature sensor failure. Choose a range with headroom above your peak spike pressure, check the overpressure rating against your worst-case transient, and share your duty cycle so we can recommend a model suited to cyclic loading. Sensors specified only on steady-state pressure are the ones that fail early on high-cycling machines." },
+  { q: "Which process connection fits hydraulic lines?", a: 'G1/4 and M20×1.5 are the most common on European-built machinery; 1/4" NPT and 1/2" NPT dominate North American equipment. We supply both families plus custom threads, with seal selection matched to the port geometry — send a drawing for retrofit work. Port depth and seal type (O-ring versus tapered thread) both affect the installed zero, so the drawing helps us get it right first time.' },
+  { q: "Can transducers be customised for OEM machine builders?", a: "Yes. Range, output, process connection, cable length and calibration points can all be set to your drawing. Custom OEM builds typically ship 15-25 days after drawing confirmation, with MOQ from 10 pieces on standard models. Every unit is individually calibrated and pressure-tested before shipping." },
+];
+---
+
+<Layout title="Hydraulic Pressure Transducers | 250-600 bar, 4-20mA | PRESSUREPOINT" description="Pressure transducers for hydraulic systems — system pressure, cylinder load and pump monitoring from 250 to 600 bar. 4-20mA, 0-10V and RS485 outputs, factory-direct with OEM support.">
+  <IndustryPageTemplate
+    title="Hydraulics"
+    kw="hydraulic pressure transducer"
+    desc="Pressure measurement for hydraulic systems: system pressure, cylinder load and pump discharge on mobile and industrial machines, with ranges up to 600 bar and pulsation-aware selection."
+    points={[
+      'Ranges to 600 bar for high-pressure circuits, presses and test rigs',
+      'Selection guidance for pulsating pressure and pressure spikes',
+      '4-20mA, 0-10V and RS485 outputs for every controller type',
+      '316L stainless wetted parts compatible with mineral hydraulic oils',
+      'G1/4, G1/2, 1/4" NPT, M20×1.5 and custom process connections',
+      'CE marked, IP65/IP67 rated for machine and mobile duty',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle: How It Works' },
+      { href: '/blog/pressure-transducer-4-20ma/', title: 'Pressure Transducer 4-20 mA Output: Wiring, Scaling and Selection' },
+    ]}
+    recommended={[
+      { title: 'High Accuracy Series', href: '/products/high-accuracy/', desc: '±0.1% FS for cylinder load and test duty' },
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'General-purpose hydraulic monitoring' },
+      { title: 'Miniature Series', href: '/products/miniature/', desc: 'Compact OEM modules for machine builders' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">What Hydraulic Systems Measure with Pressure Transducers</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Hydraulic circuits transmit force through pressurised oil, which makes pressure the single most informative variable in the system. Continuous pressure measurement feeds control loops, protects equipment from overload and gives maintenance teams early warning of wear. Transducers mount at the pump discharge, on the main manifold, in cylinder ports and on accumulators, and their signals feed PLCs, load-limiting relays and the telematics systems on mobile machines.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">System & pump pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Main circuit pressure is the reference for pump control, relief valve settings and load-sensing logic. A transducer on the pump discharge or main manifold gives the controller its primary feedback signal — and the same reading is used to verify relief valve settings during commissioning.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Cylinder load & clamping force</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Pressure in each cylinder chamber is proportional to the force applied. Reading head-end and rod-end pressure lets a press or injection moulding machine limit tonnage and protect tooling — the difference between the two chambers gives the effective force, which is what tooling protection actually needs.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Accumulator monitoring</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Pre-charge and operating pressure in accumulators indicate charge state and reveal a degrading bladder or piston seal before it affects cycle performance. Charge monitoring also prevents the hard starts and pressure dips that come from a depleted accumulator.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Test benches & calibration</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Hydraulic test rigs need stable, repeatable readings. High-accuracy models at ±0.1% FS are used for valve characterisation and component validation, where repeatability and temperature stability matter as much as the accuracy class itself.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Mobile hydraulics</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Excavators, loaders and cranes monitor system pressure and implement load for flow control, anti-stall logic and overload protection on the move. Vibration, shock and wide ambient temperature swings make IP-rated, robustly housed models the norm here.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Filter & return-line monitoring</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Pressure drop across return and off-line filters signals contamination before it damages pumps and valves — the classic early-warning measurement that turns contamination from a hidden failure mode into a scheduled maintenance event.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-slate-50">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Choosing a Transducer for Hydraulic Duty</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Hydraulic service is demanding: high working pressure, transient spikes, pulsation, vibration and temperature swings. Get the range wrong and you will be replacing the sensor long before the machine; get it right and the transducer will outlast everything around it. Work through these decisions with your supplier before ordering.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Range and overload</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Range</strong> — working pressure in the 250-400 bar band is common, with presses and test rigs to 600 bar. Place normal operating pressure in the middle third of the range; if the system peaks briefly during cold starts, that peak is the sizing point.</li>
+              <li><strong>Pulsation and spikes</strong> — pump ripple and valve switching create peaks above steady-state pressure. Verify the overpressure rating against your worst-case transient and tell us the duty cycle so cyclic loading is covered.</li>
+              <li><strong>Media</strong> — 316L wetted parts suit mineral oils and most hydraulic fluids. Fire-resistant fluids (HFD types) and water-glycol mixtures should be confirmed with the manufacturer first — some additives attack elastomers long before they attack steel.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Signal, connection and environment</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Output</strong> — 4-20mA two-wire for PLC inputs and long cable runs; RS485 Modbus for multi-drop digital buses; 0-10V for local controllers. On 4-20mA loops, a reading outside the 4-20mA window is also a quick wiring-fault indicator on most PLCs.</li>
+              <li><strong>Connection</strong> — G1/4 and M20×1.5 on European machines, 1/4" NPT on North American; seal type matters as much as the thread itself. Port depth and O-ring versus tapered-seal threads change the installed zero, so share the drawing.</li>
+              <li><strong>Environment</strong> — mobile machines add vibration, shock and weather. IP65/IP67 housings and robust connectors handle typical machine duty; for machines that wash down or work in the rain, sealed connectors beat open cable entries.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Common Hydraulic Measurement Problems and How to Avoid Them</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">These are the failures we see most often in hydraulic installations, and every one of them is preventable at the specification stage.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Pressure spikes destroying sensors</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Fast valve switching and cold-oil starts can produce transients far above working pressure. Size the range with headroom above the worst spike and confirm the overpressure rating before purchase.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Premature failure from pulsation</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Continuous ripple fatigues sensing elements over time. Discuss your cyclic duty with us so we can recommend a model matched to your loading profile.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Zero drift after installation</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Mounting torque and port depth affect the zero point. Use the correct seal and torque for the port, and re-zero after installation where your controller allows.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Cable and connector damage on mobile equipment</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Robust connectors, protected cable routing and IP67 housings cut ingress and abrasion failures on machines that work outdoors.</p>
+          </div>
+        </div>
+        <div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <h3 class="text-lg font-bold text-navy-950">Start with the right specification</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">Send us the working pressure range, peak transient pressure, duty cycle, fluid type, process connection and output signal, and we will confirm a model with the overpressure rating and cyclic capability checked against your numbers. Every unit is individually calibrated and pressure-tested before shipping, and custom OEM builds for machine builders ship 15-25 days after drawing confirmation.</p>
+        </div>
+      </div>
+    </section>
+  </IndustryPageTemplate>
+</Layout>

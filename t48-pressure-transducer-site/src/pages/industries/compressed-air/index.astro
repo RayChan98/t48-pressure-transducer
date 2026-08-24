@@ -1,0 +1,140 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import IndustryPageTemplate from '../../../components/IndustryPageTemplate.astro';
+
+const longtail = [
+  "compressed air pressure sensor",
+  "air compressor pressure transmitter",
+  "receiver tank pressure sensor",
+  "compressed air line pressure monitoring",
+  "explosion proof pressure transmitter",
+  "air pressure sensor 4-20ma",
+  "pneumatic pressure transducer",
+  "compressed air leak detection",
+];
+
+const faqs = [
+  { q: "What range do compressed air systems need?", a: "Plant networks commonly run at 7-10 bar, with some systems up to 13-16 bar. Choose a range where your normal working pressure sits in the middle third so control and alarm accuracy are preserved. Size from the compressor manufacturer's operating envelope rather than from the pipe size." },
+  { q: "Transducer or pressure switch?", a: "A switch only reports above or below a setpoint. A transducer provides continuous pressure for VFD compressor control, trend logging and leak detection — which is why modern compressor controllers accept a 4-20mA signal. Many controllers also log pressure history, which turns the sensor into a maintenance tool." },
+  { q: "When is an explosion-proof model needed?", a: "When the sensor is installed in a classified hazardous area — for example, near gas handling or in a zone defined by the site's area classification. Confirm the zone and certificate requirements with the site engineer and we will match a suitable model. The site's area classification drawing is the authority on this one." },
+  { q: "How do I find leaks in the network?", a: "Monitor receiver pressure while the system is idle: the decay rate indicates total leakage, and industry surveys commonly attribute a significant share of consumption to leaks in older networks. Once total leakage is known, the same monitoring verifies that repairs actually worked. Differential pressure across filters and dryers also flags component problems early." },
+];
+---
+
+<Layout title="Compressed Air Pressure Transducers | Receiver & Line Monitoring | PRESSUREPOINT" description="Pressure monitoring for compressed air systems: receiver tank, compressor discharge and distribution line pressure, with ranges typical of 7-16 bar duty and explosion-proof options for hazardous areas.">
+  <IndustryPageTemplate
+    title="Compressed Air"
+    kw="compressed air pressure transducer"
+    desc="Pressure monitoring for compressed air systems: receiver tank, compressor discharge and distribution line pressure, with ranges typical of 7-16 bar duty and explosion-proof options for hazardous areas."
+    points={[
+      'Ranges suited to typical 7-16 bar compressed air duty',
+      '4-20mA, 0-10V and RS485 outputs for compressor controllers and SCADA',
+      'Explosion-proof models for hazardous-area installations',
+      'Compact housings for OEM compressor builders',
+      '316L stainless wetted parts for dry and lubricated air service',
+      'CE marked, IP65 rated for machine rooms and plant floors',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-4-20ma/', title: 'Pressure Transducer 4-20 mA Output: Wiring, Scaling and Selection' },
+      { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle: How It Works' },
+    ]}
+    recommended={[
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'Receiver, discharge and line monitoring' },
+      { title: 'Differential Series', href: '/products/differential/', desc: 'Filter and dryer pressure drop' },
+      { title: 'Miniature Series', href: '/products/miniature/', desc: 'Compact OEM modules for compressor builders' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">What Compressed Air Systems Measure</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">A compressed air network is a storage-and-delivery system where pressure is the operating currency: the receiver stores energy, the distribution lines deliver it, and every consumer depends on stable pressure at the point of use. Because air is compressible, pressure is also the best efficiency signal — a network that holds pressure at lower compressor load is a network that is working.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Receiver tank pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">The receiver is the system's buffer. Its pressure drives compressor load/unload control, signals demand changes and protects downstream equipment from pressure swings. On multi-compressor rooms it is also the reading used for sequencing, so one bad sensor can waste energy across the whole plant.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Compressor discharge pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Discharge pressure, read together with temperature, indicates compressor health and gives VFD-controlled units the feedback they need. A slow fall in discharge pressure on a fixed-speed unit is often the first sign of inlet filter or valve wear.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Distribution line pressure</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Pressure at points of use must stay within the tolerance of tools and machines; line monitoring flags undersized piping and growing pressure drops. The difference between receiver pressure and point-of-use pressure is the system's real delivery cost.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Filter & dryer differential</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Pressure drop across coalescing filters and desiccant dryers tracks element loading and bed condition, so consumables are changed on condition. It also protects the process — a failed dryer element puts water into the tools that need dry air.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Leak detection</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Pressure decay monitoring while the system is idle quantifies total leakage — the biggest single source of wasted energy in most plants. Once the leak rate is known, the same monitoring verifies that repairs actually worked.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">OEM compressor control</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Embedded transducers give the controller continuous feedback for load/unload logic, VFD speed and alarm handling. Specifying the transducer at design stage also simplifies controller wiring, because the signal is already in the format the PLC expects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-slate-50">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Choosing a Transducer for Compressed Air Duty</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Compressed air is an easy media for wetted parts, so selection comes down to range, output, environment and any hazardous-area requirements. Most transducers in this service are simple, reliable instruments — the specification mistakes happen on range and on hazardous-area classification.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Range, media and output</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Range</strong> — plant networks commonly run 7-10 bar, some up to 13-16 bar. Pick a range with working pressure in the middle third, sized from the compressor manufacturer's operating envelope rather than from the pipe size.</li>
+              <li><strong>Media</strong> — dry, oil-free air is benign; oil carryover from lubricated compressors can coat diaphragms over time. If your air quality varies, confirm the expected oil content — and on lubricated systems, mounting the sensor above the condensate level reduces coating problems.</li>
+              <li><strong>Output</strong> — 4-20mA is standard for compressor controllers and SCADA; 0-10V suits local panels; RS485 Modbus for multi-drop installations. Many controllers log pressure history, which makes the sensor part of the maintenance toolkit.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Hazardous areas, environment and mounting</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Hazardous areas</strong> — if the mounting point falls in a classified hazardous area, select an explosion-proof model and confirm your zone and certificate requirements. The site's area classification drawing is the authority — do not guess on this one.</li>
+              <li><strong>Environment</strong> — compressor rooms run hot and vibrating. Confirm ambient temperature limits — electronics rated only for room temperature fail early in a hot machine room — and consider mounting that isolates the sensor from machine vibration.</li>
+              <li><strong>Connections & mounting</strong> — G1/4, G1/2 and NPT threads cover in-line, tank and panel mounting; confirm your port size. On receiver tanks, a threaded connection with a shut-off valve lets you replace the sensor without draining the system.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Common Compressed Air Measurement Problems</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">These problems show up in almost every older plant we discuss, and all of them are caught at the specification stage.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Pressure spikes at compressor start</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Starting transients can exceed working pressure. Size the range with headroom and verify the overpressure rating.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Overnight pressure drop</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">A falling receiver pressure while idle means leaks. Continuous monitoring turns that observation into a quantified maintenance task.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Condensation at the diaphragm</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Mount sensors above drip points and keep the port clear of condensate pooling, especially after dryers and receivers.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Vibration fatigue</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Reciprocating compressors shake nearby fittings; robust housings and well-supported mounting reduce failure rates.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Oversized range losing resolution</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">A 25 bar sensor on a 7 bar system wastes accuracy — apply the middle-third rule when choosing the range.</p>
+          </div>
+        </div>
+        <div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <h3 class="text-lg font-bold text-navy-950">Start with the right specification</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">Send us the operating pressure, compressor type (lubricated or oil-free), mounting point, ambient temperature and output signal. For hazardous areas, include the zone and certificate requirements. We will confirm a model with the range and rating to match, and every unit is individually calibrated and pressure-tested before shipping.</p>
+        </div>
+      </div>
+    </section>
+  </IndustryPageTemplate>
+</Layout>

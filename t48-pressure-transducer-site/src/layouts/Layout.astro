@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import FloatingActions from '../components/FloatingActions.astro';
+import MobileBottomNav from '../components/MobileBottomNav.astro';
+import InquiryModal from '../components/InquiryModal.astro';
+import SearchModal from '../components/SearchModal.astro';
+
+const { title = 'PRESSUREPOINT', description = 'Pressure Transducer & Transmitter Manufacturer' } = Astro.props;
+const canonical = Astro.url.pathname === '/' ? 'https://t48-pressure-transducer.pages.dev/' : `https://t48-pressure-transducer.pages.dev${Astro.url.pathname.replace(/\/$/, '')}/`;
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'PRESSUREPOINT',
+  url: 'https://t48-pressure-transducer.pages.dev/',
+  description: 'Pressure transducer and pressure transmitter manufacturer. Factory-direct industrial pressure transducers with 4-20mA, 0-10V and RS485 outputs, OEM/ODM support for distributors and integrators.',
+  sameAs: [],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="PRESSUREPOINT" />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" type="image/svg+xml" href="/logo/logo-icon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/logo/favicon-512.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <SiteHeader />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <SiteFooter />
+    <FloatingActions />
+    <MobileBottomNav />
+    <InquiryModal />
+    <SearchModal />
+  </body>
+</html>
