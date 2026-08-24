@@ -1,6 +1,24 @@
 ---
 // Products 品类页模板 v2（2026-08-21 升级：chapters slot + FAQ + 可配置推荐 + 博客引导）
 const { title, kw, desc, points, longtail, faqs = [], recommended = [], blogLinks = [] } = Astro.props;
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: title,
+  description: desc,
+  brand: { '@type': 'Brand', name: 'PRESSUREPOINT' },
+  manufacturer: { '@type': 'Organization', name: 'PRESSUREPOINT', url: 'https://t48-pressure-transducer.pages.dev/' },
+  category: 'Pressure Transducers',
+  additionalProperty: [
+    { '@type': 'PropertyValue', name: 'Output signals', value: '4-20mA, 0-10V, 0-5V, RS485 Modbus' },
+    { '@type': 'PropertyValue', name: 'Pressure range', value: 'Vacuum (-1 bar) to 600 bar' },
+    { '@type': 'PropertyValue', name: 'Accuracy', value: '±0.25% FS standard, ±0.1% FS high-accuracy' },
+    { '@type': 'PropertyValue', name: 'Wetted parts', value: 'Stainless steel 316L, Hastelloy, ceramic options' },
+    { '@type': 'PropertyValue', name: 'Protection', value: 'IP65/IP67' },
+    { '@type': 'PropertyValue', name: 'Certifications', value: 'CE marked' },
+  ],
+};
 ---
 
 <section class="bg-navy-950 text-white">
@@ -102,3 +120,5 @@ const { title, kw, desc, points, longtail, faqs = [], recommended = [], blogLink
     </div>
   </div>
 </section>
+
+<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
