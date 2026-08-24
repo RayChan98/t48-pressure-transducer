@@ -50,7 +50,7 @@
 - [x] 建站 31 页上线（2026-08-24）
 - [x] 缺失页 6 页补齐（2026-08-24 上线）
 - [x] 核心词 3000+ 字深度指南 6 篇（内容增量③，2026-08-25 上线，37 页）
-- [ ] on-page + technical SEO 检查（上线前收尾）
+- [x] on-page + technical SEO 终检（2026-08-25：软404全绿/无noindex/canonical正/Product schema/og+twitter图）
 - [ ] 域名注册（待主人定，走 CF Registrar）
 - [ ] logo 定稿（Trae 指令，色板后置）
-- [ ] git push 待网络恢复（commit f733d7d 已本地，wrangler 已直部署）
+- [x] git push（af55c80 + 34fcdfa 已推送）
