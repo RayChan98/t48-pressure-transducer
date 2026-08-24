@@ -1,0 +1,248 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogPostTemplate from '../../../components/BlogPostTemplate.astro';
+
+const toc = [
+  { id: 'what-is-dp', label: 'What Is Differential Pressure (ΔP)?' },
+  { id: 'why-measure-dp', label: 'Why Measure Differential Pressure?' },
+  { id: 'how-it-works', label: 'How a Differential Pressure Transducer Works' },
+  { id: 'applications', label: 'Common ΔP Applications: Filter, Flow, Level & Fouling' },
+  { id: 'range-static-pressure', label: 'Range, Static Pressure & Overload: The Specs That Matter' },
+  { id: 'selection', label: 'Selecting a Differential Pressure Transducer: Key Points' },
+  { id: 'faq', label: 'Frequently Asked Questions' },
+  { id: 'conclusion', label: 'Conclusion' },
+];
+
+const related = [
+  { href: '/blog/pressure-transducer-selection-guide/', title: 'How to Choose a Pressure Transducer: Complete Selection Guide', readTime: 15 },
+  { href: '/blog/pressure-transducer-vs-transmitter/', title: 'Transducer vs Transmitter: Key Differences', readTime: 9 },
+  { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle: How Pressure Becomes a 4-20 mA Signal', readTime: 9 },
+];
+---
+
+<Layout
+  title="Differential Pressure Measurement: How ΔP Works and Where It's Used | PRESSUREPOINT"
+  description="How differential pressure (ΔP) measurement works: the high-side and low-side ports, diaphragm sensing, filter clogging, orifice flow, level and heat-exchanger fouling applications — plus range, static pressure and selection rules."
+>
+  <BlogPostTemplate
+    title="Differential Pressure Measurement: How ΔP Works and Where It's Used"
+    category="Technical Guides"
+    date="2026-08-29"
+    readTime={13}
+    author="PRESSUREPOINT Team"
+    toc={toc}
+    related={related}
+  >
+    <p>
+      Differential pressure measurement answers a question no single gauge-pressure transducer can: <em>what is the difference between two pressures?</em> That difference — written ΔP and read as "delta P" — is one of the most information-dense signals in industrial instrumentation. A clogged filter, a flowing pipe, a rising tank level and a fouled heat exchanger all reveal themselves as a change in the pressure difference across two points, and a differential pressure transducer turns that change into a clean 4-20 mA, 0-10 V or RS485 signal your controller can act on.
+    </p>
+    <p>
+      This guide explains what differential pressure measurement actually measures, how a ΔP transducer works internally, where the measurement earns its keep in real plants, and the specification rules — range, static pressure, overload and wet/wet versus wet/dry construction — that separate a reliable installation from a drifting one. It is written for engineers and buyers who need to understand ΔP well enough to specify it correctly, without wading through transmitter catalogs.
+    </p>
+
+    <h2 id="what-is-dp">What Is Differential Pressure (ΔP)?</h2>
+    <p>
+      Differential pressure is the arithmetic difference between two pressure values, measured at two different points in a system. A differential pressure transducer has <strong>two pressure ports</strong> — a high-side (usually marked H or +) and a low-side (marked L or −) — and its sensing element responds to the difference between them, P<sub>high</sub> − P<sub>low</sub>, rather than to either pressure alone. If the high side sees 2.5 bar and the low side sees 2.1 bar, the transducer reports 0.4 bar of differential pressure, regardless of what the absolute values are.
+    </p>
+    <p>
+      That last point is the defining feature of the measurement. A gauge-pressure transducer measures its single port against atmospheric pressure; an absolute transducer measures against a vacuum reference. A differential transducer measures one process pressure against <em>another process pressure</em>. The two sides do not need to be at atmospheric or vacuum reference at all — they can both sit at 40 bar of line pressure while the transducer faithfully reports a difference of a few kilopascals between them. This is why ΔP measurement can resolve changes of a few hundred pascals in systems carrying tens of bars of static pressure, and why it is the standard technique for flow, filter and level monitoring across process industry.
+    </p>
+    <p>
+      The reference-pressure distinction matters when choosing an instrument, because it determines the sensing construction: gauge and absolute transducers expose one side of the diaphragm to the process and the other to a reference, while a true differential transducer isolates <em>both</em> sides of the diaphragm from the process, usually behind two separate isolation diaphragms. If your application needs to compare two live process pressures, you need a differential instrument, not a gauge transducer with a second port bolted on.
+    </p>
+
+    <h2 id="why-measure-dp">Why Measure Differential Pressure?</h2>
+    <p>
+      Differential pressure is attractive because it lets one measurement infer quantities that are otherwise expensive or impossible to measure directly. Four classic inferences dominate industry:
+    </p>
+    <ul>
+      <li><strong>Blockage and fouling</strong> — the pressure drop across a filter, strainer or heat exchanger rises as it loads with dirt, scale or debris. ΔP is the direct, continuous health signal for anything that gradually clogs.</li>
+      <li><strong>Flow rate</strong> — with a primary element such as an orifice plate, nozzle or Venturi, the pressure drop across the element follows a known square-law relationship to flow: ΔP is proportional to the square of flow rate. One ΔP measurement becomes a flow measurement with a calibration curve.</li>
+      <li><strong>Level</strong> — in an open or closed vessel, the hydrostatic pressure difference between two taps separated by a known height is proportional to the liquid level and density. ΔP transducers measure level in pressurized tanks where a single gauge tap would be corrupted by the vessel pressure itself.</li>
+      <li><strong>Density and interface</strong> — with two ΔP transmitters at fixed elevations, the ratio of their outputs can be solved for liquid density or for the position of an interface between two liquids, such as oil over water.</li>
+    </ul>
+    <p>
+      The economic case is strong: a single differential pressure transducer with an orifice plate typically costs a fraction of a magnetic flowmeter at large line sizes, has no moving parts in the flow stream, and works on liquids, gases and steam alike. For monitoring duties — filter condition, exchanger fouling — the instrument is often the cheapest reliable way to convert a maintenance intuition into a logged, alarming number.
+    </p>
+
+    <h2 id="how-it-works">How a Differential Pressure Transducer Works</h2>
+    <p>
+      Inside a differential pressure transducer, the two process pressures act on opposite sides of a sensing element, and the element converts the resulting deflection into an electrical signal. The architecture follows a consistent pattern:
+    </p>
+    <ol>
+      <li><strong>High-side port</strong> — the higher-pressure process connection feeds P<sub>high</sub> onto one side of the sensing assembly.</li>
+      <li><strong>Low-side port</strong> — the lower-pressure connection feeds P<sub>low</sub> onto the other side. The sign convention is simply P<sub>high</sub> − P<sub>low</sub>; reversing the connections reverses the output, so correct port identification matters at installation.</li>
+      <li><strong>Isolation diaphragms</strong> — in wet/wet construction, each port terminates in a welded metal isolation diaphragm, with the space behind it filled with a transmission fluid (typically silicone oil). The process never touches the sensing element itself, only the isolation diaphragm. This is what allows the transducer to measure two independent process fluids without cross-contamination.</li>
+      <li><strong>Sensing element</strong> — the two isolation diaphragms couple, through the fill fluid, to a central sensing element — most commonly a capacitance cell or a piezoresistive strain-gauge bridge on a thin diaphragm. When P<sub>high</sub> and P<sub>low</sub> differ, the sensing diaphragm deflects; the deflection changes either the capacitance between the diaphragm and fixed electrodes or the resistance balance of the strain-gauge bridge.</li>
+      <li><strong>Signal conditioning</strong> — the capacitance or resistance change is converted by an onboard circuit into a linear output proportional to ΔP: 4-20 mA, 0-10 V, or digital RS485 / Modbus with engineering-unit scaling.</li>
+    </ol>
+    <p>
+      The same physics that makes a strain-gauge bridge a good gauge-pressure element makes the differential version a good ΔP element; the difference is mechanical. A wet/wet transducer sandwiches the sensing element between two isolation diaphragms so that both faces of the sensor see process pressure. A wet/dry transducer, by contrast, has one isolation diaphragm facing the process on the high side while the low side is vented to atmosphere — effectively a gauge-referenced transducer with a process-isolated high side. Each construction suits a different family of applications, as covered in the selection section below.
+    </p>
+    <p>
+      The output convention deserves a note: a "bidirectional" or "symmetric" transducer can report both positive and negative ΔP (for example −10 to +10 kPa), which is required where flow can reverse or where the pressure balance can swing either way. Most filter-monitoring installations, however, are unidirectional — ΔP only ever grows as the filter loads, and a 0 to 100 kPa range is the natural choice.
+    </p>
+
+    <h2 id="applications">Common ΔP Applications: Filter, Flow, Level & Fouling</h2>
+    <p>
+      The four inference classes above cover the overwhelming majority of real ΔP installations. The table below summarizes the typical configuration for each:
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Application</th>
+            <th>What ΔP tells you</th>
+            <th>Typical ΔP range</th>
+            <th>Typical static pressure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Filter / strainer clogging</td>
+            <td>Element loading — ΔP rises as the element blocks</td>
+            <td>0-50 kPa to 0-500 kPa</td>
+            <td>Up to 16-40 bar line pressure</td>
+          </tr>
+          <tr>
+            <td>Orifice-plate flow</td>
+            <td>Flow rate — ΔP follows a square-law curve</td>
+            <td>0-1 kPa to 0-100 kPa</td>
+            <td>Up to 100 bar and above</td>
+          </tr>
+          <tr>
+            <td>Tank level (pressurized vessel)</td>
+            <td>Hydrostatic head between two taps</td>
+            <td>0-1 kPa to 0-100 kPa</td>
+            <td>Vessel working pressure, 16-100 bar</td>
+          </tr>
+          <tr>
+            <td>Heat exchanger fouling</td>
+            <td>Growing pressure drop across the exchanger</td>
+            <td>0-100 kPa to 0-1 MPa</td>
+            <td>16-40 bar typical</td>
+          </tr>
+          <tr>
+            <td>Pump / compressor differential</td>
+            <td>Head developed across the machine</td>
+            <td>0-100 kPa to 0-2.5 MPa</td>
+            <td>Suction plus head, up to 100 bar</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Filter clogging monitoring</h3>
+    <p>
+      A clean filter element has a small, predictable pressure drop. As captured particles build up, the drop rises along a repeatable curve until the element must be changed. Mounting a differential transducer across the filter — high side upstream, low side downstream — gives a continuous loading signal. Setting a high alarm at the manufacturer's recommended change-out ΔP converts filter maintenance from scheduled to condition-based, which typically extends element life and eliminates premature changes. This is the most common entry point into ΔP instrumentation because it is simple, cheap and almost universally applicable, from hydraulic return-line filters to large air intake systems.
+    </p>
+    <h3>Orifice-plate flow measurement</h3>
+    <p>
+      Insert a restriction — an orifice plate — into a pipe and the flow must accelerate through the opening, which drops the pressure just downstream. The pressure difference across the plate is governed by Bernoulli's equation and is proportional to the <em>square</em> of the flow rate: double the flow and ΔP quadruples. A differential transducer across the plate, together with a calibration that accounts for pipe diameter, orifice diameter and fluid properties, becomes a flowmeter. The square-law relationship means the measurement is most sensitive at low flows and less sensitive near full scale, so range selection is a compromise between turndown and accuracy — a 100:1 turndown claim always refers to the transducer's electronic range, not the practical flow range. For custody and control duties the flow computer typically linearizes the square root. The <a href="/products/differential/">differential pressure transducer range</a> covers the low-range, high-static-pressure combinations this service demands.
+    </p>
+    <h3>Tank level by hydrostatic head</h3>
+    <p>
+      In an open tank, a gauge transducer at the bottom measures level directly through hydrostatic head. In a pressurized vessel, the pressure above the liquid corrupts that reading — which is exactly where ΔP earns its place. Two taps are installed a known vertical distance apart, and the differential transducer measures the head of liquid between them, cancelling the vessel's gas pressure because it acts equally on both ports. The output is proportional to level × density, so a known liquid density yields level directly. This is the standard solution for pressurized separators, boilers and process vessels, and it works for interface measurement as well: with one tap in the oil layer and one below the water-oil interface, the ΔP signal tracks the interface position.
+    </p>
+    <h3>Heat-exchanger and line fouling</h3>
+    <p>
+      A clean heat exchanger has a known pressure drop at design flow. Fouling — scale, biological growth, or particulate deposition — narrows the flow passages and pushes the drop upward over weeks or months. A differential transducer across the exchanger, logged against flow, reveals fouling long before it degrades heat transfer enough to be noticed by temperature alone. The same principle applies to long transfer lines, strainers and cooling-water circuits: any asset whose pressure drop is a proxy for internal condition is a candidate for ΔP monitoring, and the transducer is typically installed with isolation valves so it can be removed for zero checks without draining the line.
+    </p>
+
+    <h2 id="range-static-pressure">Range, Static Pressure & Overload: The Specs That Matter</h2>
+    <p>
+      Differential transducers are specified by two independent numbers, and confusing them is the most common buying error. The <strong>differential range</strong> (also called the ΔP span) is the pressure difference the transducer is calibrated to measure — for example 0-10 kPa or 0-100 kPa, down to 0-100 Pa for clean-room and HVAC duties and up to megapascal levels for pump differentials. The <strong>static pressure rating</strong> (also called working pressure or line pressure) is the absolute pressure both ports can carry simultaneously while the transducer keeps measuring. A 0-10 kPa transducer with a 40 bar static rating measures a 10 kPa difference between two lines that both sit at 40 bar.
+    </p>
+    <p>
+      Static rating is a mechanical limit as much as a measurement spec. At high line pressures the fill fluid compresses, the isolation diaphragms flex, and a tiny asymmetric volume change can shift the zero — which is why low-range transducers (below roughly 10 kPa) show noticeable zero shift with static pressure, and why datasheets quote a <strong>static-pressure zero effect</strong> such as ±0.1% of span per 10 bar. If your process pressure varies significantly, specify a transducer with a documented static zero effect and plan a zero trim at line pressure.
+    </p>
+    <p>
+      Overload is the third number. A differential transducer can be overloaded in three distinct ways: <strong>high-side overload</strong> (P<sub>high</sub> far above P<sub>low</sub>, beyond the ΔP span), <strong>low-side overload</strong> (P<sub>low</sub> above P<sub>high</sub>, the reverse direction), and <strong>static overload</strong> (both ports pushed together beyond the rated static pressure, for example during a hydrotest). Check the datasheet for all three. Unidirectional transducers are often rated for a one-sided overload of 1.5 to 3× the ΔP span; bidirectional types must survive the same figure in both directions. A transducer that is not rated for reverse-pressure events can be damaged by a single valve misoperation, so state the worst-case transient on your inquiry.
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Gauge pressure transducer</th>
+            <th>Differential pressure transducer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reference</td>
+            <td>Local atmospheric pressure (vented)</td>
+            <td>A second process pressure (P<sub>low</sub>)</td>
+          </tr>
+          <tr>
+            <td>Ports</td>
+            <td>One process port + vent</td>
+            <td>Two process ports (H and L)</td>
+          </tr>
+          <tr>
+            <td>Typical ranges</td>
+            <td>0-1 bar to 0-600 bar</td>
+            <td>0-100 Pa to 0-100 kPa (up to MPa)</td>
+          </tr>
+          <tr>
+            <td>Static pressure rating</td>
+            <td>Same as the range (overload above it)</td>
+            <td>Independent of ΔP span; 16 / 40 / 100 bar typical</td>
+          </tr>
+          <tr>
+            <td>Best for</td>
+            <td>Tank pressure, hydraulics, line pressure</td>
+            <td>Filter ΔP, flow, level in pressurized vessels, fouling</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      A useful ordering rule: the ΔP range is chosen from the <em>process behavior</em> you want to observe (a clean filter drops 20 kPa, so 0-100 kPa gives headroom), while the static rating is chosen from the <em>line conditions</em> the transducer will sit in (a 40 bar line needs a 40 bar static rating regardless of the 100 kPa span). If the two are not specified separately on an inquiry, the supplier cannot quote correctly.
+    </p>
+
+    <h2 id="selection">Selecting a Differential Pressure Transducer: Key Points</h2>
+    <p>
+      With range, static pressure and overload understood, the remaining selection decisions come down to construction and stability:
+    </p>
+    <ul>
+      <li><strong>Wet/wet versus wet/dry</strong> — wet/wet construction isolates both ports with their own diaphragm and is required when both sides carry process fluid, including two different fluids (filter ΔP across an oil line and a water line, for example). Wet/dry construction has one process diaphragm and one atmospheric reference; it suits applications where the low side is genuinely vented — tank level in a vented vessel, air-filter monitoring, HVAC differential pressure. Do not use wet/dry where the low side will see liquid or where both sides are pressurized; the vent port would leak or the reference would corrupt. The <a href="/products/differential/">PRESSUREPOINT differential range</a> offers both constructions.</li>
+      <li><strong>Low-range stability</strong> — the lower the ΔP span, the harder the measurement: a 0-500 Pa transducer must resolve diaphragm deflections far smaller than a 0-100 kPa unit, and temperature swings, mounting stress and static pressure all contribute proportionally more error. For low spans, check the zero temperature coefficient and the static-pressure zero effect on the datasheet before ordering, and prefer a transducer with a rigid, stress-isolated housing. If the process has no static pressure, a low-cost wet/dry unit is often perfectly adequate; if it carries 40 bar, invest in the wet/wet construction with documented static performance.</li>
+      <li><strong>Output and connectivity</strong> — the output signal rules are identical to gauge transducers: 4-20 mA two-wire for long runs and PLC/DCS compatibility, 0-10 V for short runs and OEM boards, RS485/Modbus for multi-drop and remote configuration. For filter-monitoring panels that log several transducers, Modbus multi-drop is often the cleanest choice.</li>
+      <li><strong>Materials and process connections</strong> — 316L stainless steel isolation diaphragms cover water, air, oils and most mild media; Hastelloy is specified for chlorides and strong acids. Connections are typically G1/4, G1/2, 1/4 NPT or flanged (DIN/ANSI) for higher static pressures. State the media on both ports — they can differ.</li>
+      <li><strong>Manifold and installation</strong> — a three-valve or five-valve manifold allows isolation, equalization and zero verification without depressurizing the process. This is standard practice in flow and level service and worth specifying from the start; it also protects the transducer from one-sided overpressure during commissioning.</li>
+    </ul>
+    <p>
+      If you are new to specifying these instruments, the <a href="/blog/pressure-transducer-selection-guide/">pressure transducer selection guide</a> covers the shared decisions — accuracy classes, output signals, temperature effects and electrical termination — that apply equally to differential transducers, and the <a href="/blog/pressure-transducer-vs-transmitter/">transducer versus transmitter</a> comparison explains the terminology differences you will meet in datasheets.
+    </p>
+
+    <h2 id="faq">Frequently Asked Questions</h2>
+    <h3>What is the difference between gauge pressure and differential pressure?</h3>
+    <p>
+      Gauge pressure is measured against local atmospheric pressure — one process port plus a vented reference. Differential pressure is the difference between two process pressures, measured with two ports, neither of which is referenced to atmosphere. A differential transducer can measure a few kilopascals of difference between two lines that both carry tens of bars.
+    </p>
+    <h3>What does "wet/wet" mean on a differential pressure transducer?</h3>
+    <p>
+      Wet/wet means both the high and low ports are sealed with their own isolation diaphragm, so process fluid — possibly two different fluids — can be present on both sides of the transducer. Wet/dry means only the high side has an isolation diaphragm while the low side is vented to atmosphere, which is suitable only where the low side sees no liquid and no pressure.
+    </p>
+    <h3>How do I choose the ΔP range and static pressure rating?</h3>
+    <p>
+      Choose the ΔP span from the process signal you want to observe — for example a clean filter drops 20 kPa, so a 0-100 kPa span gives four times headroom for loading. Choose the static pressure rating from the line conditions: a 40 bar line needs a 40 bar static-rated transducer no matter how small the span. Specify both separately on your inquiry.
+    </p>
+    <h3>Why does my low-range ΔP reading drift when line pressure changes?</h3>
+    <p>
+      At high static pressure the fill fluid compresses and the isolation diaphragms flex slightly, which can shift the zero of low spans. Datasheets quote this as the static-pressure zero effect (for example ±0.1% of span per 10 bar). Mitigate it by choosing a transducer with a documented low static zero effect, performing a zero trim at line pressure, and equalizing the ports before zero checks.
+    </p>
+    <h3>Can I measure flow with a differential pressure transducer?</h3>
+    <p>
+      Yes — with a primary element such as an orifice plate, nozzle or Venturi, the ΔP across the element is proportional to the square of flow rate. Calibrate the pair (element plus transducer) and linearize the square root in your flow computer or controller. It is a proven, low-cost method for liquids, gases and steam at large line sizes.
+    </p>
+
+    <h2 id="conclusion">Conclusion</h2>
+    <p>
+      Differential pressure measurement turns a simple subtraction — P<sub>high</sub> − P<sub>low</sub> — into one of the most versatile signals in instrumentation. A transducer with two ports and a diaphragm sensing element reports the difference between two live process pressures, and from that single number engineers infer filter loading, flow rate, tank level, interface position and heat-exchanger fouling. The specification discipline is straightforward once the two key numbers are separated: pick the ΔP span from the process signal you want to see, pick the static pressure rating from the line the transducer must survive, and verify overload ratings in both directions before commissioning.
+    </p>
+    <p>
+      PRESSUREPOINT supplies factory-direct differential pressure transducers and transmitters with 4-20 mA, 0-10 V and RS485 outputs, ΔP spans from 0-100 Pa through 0-1 MPa, static pressure ratings up to 100 bar, and both wet/wet and wet/dry constructions with 316L isolation diaphragms as standard (Hastelloy options available). Send your media, line pressure, ΔP span and connection details through the <a href="/contact/">inquiry form</a>, and our engineers will confirm a suitable model with datasheet and pricing — usually within one working day.
+    </p>
+  </BlogPostTemplate>
+</Layout>

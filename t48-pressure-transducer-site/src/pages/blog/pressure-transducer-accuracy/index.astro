@@ -1,0 +1,273 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogPostTemplate from '../../../components/BlogPostTemplate.astro';
+
+const toc = [
+  { id: 'fs-accuracy', label: 'What ±0.25% FS Actually Means' },
+  { id: 'error-components', label: 'Non-Linearity, Hysteresis & Repeatability' },
+  { id: 'temperature-drift', label: 'Temperature Drift: The Overlooked Spec' },
+  { id: 'read-datasheet', label: 'How to Read an Accuracy Datasheet' },
+  { id: 'rated-vs-real', label: 'Rated Accuracy vs Real-World Accuracy' },
+  { id: 'accuracy-classes', label: '±0.5% vs ±0.25% vs ±0.1% FS' },
+  { id: 'improve-accuracy', label: 'How to Get the Accuracy You Paid For' },
+  { id: 'faq', label: 'Frequently Asked Questions' },
+  { id: 'conclusion', label: 'Conclusion' },
+];
+
+const related = [
+  { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle', readTime: 9 },
+  { href: '/blog/pressure-transducer-selection-guide/', title: 'How to Choose a Pressure Transducer', readTime: 15 },
+  { href: '/blog/pressure-sensor-types/', title: 'Pressure Sensor Types: Technologies Compared', readTime: 9 },
+];
+---
+
+<Layout
+  title="Pressure Transducer Accuracy: % FS, Errors and What Matters | PRESSUREPOINT"
+  description="What pressure transducer accuracy really means: % FS error, non-linearity, hysteresis, repeatability, temperature drift, datasheet terms, and how to choose between ±0.5%, ±0.25% and ±0.1% FS classes."
+>
+  <BlogPostTemplate
+    title="Pressure Transducer Accuracy: % FS, Errors and What Matters"
+    category="Technical Guides"
+    date="2026-08-29"
+    readTime={13}
+    author="PRESSUREPOINT Team"
+    toc={toc}
+    related={related}
+  >
+    <p>
+      Every pressure transducer datasheet prints an accuracy figure — ±0.25% FS, ±0.1% FS, sometimes ±0.5% FS — and most buyers compare those numbers as if they were the whole story. They are not. That single figure bundles several independent error sources, hides the effect of temperature entirely, and only holds under specific calibration conditions that your installation may not meet. This guide unpacks what the accuracy specification actually means, where the error really comes from, and how to select and install a transducer so the accuracy you paid for is the accuracy you measure.
+    </p>
+
+    <h2 id="fs-accuracy">What ±0.25% FS Actually Means</h2>
+    <p>
+      Accuracy for industrial pressure transducers is quoted as a percentage of <strong>full scale (% FS)</strong>, which is the calibrated span of the instrument. A ±0.25% FS transducer with a 0-100 bar range has a possible error of ±0.25 bar at any point in the range — not 0.25% of the reading. That distinction matters enormously at the low end: at 10 bar, a ±0.25% FS error of ±0.25 bar is a 2.5% error relative to the reading, even though the transducer is performing exactly to specification.
+    </p>
+    <p>
+      The same logic applies to every range. A ±0.1% FS unit on 0-16 bar allows ±0.016 bar; the same unit on 0-600 bar allows ±0.6 bar. The percentage is constant, but the physical error in bar, psi or kPa scales with the range you choose. This is why range selection is the first accuracy decision: oversizing the range to get overload headroom quietly increases the absolute error you will see on real measurements. The <a href="/blog/pressure-transducer-selection-guide/">selection guide</a> covers the range sizing trade-off in detail; for accuracy work the rule is to pick the smallest range that safely covers the process, including transients.
+    </p>
+    <p>
+      Note also that % FS is not the only way accuracy is quoted. Some suppliers quote % of reading (span or URL), which looks better at low pressures but behaves differently, and some quote a combined figure that includes temperature effects over a reference range. Always check which basis the datasheet uses before comparing two products — comparing a % FS figure against a % reading figure directly is a category error.
+    </p>
+
+    <h2 id="error-components">Non-Linearity, Hysteresis & Repeatability</h2>
+    <p>
+      The headline accuracy figure is usually the root-sum-square (or sometimes the simple sum) of three distinct error sources: <strong>non-linearity</strong>, <strong>hysteresis</strong> and <strong>repeatability</strong>. They behave differently, and understanding which one dominates helps you choose a transducer for your specific duty cycle.
+    </p>
+    <ul>
+      <li><strong>Non-linearity</strong> — the deviation of the calibration curve from an ideal straight line between zero and full scale. It is systematic: the same error appears at the same pressure every time. Because it is predictable, it can be corrected in software if your controller has a linearization table — but it still counts against the datasheet accuracy figure.</li>
+      <li><strong>Hysteresis</strong> — the difference between readings taken on the way up and on the way down to the same pressure. It comes from mechanical and elastic memory in the diaphragm and bonding layers. Hysteresis is not corrected by calibration and is especially visible in applications that cycle pressure continuously, such as hydraulic presses and fatigue testing.</li>
+      <li><strong>Repeatability</strong> — the spread of readings when the same pressure is applied repeatedly under identical conditions. It is the random component: it cannot be predicted or calibrated out, only minimized by the sensor design. Good industrial transducers achieve repeatability well under 0.05% FS.</li>
+    </ul>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Error component</th>
+            <th>Nature</th>
+            <th>Can it be calibrated out?</th>
+            <th>Typical magnitude (% FS)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Non-linearity</td>
+            <td>Systematic, predictable</td>
+            <td>Partly (linearization table)</td>
+            <td>0.1-0.2</td>
+          </tr>
+          <tr>
+            <td>Hysteresis</td>
+            <td>Systematic, path-dependent</td>
+            <td>No</td>
+            <td>0.05-0.1</td>
+          </tr>
+          <tr>
+            <td>Repeatability</td>
+            <td>Random</td>
+            <td>No</td>
+            <td>0.02-0.05</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      When these three are combined, a transducer sold as ±0.25% FS typically has each individual component in the ranges above. If your process never cycles (a steady tank level, a filter pressure), hysteresis is nearly irrelevant to you. If it cycles thousands of times a day, hysteresis and repeatability are the numbers that decide whether your reading drifts on every stroke.
+    </p>
+
+    <h2 id="temperature-drift">Temperature Drift: The Overlooked Spec</h2>
+    <p>
+      Temperature is the largest single source of accuracy loss in real installations, and the most commonly ignored. The base accuracy is measured at a reference temperature — typically 20-25 °C. Away from that temperature, two separate effects appear:
+    </p>
+    <ul>
+      <li><strong>Zero temperature drift</strong> — the zero point moves as temperature changes, shifting the whole reading up or down. On outdoor, engine-bay or steam-adjacent installations this is what makes an idle reading creep overnight.</li>
+      <li><strong>Span temperature drift</strong> — the sensitivity (gain) of the sensor changes with temperature, so the error grows with pressure. It is quoted separately from zero drift and matters most for full-range measurements.</li>
+    </ul>
+    <p>
+      Datasheets express these as temperature coefficients, typically <strong>0.02-0.04% FS per 10 °C</strong> (or per 50 °C on some European datasheets — always check the reference). To see why this dominates: a ±0.1% FS transducer with a zero coefficient of 0.03% FS/10 °C drifts 0.12% FS over a 40 °C swing — more than its entire base accuracy. A ±0.25% FS transducer with tight compensation can outperform it in the field. This is the classic case where the headline number lies.
+    </p>
+    <p>
+      Two practical consequences follow. First, compare temperature coefficients whenever accuracy matters; for outdoor or hot-process duty they are as important as the % FS figure. Second, remember that temperature error is worst at the extremes of the operating range — a transducer rated -20 to +85 °C is only at its rated accuracy in a narrow band around the reference temperature, with additional error everywhere else. The <a href="/products/high-accuracy/">high accuracy series</a> is built with low zero and span temperature coefficients specifically so that field performance stays close to the lab figure.
+    </p>
+
+    <h2 id="read-datasheet">How to Read an Accuracy Datasheet</h2>
+    <p>
+      A datasheet lists several numbers that look interchangeable but are not. Learning to separate them prevents both overpaying and under-specifying:
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Datasheet term</th>
+            <th>What it means</th>
+            <th>Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Accuracy (% FS)</td>
+            <td>Combined error at reference temperature (20-25 °C)</td>
+            <td>The headline comparison figure — but only at lab temperature</td>
+          </tr>
+          <tr>
+            <td>Non-linearity / hysteresis / repeatability</td>
+            <td>Individual error components</td>
+            <td>Tells you which error dominates your duty cycle</td>
+          </tr>
+          <tr>
+            <td>Zero / span temperature coefficient</td>
+            <td>Drift per °C or per 10 °C away from reference</td>
+            <td>Decides field accuracy on hot or outdoor installations</td>
+          </tr>
+          <tr>
+            <td>Long-term stability</td>
+            <td>Drift over time, usually % FS per year</td>
+            <td>Determines recalibration interval; 0.1-0.2% FS/year is typical</td>
+          </tr>
+          <tr>
+            <td>Total error band (TEB)</td>
+            <td>Accuracy + temperature error over a stated range</td>
+            <td>The honest number for real operating conditions</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <strong>Long-term stability</strong> deserves special attention. A typical industrial transducer drifts <strong>0.1-0.2% FS per year</strong>, mostly in the zero point. For a process that must stay within a tight tolerance for a year without recalibration, a transducer with excellent short-term accuracy but average stability is the wrong purchase — the stability figure, not the accuracy figure, sets your recalibration interval. Some suppliers now quote a <strong>total error band (TEB)</strong>, which combines base accuracy with temperature error over a stated range. When a TEB is available, it is a much better basis for comparison than % FS alone because it reflects real operating conditions.
+    </p>
+
+    <h2 id="rated-vs-real">Rated Accuracy vs Real-World Accuracy</h2>
+    <p>
+      The accuracy printed on the datasheet is measured under controlled conditions: a deadweight tester or precision reference, stable temperature, no vibration, proper mounting torque, and a clean media. Your installation almost never matches all of those. The gap between rated and real accuracy comes from several directions:
+    </p>
+    <ul>
+      <li><strong>Mounting effects</strong> — over-torquing a threaded connection, missing a sealing washer, or mounting the diaphragm against a step in the port deforms the sensing element and shifts the zero by more than the datasheet allows. Follow the manufacturer's torque spec.</li>
+      <li><strong>Temperature</strong> — as covered above, ambient or media temperature away from the reference temperature adds error directly.</li>
+      <li><strong>Installation position and static head</strong> — a vertical versus horizontal mount changes the zero on liquid systems; a tall impulse line adds a static head that must be zeroed out. If zeroing is not possible, that head counts against accuracy.</li>
+      <li><strong>Supply voltage and load</strong> — an undervolted 4-20 mA loop or excessive loop resistance forces the transmitter out of its operating window and degrades the output at full scale.</li>
+      <li><strong>Vibration and EMI</strong> — sustained vibration and electrical noise add random error that no datasheet figure covers. Check the vibration rating and use shielded, properly grounded cable.</li>
+      <li><strong>Calibration reference quality</strong> — a field calibration against a gauge that is itself only ±0.5% FS cannot produce a transducer reading better than that; the calibration chain sets a floor on achievable accuracy.</li>
+    </ul>
+    <p>
+      The practical rule: assume your real-world accuracy is roughly 1.5-3× the datasheet figure unless the installation is carefully controlled. If the process needs ±0.25 bar on a 100 bar line, do not buy the cheapest ±0.25% FS unit — buy enough margin that the mounting and temperature effects stay inside your tolerance. This is exactly why instrument engineers specify one accuracy class above the strict requirement.
+    </p>
+
+    <h2 id="accuracy-classes">±0.5% vs ±0.25% vs ±0.1% FS</h2>
+    <p>
+      The market standardizes on three accuracy classes, and each maps onto a different kind of application. Choosing between them is a matter of what the reading is used for, not of pride in numbers:
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Accuracy class</th>
+            <th>Error on 0-100 bar</th>
+            <th>Typical applications</th>
+            <th>Price / complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>±0.5% FS</td>
+            <td>±0.5 bar</td>
+            <td>Alarms, displays, general monitoring, hydraulics</td>
+            <td>Lowest</td>
+          </tr>
+          <tr>
+            <td>±0.25% FS</td>
+            <td>±0.25 bar</td>
+            <td>Process control, OEM machinery, most industrial loops</td>
+            <td>Standard</td>
+          </tr>
+          <tr>
+            <td>±0.1% FS</td>
+            <td>±0.1 bar</td>
+            <td>Test stands, custody-grade measurement, calibration, R&D</td>
+            <td>Highest</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <strong>±0.5% FS</strong> is the workhorse class for duty where the reading feeds a gauge, an alarm or a coarse control function. It is the cheapest and often the most robust, and for many hydraulic and pneumatic systems the process itself varies by more than ±0.5% anyway — paying for tighter accuracy would buy nothing measurable.
+    </p>
+    <p>
+      <strong>±0.25% FS</strong> is the industrial default for anything that feeds a control loop, a quality record or an energy calculation. It is the accuracy class most PLC-controlled processes are actually specified around, and the price premium over ±0.5% is small.
+    </p>
+    <p>
+      <strong>±0.1% FS</strong> is a precision class for measurements that are reported, billed or validated: test benches, OEM calibration equipment, leak testing with tight pass/fail thresholds, and applications where 0.1 bar on a 100 bar process is commercially meaningful. It demands better temperature compensation and a correspondingly better calibration procedure — a ±0.1% transducer is only as good as the standard it was calibrated against. The <a href="/products/high-accuracy/">PRESSUREPOINT high accuracy range</a> offers ±0.1% FS with low temperature drift for exactly these duties.
+    </p>
+    <p>
+      One more consideration: accuracy class interacts with range. If your working pressure is 30 bar on a 0-100 bar range, a ±0.1% FS unit has ±0.1 bar of error — 0.33% of your actual reading. A ±0.25% FS unit on a 0-40 bar range has the same ±0.1 bar but costs less. When accuracy matters, <strong>right-size the range before upgrading the accuracy class</strong>; it is usually the cheaper way to the same result.
+    </p>
+
+    <h2 id="improve-accuracy">How to Get the Accuracy You Paid For</h2>
+    <p>
+      Most field accuracy problems are installation and maintenance problems, not sensor problems. The following measures cost little and routinely recover the full datasheet accuracy:
+    </p>
+    <ul>
+      <li><strong>Calibrate at the operating point</strong> — a two-point calibration at zero and full scale leaves the largest residual error in the middle of the range. If your process lives near one pressure, calibrate around it; better, use a three-point or five-point calibration if the transducer and your reference allow it.</li>
+      <li><strong>Zero after installation, not before</strong> — mounting torque, static head and temperature all shift the zero. Vent to atmosphere (for gauge units) and zero the transducer in place after the mechanical installation is finished.</li>
+      <li><strong>Keep temperature stable or compensated</strong> — insulate impulse lines, avoid direct sun and steam proximity, and if the transducer supports it, use the digital temperature compensation. Where ambient swings are unavoidable, buy on temperature coefficient, not headline accuracy.</li>
+      <li><strong>Right-size the range</strong> — operating in the 25-75% band of full scale keeps the % FS error small in absolute terms and improves stability. Revisit the range when the process changes; a range chosen five years ago is often oversized today.</li>
+      <li><strong>Use a calibration chain one class better</strong> — calibrate a ±0.1% transducer against a reference accurate to at least ±0.02-0.05%, and keep that reference's certificate current. A field gauge with worse accuracy than the device under test invalidates the whole exercise.</li>
+      <li><strong>Schedule recalibration by the stability spec</strong> — if the datasheet says 0.1% FS/year and your tolerance is 0.25%, annual calibration is defensible; tighten the interval if the process tolerance is tighter. Log zero drift between calibrations — it predicts when the next calibration is due.</li>
+      <li><strong>Protect the sensing element</strong> — water hammer and overpressure permanently deform the diaphragm and no recalibration restores it. The overload rating on the datasheet is a survival limit, not an operating recommendation.</li>
+    </ul>
+    <p>
+      For applications where every tenth of a percent matters, PRESSUREPOINT supplies a <a href="/products/high-accuracy/">high accuracy series</a> at ±0.1% FS with low temperature drift and NIST-traceable calibration options. Send your range, media and accuracy requirement through the <a href="/contact/">inquiry form</a> and our engineers will confirm a model with a calibration certificate to match.
+    </p>
+
+    <h2 id="faq">Frequently Asked Questions</h2>
+    <h3>What does ±0.25% FS mean on a 0-100 bar transducer?</h3>
+    <p>
+      It means the total possible error is ±0.25 bar at any point in the range — at 10 bar the reading can be off by ±0.25 bar (2.5% of the reading), and at 100 bar by the same ±0.25 bar (0.25% of the reading). The error is fixed in physical terms by the range, not by the reading.
+    </p>
+    <h3>Is a ±0.1% FS transducer always more accurate in real use?</h3>
+    <p>
+      Not automatically. The ±0.1% figure holds only at the reference temperature and under controlled conditions. A ±0.1% unit with poor temperature compensation can drift more over a 40 °C swing than a well-compensated ±0.25% unit. Compare the temperature coefficients and total error band before buying on the headline number.
+    </p>
+    <h3>What is a typical temperature coefficient for a pressure transducer?</h3>
+    <p>
+      Most industrial transducers specify zero and span temperature coefficients in the range of 0.02-0.04% FS per 10 °C (some datasheets quote per 50 °C — check the reference basis). Over a 40 °C ambient swing, that adds roughly 0.08-0.16% FS of error on top of the base accuracy.
+    </p>
+    <h3>How often should a pressure transducer be recalibrated?</h3>
+    <p>
+      It depends on the long-term stability spec and your tolerance. With typical stability of 0.1-0.2% FS per year and a ±0.25% requirement, annual calibration is a reasonable default. If you track zero drift between calibrations, the trend tells you when the instrument actually needs attention.
+    </p>
+    <h3>Does a higher range reduce accuracy?</h3>
+    <p>
+      In absolute terms, yes: % FS error scales with the range, so a ±0.25% FS transducer on 0-400 bar allows ±1 bar, while the same class on 0-100 bar allows ±0.25 bar. Choose the smallest range that safely covers your process (including transient peaks) to keep absolute error low.
+    </p>
+
+    <h2 id="conclusion">Conclusion</h2>
+    <p>
+      Pressure transducer accuracy is a small family of numbers, not one number: the % FS figure describes error at a reference temperature, non-linearity, hysteresis and repeatability describe how that error behaves, temperature coefficients describe how it grows away from the reference, and long-term stability describes how it grows over time. Buyers who compare only headline % FS figures routinely end up with transducers whose field accuracy is dominated by temperature, mounting and range effects they never checked.
+    </p>
+    <p>
+      The practical path to accurate measurement is short: right-size the range, compare temperature coefficients and total error band rather than headline accuracy, install to the torque spec, zero in place, and calibrate against a reference one class better than the instrument. If you need to know more about how the sensing element itself converts pressure into a signal, the <a href="/blog/pressure-transducer-working-principle/">working principle guide</a> is a good next read.
+    </p>
+    <p>
+      PRESSUREPOINT supplies factory-direct pressure transducers and transmitters in ±0.5%, ±0.25% and ±0.1% FS accuracy classes, with a <a href="/products/high-accuracy/">high accuracy series</a> at ±0.1% FS featuring low zero and span temperature drift, 316L wetted parts, 4-20 mA / 0-10 V / RS485 outputs and ranges from vacuum to 600 bar. NIST-traceable calibration certificates are available on request. Send your range, media and accuracy requirement through the <a href="/contact/">inquiry form</a> and our engineers will confirm a suitable model with datasheet and pricing — usually within one working day.
+    </p>
+  </BlogPostTemplate>
+</Layout>

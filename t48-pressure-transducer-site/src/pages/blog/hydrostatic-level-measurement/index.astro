@@ -1,0 +1,295 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogPostTemplate from '../../../components/BlogPostTemplate.astro';
+
+const toc = [
+  { id: 'what-is', label: 'What Is Hydrostatic Level Measurement?' },
+  { id: 'why-pressure', label: 'Why Use a Pressure Sensor for Level' },
+  { id: 'how-it-works', label: 'How Submersible Pressure Sensors Work' },
+  { id: 'applications', label: 'Common Applications' },
+  { id: 'calculations', label: 'Level-to-Pressure Calculations & Conversion Table' },
+  { id: 'selection', label: 'Selecting a Hydrostatic Level Transmitter' },
+  { id: 'comparison', label: 'Hydrostatic vs Ultrasonic vs Radar' },
+  { id: 'faq', label: 'Frequently Asked Questions' },
+  { id: 'conclusion', label: 'Conclusion' },
+];
+
+const related = [
+  { href: '/blog/pressure-transducer-selection-guide/', title: 'How to Choose a Pressure Transducer: Complete Selection Guide', readTime: 15 },
+  { href: '/blog/pressure-sensor-types/', title: 'Pressure Sensor Types: Technologies Compared', readTime: 9 },
+  { href: '/blog/pressure-transducer-4-20ma/', title: '4-20 mA Output: Loop, Scaling & Wiring', readTime: 9 },
+];
+---
+
+<Layout
+  title="Hydrostatic Level Measurement: How Submersible Pressure Sensors Work | PRESSUREPOINT"
+  description="Hydrostatic level measurement explained: the P = ρgh principle, how submersible pressure transmitters with vent tubes work, depth-to-pressure conversion tables, selection rules and technology comparisons."
+>
+  <BlogPostTemplate
+    title="Hydrostatic Level Measurement: How Submersible Pressure Sensors Work"
+    category="Technical Guides"
+    date="2026-08-29"
+    readTime={13}
+    author="PRESSUREPOINT Team"
+    toc={toc}
+    related={related}
+  >
+    <p>
+      Hydrostatic level measurement is one of the oldest and most reliable ways to measure the level of a liquid in a tank, well, river or reservoir. Instead of bouncing a signal off the surface or floating a mechanical device on it, a hydrostatic sensor sits below the surface and measures the pressure exerted by the column of liquid above it. Because that pressure depends only on liquid density, gravity and depth — not on tank shape, surface foam, vapor or turbulence — it delivers a clean, repeatable level signal in applications where other technologies struggle. This guide explains the physics, the submersible pressure transmitter design that exploits it, the calculations and conversion tables you need on site, and how to choose the right instrument for your application.
+    </p>
+
+    <h2 id="what-is">What Is Hydrostatic Level Measurement?</h2>
+    <p>
+      Hydrostatic level measurement determines liquid level from the hydrostatic pressure at a point below the liquid surface. The fundamental relationship is the hydrostatic pressure equation:
+    </p>
+    <p>
+      <strong>P = ρ × g × h</strong>
+    </p>
+    <p>
+      where <strong>P</strong> is the pressure at the measurement point in pascals (Pa), <strong>ρ</strong> is the liquid density in kilograms per cubic meter (kg/m³), <strong>g</strong> is the acceleration due to gravity (9.80665 m/s² at standard gravity), and <strong>h</strong> is the height of the liquid column above the sensor in meters. For fresh water (ρ = 1000 kg/m³), this simplifies to a rule every instrumentation engineer knows: <strong>one meter of water produces a pressure of 9.80665 kPa</strong>, which is approximately 0.098 bar or 1.42 psi.
+    </p>
+    <p>
+      Three properties make this relationship exceptionally useful. First, pressure depends on the vertical height of the liquid column, so tank shape, volume and surface area are irrelevant — a narrow standpipe and a wide basin at the same level produce the same reading. Second, the relationship is linear: double the depth, double the pressure, which makes scaling a 4-20 mA output trivial. Third, the measurement is independent of surface conditions: foam, oil sheen, vapor, condensation and surface turbulence have no effect on the pressure at the sensor, because they do not change the mass of liquid above it.
+    </p>
+    <p>
+      The approach works for any open or vented vessel where the surface is exposed to the atmosphere, and for sealed tanks when the gas pressure above the liquid is accounted for separately. It does not work for gases themselves — the density of air at atmospheric pressure is roughly 1.2 kg/m³, about 800 times less than water, so the pressure contributed by a gas column is negligible for practical level purposes.
+    </p>
+
+    <h2 id="why-pressure">Why Use a Pressure Sensor for Level?</h2>
+    <p>
+      Several level technologies exist — floats, ultrasonic, radar, capacitance, conductivity — yet pressure-based (hydrostatic) instruments remain a default choice across water, wastewater, oil and process industries. The reasons are practical:
+    </p>
+    <ul>
+      <li><strong>No moving parts.</strong> A submersible pressure transmitter has a static diaphragm and solid-state electronics. There is no float to jam, no mechanical linkage to wear, no motor or encoder to service. Mean time between failures is high, and maintenance is limited to periodic cleaning and cable inspection.</li>
+      <li><strong>Low installed cost.</strong> A single submersible transmitter replaces the float, guide pipe, sight glass and manual dip tape of a traditional installation. For a well or reservoir, it is often the only practical way to get a continuous electronic level signal without building a stilling well.</li>
+      <li><strong>Insensitive to surface conditions.</strong> Foam, vapor, dust, steam, condensation and surface agitation — all common disruptors for ultrasonic and optical sensors — have zero effect on hydrostatic pressure. This makes it the reliable choice for sewage, fermentation and chemical tanks with heavy vapor.</li>
+      <li><strong>Works from the bottom up.</strong> The sensor enters through the top or a side port and sits at the bottom. It measures level directly even when the tank is empty or the surface is invisible, which matters for wells, boreholes and underground tanks.</li>
+      <li><strong>Simple calibration and scaling.</strong> Because the response is linear, calibrating is a two-point job: zero corresponds to the empty level and full scale to the maximum design level. The <a href="/blog/pressure-transducer-selection-guide/">pressure transducer selection guide</a> covers how range, accuracy and output choices carry over to this application.</li>
+    </ul>
+    <p>
+      The main limitation is that the sensor must be immersed in the liquid and the liquid's density must be known and reasonably stable — points covered in the calculation and selection sections below.
+    </p>
+
+    <h2 id="how-it-works">How Submersible Pressure Sensors Work</h2>
+    <p>
+      A submersible level transmitter is a pressure transducer packaged for permanent immersion. Its core is the same sensing technology used in industrial pressure instruments — a piezoresistive or strain-gauge element bonded to a diaphragm of 316L stainless steel or ceramic (Al₂O₃) — but with three design features specific to liquid level duty.
+    </p>
+    <p>
+      <strong>The vented gauge reference.</strong> This is the most important detail. A submersible sensor measures the total pressure at depth, which is the sum of the atmospheric pressure on the surface and the hydrostatic pressure of the liquid column. Because atmospheric pressure changes with weather and altitude, the sensor must subtract it to report true liquid level. It does this with a <strong>capillary vent tube</strong> running inside the cable: one end opens to the sensing element's reference chamber, and the other terminates in a dry location above the surface, open to the atmosphere. The reference chamber therefore always sees ambient air pressure, and the sensor output reflects only the hydrostatic head. This is called vented gauge or sealed-gauge-with-vent reference, and it is why the vent tube must never be cut short, kinked or terminated under water — a blocked vent tube produces a drifting, weather-dependent zero. The <a href="/blog/pressure-sensor-types/">pressure sensor types guide</a> explains gauge, absolute and sealed references in more detail.
+    </p>
+    <p>
+      <strong>The submersible cable.</strong> The cable does three jobs at once: it carries the supply and signal wires (typically a two-wire 4-20 mA loop), it houses the vent tube, and it provides mechanical suspension. Standard constructions use a polyurethane or polyethylene jacket rated for continuous immersion, a Kevlar or rope core for strain relief so the sensor is not pulled by its own weight in deep wells, and a sealed cable gland at the sensor head rated IP68 — continuous submersion beyond 1 meter. Cable length is specified in meters and ordered to match the installation; it is not something to extend in the field.
+    </p>
+    <p>
+      <strong>The output and scaling.</strong> The majority of submersible transmitters output 4-20 mA on a two-wire loop. At minimum level the loop sits at 4 mA; at maximum level it reaches 20 mA. A 0-10 m water column transmitter therefore produces 1.6 mA per meter of level, and a controller scales the loop current back to engineering units. The signal is immune to cable resistance, which matters because level transmitters routinely run cable lengths of hundreds of meters from a well head or tank farm to a control room — see the <a href="/blog/pressure-transducer-4-20ma/">4-20 mA loop guide</a> for wiring and scaling details.
+    </p>
+
+    <h2 id="applications">Common Applications</h2>
+    <p>
+      Hydrostatic level transmitters are specified wherever a continuous, reliable level signal is needed in a liquid that is accessible from above or through a side opening:
+    </p>
+    <ul>
+      <li><strong>Water tanks and reservoirs</strong> — municipal storage tanks, elevated towers, process water tanks and fire water systems, typically with ranges of 0-5 m to 0-30 m water column.</li>
+      <li><strong>Wells and groundwater monitoring</strong> — boreholes, standpipes and monitoring wells from a few meters to 200 m deep, where the sensor hangs on its cable and the vent tube terminates at the wellhead.</li>
+      <li><strong>Rivers, lakes and flood monitoring</strong> — staff-gauge replacement for remote hydrology stations, where a pressure transmitter with a data logger provides continuous water level telemetry.</li>
+      <li><strong>Wastewater and sewage</strong> — pump station wet wells, sewer lift stations and sludge tanks, where foam, vapor and solids rule out ultrasonic sensors; a ceramic diaphragm resists abrasion and chemical attack.</li>
+      <li><strong>Oil, fuel and chemical storage</strong> — tank farms and day tanks where the liquid is stored in vented or fixed-roof tanks; density must be accounted for and diaphragm material matched to the product.</li>
+      <li><strong>Open-channel and weir level</strong> — level upstream of a weir or flume feeds a flow calculation, giving inexpensive open-channel flow measurement in irrigation and drainage networks.</li>
+    </ul>
+    <p>
+      In each case the instrument is installed at or near the bottom of the vessel, below the minimum level, so the sensor always remains wetted and the reading never drops to zero prematurely.
+    </p>
+
+    <h2 id="calculations">Level-to-Pressure Calculations & Conversion Table</h2>
+    <p>
+      Specifying and verifying a hydrostatic system is a matter of converting between level and pressure. For fresh water, use the standard values: density 1000 kg/m³ and gravity 9.80665 m/s², giving exactly 9.80665 kPa per meter of water column. The table below is the on-site reference most engineers keep handy:
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Water depth</th>
+            <th>Pressure (kPa)</th>
+            <th>Pressure (bar)</th>
+            <th>Pressure (psi)</th>
+            <th>Typical use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1 m</td>
+            <td>9.81 kPa</td>
+            <td>0.098 bar</td>
+            <td>1.42 psi</td>
+            <td>Small tanks, sumps</td>
+          </tr>
+          <tr>
+            <td>2 m</td>
+            <td>19.61 kPa</td>
+            <td>0.196 bar</td>
+            <td>2.84 psi</td>
+            <td>Wet wells, process tanks</td>
+          </tr>
+          <tr>
+            <td>5 m</td>
+            <td>49.03 kPa</td>
+            <td>0.490 bar</td>
+            <td>7.11 psi</td>
+            <td>Storage tanks, rivers</td>
+          </tr>
+          <tr>
+            <td>10 m</td>
+            <td>98.07 kPa</td>
+            <td>0.981 bar</td>
+            <td>14.22 psi</td>
+            <td>Water towers, reservoirs</td>
+          </tr>
+          <tr>
+            <td>20 m</td>
+            <td>196.13 kPa</td>
+            <td>1.961 bar</td>
+            <td>28.44 psi</td>
+            <td>Deep tanks, boreholes</td>
+          </tr>
+          <tr>
+            <td>50 m</td>
+            <td>490.33 kPa</td>
+            <td>4.903 bar</td>
+            <td>71.12 psi</td>
+            <td>Groundwater monitoring</td>
+          </tr>
+          <tr>
+            <td>100 m</td>
+            <td>980.67 kPa</td>
+            <td>9.807 bar</td>
+            <td>142.23 psi</td>
+            <td>Deep wells, dams</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Two useful shorthand rules fall out of this table: <strong>10 meters of water equals roughly 1 bar</strong>, and <strong>1 meter of water equals approximately 1.42 psi</strong>. For quick mental checks, treat 1 mH₂O as 10 kPa.
+    </p>
+    <p>
+      <strong>Density changes the numbers.</strong> The sensor measures pressure, so a denser liquid produces a higher pressure at the same depth. If the liquid is not fresh water, multiply the depth by its specific gravity (SG) — the ratio of its density to that of water. Seawater at SG 1.025 reads about 2.5% higher than fresh water at the same depth; a 10 m seawater column produces about 100.5 kPa instead of 98.07 kPa. Slurries, brines and sugar syrups can have SG of 1.2 or higher, which is why a level transmitter is always specified in units of the actual product, not in meters of water alone. The sizing formula is:
+    </p>
+    <p>
+      <strong>Required range (mH₂O) = maximum liquid level (m) × specific gravity of the liquid</strong>
+    </p>
+    <p>
+      For example, a 6 m tank of a liquid with SG 1.2 needs a transmitter with a range of at least 6 × 1.2 = 7.2 mH₂O (≈70.6 kPa), and a standard 0-8 mH₂O instrument with overload margin is the sensible choice.
+    </p>
+
+    <h2 id="selection">Selecting a Hydrostatic Level Transmitter</h2>
+    <p>
+      The following specification points cover nearly every submersible level application:
+    </p>
+    <ul>
+      <li><strong>Range</strong> — compute the maximum level in meters of water column (or equivalent pressure) using the density-adjusted formula above, then add 20-25% margin. Standard submersible level transmitters are available from 0-5 m up to 0-200 m water column, with overload ratings typically 150-200% of full scale.</li>
+      <li><strong>Wetted material</strong> — 316L stainless steel handles clean water, most fuels and mild chemicals. For wastewater, brines and aggressive media, a ceramic (Al₂O₃) diaphragm offers excellent chemical resistance and stands up to abrasive solids. Match the diaphragm to the liquid, not to the tank.</li>
+      <li><strong>Cable length</strong> — order the full installed length: depth of immersion plus the run from the surface to the controller, plus a working margin. A 4-20 mA loop tolerates hundreds of meters of cable, but the vent tube must run the full length without splices, so the cable must be ordered to length, not joined on site.</li>
+      <li><strong>Vent tube protection</strong> — terminate the vent tube in a dry junction box or cable gland with a desiccant filter, away from splash and rain. Moisture in the reference chamber is the most common cause of drifting zero readings on submersible transmitters.</li>
+      <li><strong>Ingress protection</strong> — IP68 is the standard rating for continuous submersion. Confirm the cable gland and sensor head are rated for the depth and the water chemistry (fresh, salt or wastewater).</li>
+      <li><strong>Output and accuracy</strong> — 4-20 mA two-wire is the default for PLC/DCS integration; RS485 Modbus suits IoT and SCADA panels with multiple sensors. Standard accuracy is ±0.25% to ±0.5% FS, with temperature-compensated versions for outdoor and seasonal installations.</li>
+      <li><strong>Mounting and mechanical protection</strong> — suspend the sensor from its cable with a strain-relief clamp or weight it at the bottom of the tank; avoid letting it rest in sediment, which can block the diaphragm ports over time.</li>
+    </ul>
+    <p>
+      If you are also selecting the rest of the instrument chain, the <a href="/blog/pressure-transducer-selection-guide/">full transducer selection guide</a> walks through accuracy, output, connection and environment decisions in sequence.
+    </p>
+
+    <h2 id="comparison">Hydrostatic vs Ultrasonic vs Radar</h2>
+    <p>
+      Hydrostatic is not the only continuous level technology, and the right choice depends on the liquid, the vessel and the environment. The comparison below summarizes the three main contenders:
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Hydrostatic (submersible)</th>
+            <th>Ultrasonic (non-contact)</th>
+            <th>Radar (non-contact / guided wave)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Contact with liquid</td>
+            <td>Yes — sensor is immersed</td>
+            <td>No — measures from above</td>
+            <td>No (non-contact) or probe (guided wave)</td>
+          </tr>
+          <tr>
+            <td>Typical accuracy</td>
+            <td>±0.25% to ±0.5% FS</td>
+            <td>±0.25% to ±0.5% of range</td>
+            <td>±0.1% to ±0.5% of range</td>
+          </tr>
+          <tr>
+            <td>Effect of foam, vapor, dust</td>
+            <td>None</td>
+            <td>Foam and vapor attenuate signal</td>
+            <td>Minimal for radar</td>
+          </tr>
+          <tr>
+            <td>Density dependence</td>
+            <td>Yes — needs known SG</td>
+            <td>No — measures surface distance</td>
+            <td>No — measures surface distance</td>
+          </tr>
+          <tr>
+            <td>Effect of temperature</td>
+            <td>Small (via density)</td>
+            <td>Significant — sound speed varies</td>
+            <td>Negligible</td>
+          </tr>
+          <tr>
+            <td>Installed cost</td>
+            <td>Low</td>
+            <td>Low to medium</td>
+            <td>Medium to high</td>
+          </tr>
+          <tr>
+            <td>Best for</td>
+            <td>Wells, tanks, wastewater, remote sites</td>
+            <td>Clean liquids, tanks with top access, hygienic duty</td>
+            <td>Process tanks, vapors, high temperatures, custody applications</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      As a rule: if the liquid is accessible from below and its density is known and stable, hydrostatic gives the best value. If the tank must stay sealed with no penetration below the liquid line, or the liquid is corrosive to any immersed material, non-contact radar or ultrasonic wins despite the higher cost. For deep wells, remote hydrology and anything with foam or solids, the submersible pressure transmitter is usually the only technology that works reliably.
+    </p>
+
+    <h2 id="faq">Frequently Asked Questions</h2>
+    <h3>How much pressure does 1 meter of water produce?</h3>
+    <p>
+      Exactly 9.80665 kPa under standard gravity with fresh water at 1000 kg/m³. In practical units that is approximately 0.098 bar, 98 mbar, or 1.42 psi. Ten meters of water is very close to 1 bar (0.981 bar).
+    </p>
+    <h3>Does water temperature affect the level reading?</h3>
+    <p>
+      Slightly, through density. Fresh water density changes from about 1000 kg/m³ at 4 °C to roughly 988 kg/m³ at 50 °C — under 1.5% — so for water the effect is small for most applications. For liquids with large thermal expansion, such as hydrocarbons, the density change is larger and the transmitter range should be specified for the worst-case (coldest, densest) condition.
+    </p>
+    <h3>Why does the submersible sensor have a vent tube in the cable?</h3>
+    <p>
+      The vent tube carries atmospheric pressure to the sensor's reference chamber so the instrument measures only the hydrostatic head of the liquid, not the weather. Without it, changes in barometric pressure would appear as false level changes. The tube must terminate in a dry, atmosphere-exposed location and must never be cut or kinked.
+    </p>
+    <h3>Can a hydrostatic transmitter measure level in a sealed pressurised tank?</h3>
+    <p>
+      Not directly — the sensor measures the sum of the liquid head and the tank gas pressure. For sealed tanks, either measure the gas pressure with a second transmitter and subtract it, or use a differential pressure transmitter with the low side connected to the tank vapor space. For open and vented tanks, the standard submersible instrument is sufficient.
+    </p>
+    <h3>What is the difference between a level transmitter and a pressure transmitter?</h3>
+    <p>
+      Functionally they are the same instrument — a pressure transmitter measuring the hydrostatic head — but a level transmitter is calibrated and scaled in level units (meters of water column or meters of liquid), includes the vented gauge reference and submersible cable, and is packaged for immersion. A standard pressure transmitter measures pressure in bar or kPa and lacks the vent tube and IP68 cable construction.
+    </p>
+
+    <h2 id="conclusion">Conclusion</h2>
+    <p>
+      Hydrostatic level measurement converts a simple physical law — P = ρgh — into a continuous, reliable level signal with an instrument that has no moving parts, ignores foam and vapor, and costs a fraction of non-contact alternatives. The practical system is a submersible pressure transmitter with a vented gauge reference, a 4-20 mA two-wire output, and a range sized from the maximum liquid level multiplied by its specific gravity. Verify your level with the conversion table, protect the vent tube from moisture, match the diaphragm to the liquid, and the measurement will hold its accuracy for years with almost no maintenance.
+    </p>
+    <p>
+      PRESSUREPOINT supplies IP68 <a href="/products/submersible/">submersible hydrostatic level transmitters</a> with vented cables and your choice of 316L stainless steel or ceramic pressure sensors, covering water column ranges from 0-5 m to 0-200 m with 4-20 mA and RS485 outputs. Send your liquid type, tank depth and cable length through the <a href="/contact/">inquiry form</a>, and our engineers will confirm a suitable model with a datasheet and pricing — usually within one working day.
+    </p>
+  </BlogPostTemplate>
+</Layout>
