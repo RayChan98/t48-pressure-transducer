@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const posts = [
+  {
+    title: 'Pressure Sensor Types: A Complete Guide to Technologies and Reference Types',
+    href: '/blog/pressure-sensor-types/',
+    category: 'Technical Guides',
+    date: '2026-08-28',
+    readTime: 9,
+    excerpt: 'Piezoresistive, strain gauge, capacitive and resonant technologies, plus gauge, absolute, sealed and differential references — with a comparison table to narrow your options.',
+  },
+  {
+    title: 'What Is a Pressure Transducer? Working Principle, Types & How to Choose',
+    href: '/blog/what-is-a-pressure-transducer/',
+    category: 'Technical Guides',
+    date: '2026-08-27',
+    readTime: 9,
+    excerpt: 'A pressure transducer converts pressure into an electrical signal. This guide covers the working principle, main types, output signals and how to choose the right transducer for your application.',
+  },
+  {
+    title: 'Pressure Transducer 4-20 mA Output: How the Loop Works, Scaling and Wiring',
+    href: '/blog/pressure-transducer-4-20ma/',
+    category: 'Technical Guides',
+    date: '2026-08-27',
+    readTime: 9,
+    excerpt: 'Two-wire loop wiring, scaling 4 mA to 20 mA into pressure readings, 4-20 mA vs 0-10 V, and common wiring mistakes — with conversion tables you can use on site.',
+  },
+  {
+    title: 'Pressure Transducer Working Principle: How Pressure Becomes a 4-20 mA Signal',
+    href: '/blog/pressure-transducer-working-principle/',
+    category: 'Technical Guides',
+    date: '2026-08-26',
+    readTime: 9,
+    excerpt: 'Strain gauge, piezoresistive and capacitive sensing elements explained step by step, from diaphragm deflection to a standard 4-20 mA or 0-10 V output.',
+  },
+  {
+    title: "Pressure Transducer vs Pressure Transmitter: What's the Difference?",
+    href: '/blog/pressure-transducer-vs-transmitter/',
+    category: 'Buying Guides',
+    date: '2026-08-25',
+    readTime: 9,
+    excerpt: 'What each term means, how output signals differ, and a straightforward rule for choosing the right instrument for your machine or process line.',
+  },
+];
+
+const ranges = [
+  { href: '/products/industrial/', title: 'Industrial Transducers', desc: 'General-purpose 4-20mA / 0-10V platform for plant and OEM applications' },
+  { href: '/products/high-accuracy/', title: 'High Accuracy Series', desc: '±0.1% FS accuracy with low temperature drift for precision measurement' },
+  { href: '/products/explosion-proof/', title: 'Explosion-Proof Transmitters', desc: 'ATEX & IECEx Zone 1/2 certified transmitters for hazardous areas' },
+];
+---
+
+<Layout
+  title="Pressure Transducer Blog: Guides & Technical Articles | PRESSUREPOINT"
+  description="Practical guides on pressure transducers: working principles, 4-20 mA output and wiring, sensor types, transducer vs transmitter, and how to choose the right instrument for your application."
+>
+  <section class="bg-navy-950 text-white">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <nav class="flex items-center gap-2 text-sm text-slate-400" aria-label="Breadcrumb">
+        <a href="/" class="transition hover:text-white">Home</a>
+        <span>/</span>
+        <span class="text-slate-200">Blog</span>
+      </nav>
+      <p class="mt-6 text-sm font-semibold uppercase tracking-wider text-night-green">BLOG</p>
+      <h1 class="mt-2 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">Pressure Transducer Guides & Technical Articles</h1>
+      <p class="mt-4 max-w-2xl text-lg text-slate-300">Plain-English guides on how pressure transducers work, how to wire and scale them, and how to choose the right instrument for your application.</p>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <div class="space-y-6">
+        {posts.map((p) => (
+          <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-8">
+            <div class="flex flex-wrap items-center gap-3 text-xs text-slate-500">
+              <span class="rounded-full bg-brand-blue/10 px-3 py-1 font-semibold text-brand-blue">{p.category}</span>
+              <span>{p.date}</span>
+              <span aria-hidden="true">·</span>
+              <span>{p.readTime} min read</span>
+            </div>
+            <h2 class="mt-3 text-xl font-bold text-navy-950 sm:text-2xl">
+              <a href={p.href} class="transition hover:text-brand-blue">{p.title}</a>
+            </h2>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 sm:text-base">{p.excerpt}</p>
+            <a href={p.href} class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-blue transition hover:text-navy-950">
+              Read article <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <p class="text-sm font-semibold text-brand-blue">EXPLORE</p>
+      <h2 class="mt-2 text-2xl font-extrabold text-navy-950 sm:text-3xl">Browse Pressure Transducer Ranges</h2>
+      <div class="mt-6 grid gap-6 md:grid-cols-3">
+        {ranges.map((r) => (
+          <a href={r.href} class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+            <h3 class="text-lg font-bold text-navy-950 group-hover:text-brand-blue">{r.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{r.desc}</p>
+          </a>
+        ))}
+      </div>
+      <p class="mt-6 text-sm text-slate-600">
+        Need a quick answer on specifications, wiring or compatibility? See the <a href="/faq/" class="font-semibold text-brand-blue hover:underline">FAQ</a> or
+        <a href="/contact/" class="font-semibold text-brand-blue hover:underline"> contact our engineers</a> with your range, media and connection.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Need a Pressure Transducer for Your Application?"
+    subtitle="Tell us your range, media, output and connection — we will confirm a model with datasheet and pricing, usually within one working day."
+  />
+</Layout>

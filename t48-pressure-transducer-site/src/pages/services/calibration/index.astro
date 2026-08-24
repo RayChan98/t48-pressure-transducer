@@ -1,0 +1,139 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ServicePageTemplate from '../../../components/ServicePageTemplate.astro';
+
+const longtail = [
+  "pressure transducer calibration",
+  "nist traceable pressure transducer",
+  "pressure transmitter recalibration",
+  "pressure sensor calibration certificate",
+  "4-20ma pressure transducer calibration",
+  "temperature compensated pressure transducer",
+  "pressure transducer certificate of calibration",
+  "pressure sensor recalibration service",
+  "return to factory pressure sensor calibration",
+  "pressure transmitter calibration interval",
+];
+
+const points = [
+  {
+    title: 'NIST-Traceable Calibration',
+    desc: 'Every PRESSUREPOINT transducer is calibrated against reference standards whose calibration chain traces back to NIST. Zero, span and intermediate test points are verified across the full range, and the results are recorded per serial number.',
+  },
+  {
+    title: 'Temperature Compensation',
+    desc: 'Zero and span are compensated across the operating temperature range during production. For applications with wide ambient swings, temperature testing is available so the certificate reflects real-site behavior rather than lab conditions alone.',
+  },
+  {
+    title: 'Calibration Certificates',
+    desc: 'Certificates list the test points, applied pressure versus measured output, the error at each point, the reference standards used and their traceability, plus the unit\u2019s serial number — ready for audits and quality files.',
+  },
+  {
+    title: 'Recertification & Repair',
+    desc: 'Return your unit to the factory for recalibration: as-found testing, a full recalibration against NIST-traceable references, and repair or replacement of damaged sensing elements — with a quotation before any chargeable work starts.',
+  },
+  {
+    title: 'Multi-Point & Hysteresis Testing',
+    desc: 'Standard five-point ascending and descending verification, or custom test points matched to your operating range, so the certificate reflects the pressures you actually measure.',
+  },
+  {
+    title: 'Documentation Packages',
+    desc: 'Calibration certificates, test reports, material certificates and CE declarations assembled per serial number for regulated customers and ISO-style quality systems.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Request an RMA',
+    desc: 'Send the model, serial number, range, output and a short description of the issue. We confirm the service scope, price and turnaround, then issue an RMA number with shipping instructions.',
+  },
+  {
+    title: 'Ship the unit',
+    desc: 'Pack the transducer with its RMA number and ship it to us. We confirm receipt and give you the inspection schedule.',
+  },
+  {
+    title: 'Inspection & calibration',
+    desc: 'We run an as-found test, perform a full calibration against NIST-traceable references and check temperature behavior. If repair is needed, we send a quotation and wait for approval before work starts.',
+  },
+  {
+    title: 'Certificate & return',
+    desc: 'A calibration certificate and test report are issued per serial number, and the unit is returned with tracking details. Typical turnaround is 5-7 working days after receipt.',
+  },
+];
+
+const challenges = [
+  {
+    title: 'Drift between calibrations',
+    desc: 'Thermal cycling and long-term aging shift zero and span. Periodic recalibration keeps readings inside the datasheet specification and gives you documented evidence for your quality records.',
+  },
+  {
+    title: 'Audit failures over traceability',
+    desc: 'Quality and regulated customers expect certificates that name the standards used and the traceability chain. Per-serial-number documentation removes the guesswork at audit time.',
+  },
+  {
+    title: 'Unplanned downtime',
+    desc: 'A transducer that drifts out of spec can pass questionable data for weeks before anyone notices. Scheduled recalibration catches problems while the unit is still in service.',
+  },
+  {
+    title: 'Temperature effects on accuracy',
+    desc: 'Uncompensated units behave differently across ambient swings. Temperature-compensated calibration and testing quantify performance in the environment where the unit actually runs.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How often should a pressure transducer be recalibrated?',
+    a: 'A common starting point is a 12-month interval, which is what most ISO-style quality systems and OEM recommendations assume. Safety-critical or high-accuracy applications often use 6 months, while stable, benign installations can stretch to 24 months. The right interval for you is the one your as-found drift data supports: if consecutive certificates show small errors, you can extend it; if drift grows, shorten it.',
+  },
+  {
+    q: 'What is included in a calibration certificate?',
+    a: 'Test points, applied pressure and measured output at each point, the error at each point, the reference standards used with their IDs and traceability, the temperature during testing, the date, the technician and the unit\u2019s serial number.',
+  },
+  {
+    q: 'Is your calibration traceable to NIST?',
+    a: 'Yes. Our reference standards are calibrated by accredited laboratories, and the chain of traceability from each standard back to NIST is documented and listed on the certificate.',
+  },
+  {
+    q: 'How long does factory recalibration take?',
+    a: 'Typically 5-7 working days after the unit arrives. If repair is needed, we quote the work and get your approval before starting, so additional time only accrues when you approve it.',
+  },
+  {
+    q: 'Can you calibrate transducers from other brands?',
+    a: 'We recalibrate PRESSUREPOINT transducers as standard. For other brands, send the model and range and we will confirm whether we can cover it — many common industrial platforms are within our test capability.',
+  },
+  {
+    q: 'What does recalibration cost?',
+    a: 'It depends on the range, the number of test points, temperature testing and the documentation package. We confirm the price with the RMA, before you ship anything.',
+  },
+];
+
+const products = [
+  { href: '/products/industrial/', title: 'Industrial Transducers', desc: 'General-purpose 4-20mA / 0-10V platform, individually calibrated before shipment' },
+  { href: '/products/high-accuracy/', title: 'High Accuracy Series', desc: '±0.1% FS accuracy and low temperature drift for precision measurement' },
+  { href: '/products/explosion-proof/', title: 'Explosion-Proof Transmitters', desc: 'ATEX & IECEx Zone 1/2 certified transmitters for hazardous areas' },
+];
+
+const guides = [
+  { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle' },
+  { href: '/blog/pressure-transducer-4-20ma/', title: 'Understanding 4-20 mA Output' },
+  { href: '/blog/pressure-sensor-types/', title: 'Pressure Sensor Types Guide' },
+];
+---
+
+<Layout
+  title="Pressure Transducer Calibration Service | NIST-Traceable & Certificates | PRESSUREPOINT"
+  description="PRESSUREPOINT calibration service: NIST-traceable multi-point calibration, temperature compensation, calibration certificates per serial number, and factory recalibration with a typical 5-7 working day turnaround."
+>
+  <ServicePageTemplate
+    title="Pressure Transducer Calibration & Recertification Service"
+    kw="pressure transducer calibration"
+    desc="Factory calibration and recertification for PRESSUREPOINT pressure transducers: NIST-traceable multi-point calibration, temperature compensation, per-serial-number certificates, and a documented return-to-factory process — with calibration interval guidance for your quality system."
+    points={points}
+    steps={steps}
+    challenges={challenges}
+    faqs={faqs}
+    longtail={longtail}
+    products={products}
+    guides={guides}
+  />
+</Layout>

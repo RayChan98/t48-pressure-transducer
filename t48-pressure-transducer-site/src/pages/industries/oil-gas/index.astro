@@ -1,0 +1,137 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import IndustryPageTemplate from '../../../components/IndustryPageTemplate.astro';
+
+const longtail = [
+  "explosion proof pressure transmitter",
+  "oil and gas pressure transmitter",
+  "wellhead pressure transducer",
+  "pipeline pressure monitoring",
+  "high temperature pressure transmitter",
+  "pressure transmitter for hazardous area",
+  "storage tank level transmitter",
+  "high pressure transmitter 600 bar",
+];
+
+const faqs = [
+  { q: "When does an oil and gas installation need an explosion-proof pressure transmitter?", a: "When the transmitter mounts inside a classified hazardous area — a zone defined by the site's area classification drawing. The zone, gas group and temperature class are set by the site engineer, so confirm the certificate requirements with them before purchase and we will match a suitable model. The area classification drawing is the authority on this one." },
+  { q: "What pressure ranges do oil and gas duties need?", a: "Working pressures vary widely by service: low-pressure storage tank gauging, mid-range process lines and high-pressure wellhead duty. Standard ranges cover vacuum (-1 bar) to 600 bar, with the usual sizing rule that normal working pressure sits in the middle third of the range. Send your working pressure, peak transient and media, and we will confirm a model with the overpressure rating checked against your numbers." },
+  { q: "Can the transmitters handle high process temperatures?", a: "Standard models cover media temperatures from -40°C to +125°C. If your process runs hotter — common near wellheads, compressors and separators — tell us the continuous temperature plus the peak and its duration, and we will confirm the right build, which may include a remote-mount or cooling arrangement." },
+  { q: "Do you supply transmitters to API and sour-service specifications?", a: "We review the applicable API and NACE requirements — for example API 6A for wellhead equipment, API 650 for storage tanks and NACE MR0175/ISO 15156 for sour service — against your specification and confirm materials, wetted parts and documentation before building. Send the standard reference and the required documents, and we will confirm what we can supply." },
+];
+---
+
+<Layout title="Oil & Gas Pressure Transducers | Explosion-Proof & High-Temp | PRESSUREPOINT" description="Explosion-proof pressure transmitters for oil and gas: wellhead, pipeline, separator and storage tank pressure monitoring with 4-20mA, 0-10V and RS485 outputs, high-temperature options and API/NACE specification review.">
+  <IndustryPageTemplate
+    title="Oil & Gas"
+    kw="explosion proof pressure transmitter"
+    desc="Pressure monitoring for oil and gas production: wellhead, pipeline, separator and storage tank service, with explosion-proof builds for classified hazardous areas, high-temperature and high-pressure options, and specification review against API and NACE MR0175 requirements."
+    points={[
+      'Explosion-proof models for classified hazardous-area installations',
+      'High-temperature, high-pressure builds for wellhead and process duty',
+      'Standard ranges from vacuum (-1 bar) to 600 bar, custom ranges available',
+      '4-20mA, 0-10V and RS485 outputs for PLC, RTU and SCADA systems',
+      '316L stainless wetted parts with media-isolated options for aggressive media',
+      'API and NACE MR0175 specification review against your project requirements',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle: How It Works' },
+    ]}
+    recommended={[
+      { title: 'Explosion-Proof Series', href: '/products/explosion-proof/', desc: 'Hazardous-area pressure monitoring' },
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'Process, pipeline and wellsite duty' },
+      { title: 'Submersible Series', href: '/products/submersible/', desc: 'Hydrostatic level for storage tanks' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Where Oil and Gas Operations Measure Pressure</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Oil and gas production is a pressure business: reservoirs flow under pressure, pipelines move product under pressure, and separators and tanks hold it under pressure. Pressure transmitters provide the continuous readings that protect equipment, keep custody transfer honest and give operators early warning of upset conditions. Installations range from storage tank farms to high-pressure wellheads, and the instruments have to survive outdoor exposure, temperature swings and, in classified areas, the certification the zone demands.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Wellhead &amp; tree monitoring</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Wellhead pressure tracks reservoir behaviour and drives production decisions. Transmitters on the casing and tubing sides report flowing and shut-in pressures to the control room and are also used for kick detection and production optimisation.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Pipelines &amp; transfer lines</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Line pressure at pump stations, block valves and delivery points protects the pipeline and supports flow measurement. Continuous readings alongside flow meters help operators detect blockage, leakage and pump degradation before they become incidents.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Separators &amp; process vessels</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Vessel pressure controls the separation of oil, gas and water and protects downstream equipment. Transmitters on the inlet, gas outlet and liquid legs feed the control valves that hold separator pressure inside its operating window.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Storage tanks &amp; tank farms</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Tank level is measured by hydrostatic pressure at the tank bottom, typically with a <a href="/products/submersible/" class="text-brand-blue hover:underline">submersible level transmitter</a> or a flush-mounted unit. Confirm wetted materials for hydrocarbon service and use the level reading alongside overfill alarms for tank farm safety.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Compressor &amp; pump stations</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Suction, discharge and interstage pressure on compressors and pumps protects rotating equipment and keeps the process on spec. High cycle counts and vibration make robust housings and verified overpressure ratings the norm here.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Drilling &amp; completion</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Mud system and choke manifold pressure is monitored for well control during drilling and completion. Mud solids, vibration and washdown conditions make IP-rated, robustly housed transmitters the standard choice for these duties.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-slate-50">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Specifying a Transmitter for Oil and Gas Duty</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Oil and gas service combines the harshest elements of industrial measurement: classified areas, high pressure, high temperature, aggressive media and outdoor exposure. Work through these decisions with your supplier before ordering — the cost of getting them wrong is measured in downtime and compliance risk, not just replacement sensors.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Hazardous area, pressure and temperature</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Area classification</strong> — if the transmitter mounts in a classified area, the zone, gas group and temperature class come from the site's area classification drawing. Confirm the certificate requirements with the site engineer and we will match a suitable <a href="/products/explosion-proof/" class="text-brand-blue hover:underline">explosion-proof model</a>.</li>
+              <li><strong>Range and overpressure</strong> — standard ranges cover vacuum (-1 bar) to 600 bar. Place normal working pressure in the middle third of the range, and check the overpressure rating against your worst-case transient — surge and pigging events can far exceed steady-state line pressure.</li>
+              <li><strong>Temperature</strong> — standard models handle media temperatures from -40°C to +125°C. For hotter duties, share the continuous temperature and the peak with its duration so the build can be confirmed rather than assumed.</li>
+              <li><strong>Media and sour service</strong> — 316L stainless wetted parts cover sweet service. Where hydrogen sulphide is present, wetted materials should be reviewed against NACE MR0175/ISO 15156 requirements — confirm the material specification with your supplier.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Signal, connection and documentation</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Output</strong> — 4-20mA two-wire for PLC/SCADA and long cable runs; RS485 Modbus for multi-drop digital buses; 0-10V for local controllers. On 4-20mA loops, a reading outside the 4-20mA window also doubles as a wiring-fault indicator on most PLCs.</li>
+              <li><strong>Connection</strong> — G1/2 and 1/2" NPT are common on process and wellsite equipment, with M20×1.5 on European-built skids. Seal type matters as much as the thread — share the port drawing so the installed zero is right first time.</li>
+              <li><strong>Enclosure and ingress</strong> — outdoor wellsite and tank farm exposure calls for IP65/IP67 housings and sealed connectors. Flush diaphragm variants suit viscous or solids-bearing media where a cavity would block.</li>
+              <li><strong>Documentation</strong> — API-specified projects usually name the documents they need: calibration certificates, material certificates and test reports. Confirm the required documentation before ordering so the paperwork matches the deliverable.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Common Oil and Gas Measurement Problems and How to Avoid Them</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">These are the specification failures that surface most often in oil and gas installations, and every one of them is preventable at the specification stage.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Wrong area classification</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Installing a non-explosion-proof transmitter in a classified zone is a safety and compliance failure. Confirm the zone, gas group and temperature class from the area classification drawing before purchase.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Undersized range with transient spikes</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Surge, valve switching and pigging events can push line pressure well above steady state. Size the range with headroom and verify the overpressure rating against the worst transient, not the average.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Material failure in sour service</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Elastomers and wetted metals that perform in sweet service can fail quickly where hydrogen sulphide is present. Confirm wetted materials against NACE MR0175/ISO 15156 requirements before ordering.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Ingress and vibration damage outdoors</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Wellsite and tank farm transmitters live with rain, dust and vibration. IP65/IP67 housings, sealed connectors and protected cable routing make the difference between a sensor that lasts and one that fails at the worst moment.</p>
+          </div>
+        </div>
+        <div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <h3 class="text-lg font-bold text-navy-950">Start with the right specification</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">Send us the service (wellhead, pipeline, separator or tank), working and peak pressure, media and temperature, the area classification where applicable and the output signal you need. We will confirm a model with the overpressure rating and wetted materials checked against your numbers — and confirm the documentation your project requires. If you are not sure where to start, the <a href="/products/industrial/" class="text-brand-blue hover:underline">industrial series</a> covers most general-purpose process duty. Common range and temperature questions are answered in the <a href="/faq/" class="text-brand-blue hover:underline">FAQ</a>, or <a href="/contact/" class="text-brand-blue hover:underline">contact us</a> with your datasheet. Every unit is individually calibrated and pressure-tested before shipping.</p>
+        </div>
+      </div>
+    </section>
+  </IndustryPageTemplate>
+</Layout>

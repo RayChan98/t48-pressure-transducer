@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const productLines = [
+  {
+    title: 'Industrial Pressure Transducers',
+    description: 'General-purpose pressure transducers with 4-20mA or 0-10V output — the workhorse for hydraulic systems, pumps, compressors and machine builders.',
+    href: '/products/industrial/',
+    tag: '4-20MA · 0-10V',
+  },
+  {
+    title: 'High Accuracy Transducers',
+    description: '±0.1% FS precision models with low temperature drift for test stands, process control and OEM instrumentation where measurement certainty matters.',
+    href: '/products/high-accuracy/',
+    tag: '±0.1% FS',
+  },
+  {
+    title: 'Miniature Pressure Sensors',
+    description: 'Compact OEM sensor modules from 12mm diameter for embedded applications — medical devices, pneumatics, robotics and handheld instruments.',
+    href: '/products/miniature/',
+    tag: 'OEM MODULES',
+  },
+  {
+    title: 'Differential Pressure Transducers',
+    description: 'Pressure-difference measurement for airflow, filter monitoring and level measurement — with wet/wet and wet/dry options.',
+    href: '/products/differential/',
+    tag: 'WET/WET · AIR',
+  },
+  {
+    title: 'Flush Diaphragm Transducers',
+    description: 'Hygienic and viscous-media models with flush stainless diaphragms for food, pharma and polymerization processes — no dead volume.',
+    href: '/products/flush-diaphragm/',
+    tag: 'HYGIENIC',
+  },
+  {
+    title: 'Submersible Level Transmitters',
+    description: 'Hydrostatic level transmitters for tanks, wells and boreholes — with ventilation tube and IP68 cable for continuous level monitoring.',
+    href: '/products/submersible/',
+    tag: 'LEVEL · IP68',
+  },
+];
+---
+
+<Layout title="Pressure Transducers & Transmitters | Product Lines" description="Explore the PRESSUREPOINT product lines: industrial, high-accuracy, miniature, differential, flush diaphragm and submersible pressure transducers and transmitters with 4-20mA, 0-10V and RS485 outputs.">
+  <!-- Hero 简版 -->
+  <section class="bg-navy-950 py-16 text-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <nav class="text-sm text-slate-400" aria-label="Breadcrumb">
+        <a href="/" class="transition hover:text-white">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-slate-200">Products</span>
+      </nav>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Industrial Pressure Transducers &amp; Transmitters</h1>
+      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-300">
+        Six product families covering pressure measurement from -1 bar vacuum to 600 bar — with 4-20mA, 0-10V and RS485 Modbus outputs, stainless 316L wetted parts, ±0.25% FS accuracy standard, G1/4 / NPT process connections and IP65/IP67 CE-marked housings. Custom ranges, outputs and connections available on every line.
+      </p>
+    </div>
+  </section>
+
+  <!-- 产品线网格 -->
+  <section class="bg-slate-50 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <h2 class="text-center text-3xl font-extrabold text-navy-950">Pressure Transducer Product Lines</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-center text-slate-600">Every family is available with custom ranges, output signals and process connections — pick a line below to see models, specifications and options.</p>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {productLines.map((p) => (
+          <ProductCard title={p.title} description={p.description} href={p.href} tag={p.tag} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Not Sure Which Transducer Fits Your Application?"
+    subtitle="Send us your range, media, output signal, process connection and accuracy requirement — our engineers confirm a suitable model with datasheet and pricing the same day."
+  />
+</Layout>

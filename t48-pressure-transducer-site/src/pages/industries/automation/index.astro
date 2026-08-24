@@ -1,0 +1,137 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import IndustryPageTemplate from '../../../components/IndustryPageTemplate.astro';
+
+const longtail = [
+  "oem pressure transducer",
+  "embedded pressure sensor",
+  "pressure sensor for machine builders",
+  "compact pressure transmitter",
+  "miniature pressure sensor 12mm",
+  "pressure sensor for automation",
+  "custom pressure transducer",
+  "pressure sensor 4-20ma oem",
+];
+
+const faqs = [
+  { q: "What is the minimum order quantity for OEM builds?", a: "Standard models start from 10 pcs. Custom OEM builds — range, connection, output and cable — are quoted per project, with quantity pricing discussed once the drawing is confirmed. Batch supply is a normal part of the offer, not a special case." },
+  { q: "How small can an embedded pressure sensor be?", a: "Body diameters from 12 mm are available depending on range and output. The sensing element, signal conditioning and process connection fit in a short, light package that mounts inside machine sub-assemblies and portable equipment where a standard-size transducer will not fit." },
+  { q: "Which outputs can be supplied?", a: "4-20mA two-wire, 0-10V, RS485 Modbus and mV output variants. mV output suits designs where your electronics do the amplification; 4-20mA and RS485 simplify wiring and improve immunity in electrically noisy machines. Custom ranges and calibration points are set at the factory so the sensor arrives matched to your application." },
+  { q: "What is the lead time for custom OEM builds?", a: "Standard models ship in 7-15 days. Custom OEM builds typically run 15-25 days after drawing confirmation. Share the drawing early — range, output, thread, seal type, cable length and termination — and we will confirm the build before you commit." },
+];
+---
+
+<Layout title="Pressure Transducers for Automation & OEM | Embedded Sensing | PRESSUREPOINT" description="Pressure transducers for machine builders and OEMs: compact embedded sensing modules from 12 mm body diameter, 4-20mA, 0-10V, RS485 and mV outputs, custom ranges and calibration, batch supply from small MOQs.">
+  <IndustryPageTemplate
+    title="Automation & OEM"
+    kw="OEM pressure transducer"
+    desc="Pressure transducers for machine builders and OEM manufacturers: compact and miniature embedded sensing modules with 4-20mA, 0-10V, RS485 and mV outputs, custom ranges and calibration points set at the factory, and batch supply with small MOQs."
+    points={[
+      'Compact and miniature modules — body diameters from 12 mm for embedded designs',
+      '4-20mA, 0-10V, RS485 Modbus and mV outputs, selected for your controller',
+      'Custom ranges, calibration points, threads and terminations set at the factory',
+      'Batch supply with MOQ from 10 pcs on standard models, quantity pricing per project',
+      '316L stainless wetted parts, CE marked, IP65/IP67 rated options',
+      'OEM builds typically ship 15-25 days after drawing confirmation',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-working-principle/', title: 'Pressure Transducer Working Principle: How It Works' },
+    ]}
+    recommended={[
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'General-purpose transducers for OEM machines' },
+      { title: 'Explosion-Proof Series', href: '/products/explosion-proof/', desc: 'For machines installed in hazardous areas' },
+      { title: 'Submersible Series', href: '/products/submersible/', desc: 'Hydrostatic level modules for OEM tank products' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Where Machine Builders Embed Pressure Sensing</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">Modern machines close the loop on pressure: pneumatic circuits, hydraulic tooling, coolant systems and process modules all run better when the controller can see the actual pressure rather than a schedule. Embedded transducers give the machine self-diagnosis, tighter cycle control and the data trail end customers now expect. Because the sensor lives inside the product, it has to fit the envelope, match the controller input and survive the machine's environment — and it has to repeat across production batches.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Pneumatic controls &amp; valve islands</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Manifold and actuator pressure in compact valve islands gives the controller the feedback it needs for positioning and force control. Small ranges and miniature bodies fit the tight envelopes of modern pneumatic sub-assemblies.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Hydraulic tools &amp; power units</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Torque wrenches, portable power units and compact hydraulic tools measure pressure to control force and protect the tool. High ranges in a small package are a standard requirement here.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Compressors &amp; pumps</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Packaged compressor and pump units embed pressure sensing beside their own controllers — suction, discharge and receiver pressure in one small module, with the output matched to the controller input.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Robotics &amp; end effectors</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Grip force and clamp pressure sensing in end effectors and tooling lets a robot handle parts without crushing them. Compact modules mount close to the gripper where space is tightest.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Test &amp; calibration equipment</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Portable calibrators, test benches and field instruments need stable, repeatable readings in a package that survives travel and handling. Higher-accuracy models serve valve characterisation and component validation.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h3 class="text-base font-bold text-navy-950">Medical &amp; laboratory devices</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Analyzers, dialysis and infusion equipment monitor gas and liquid pressure in small, clean packages. Confirm wetted materials and any hygiene requirements with the manufacturer for each fluid.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-slate-50">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Specifying a Sensor for Embedded OEM Duty</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">An embedded sensor is a design decision, not a procurement line item: it constrains the envelope, sets the controller input and commits the machine to one supplier for the life of the product. Work through the design-in and supply-side decisions together before the drawing is frozen.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Design-in decisions</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Size vs performance</strong> — smaller bodies trade a little on mounting options, not on output or media compatibility. Confirm the thread size and overall length against your envelope early, because the mechanical clearance usually decides the sensor family.</li>
+              <li><strong>Output</strong> — mV output keeps cost and size down when your board does the conditioning; 4-20mA and RS485 simplify wiring and improve immunity in noisy machines. Match the sensor output to the controller input range rather than the other way around.</li>
+              <li><strong>Mounting and seal</strong> — G1/4 and G1/8 threads suit manifolds and valve blocks; M12×1.5 suits hydraulic tooling. Port depth and seal type both change the installed zero, so send the port drawing.</li>
+              <li><strong>Environment</strong> — vibration, splash and washdown all affect the housing and termination choice. Confirm the IP rating against the machine's actual cleaning regime rather than a generic target.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Supply-side decisions</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Range and calibration</strong> — factory-set range and zero points remove field adjustment from your production line and keep quality consistent across batches. Custom ranges and calibration points are set before shipping.</li>
+              <li><strong>MOQ and pricing</strong> — standard models start from 10 pcs, with quantity pricing discussed per project. Fix the first-batch volume and unit price with your supplier before you commit the design.</li>
+              <li><strong>Lead time</strong> — standard models ship in 7-15 days; custom OEM builds typically 15-25 days after drawing confirmation. A drawing review early in the design phase protects your production schedule.</li>
+              <li><strong>Documentation</strong> — confirm what ships with each batch — calibration certificates, material certificates, test reports — so your incoming inspection and end-customer requirements are met without extra requests. Common range, output and lead-time questions are covered in the <a href="/faq/" class="text-brand-blue hover:underline">FAQ</a>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Common OEM Integration Mistakes and How to Avoid Them</h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">These are the integration failures we see most often in OEM projects, and every one of them is preventable at the specification stage.</p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Oversized range wasting resolution</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">Accuracy is quoted as a percentage of full scale, so a 0-600 bar sensor on a 0-10 bar application throws away most of its usable resolution. Place normal working pressure in the middle third of the range.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Output mismatched to the controller</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">A 0-10V sensor on a 4-20mA input — or an unamplified mV sensor feeding a controller that expects a standard signal — produces readings nobody can trust. Confirm the controller input before the output is finalised.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Thread and seal assumed from a catalogue photo</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">The thread size and seal type must match your port geometry. Send the port drawing: port depth and O-ring versus tapered-seal threads both change the installed zero point.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 class="text-base font-bold text-navy-950">Environment specified from the bench</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">A sensor that performs on the test bench can fail fast in production — vibration, splash, washdown and temperature all bite. Specify the housing and termination from the machine's real operating environment.</p>
+          </div>
+        </div>
+        <div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <h3 class="text-lg font-bold text-navy-950">Start with the right specification</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">Send us the envelope, working pressure range, media, controller input, thread and seal detail, and your target batch size and schedule. We will confirm a model with the range, output, calibration and documentation matched to your build, with drawings reviewed before you commit — or point you to a general-purpose <a href="/products/industrial/" class="text-brand-blue hover:underline">industrial transducer</a> where a standard model fits. Standard models ship 7-15 days; custom OEM builds typically 15-25 days after drawing confirmation. <a href="/contact/" class="text-brand-blue hover:underline">Contact us</a> with your drawing to start.</p>
+        </div>
+      </div>
+    </section>
+  </IndustryPageTemplate>
+</Layout>

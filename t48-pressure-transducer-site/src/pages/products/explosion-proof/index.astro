@@ -1,0 +1,67 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CategoryPageTemplate from '../../../components/CategoryPageTemplate.astro';
+
+const longtail = ["explosion proof pressure transmitter", "intrinsically safe pressure transmitter", "ATEX approved pressure transmitter", "IECEx pressure transmitter", "hazardous area pressure sensor", "flameproof pressure transmitter Zone 1", "explosion proof pressure sensor oil and gas", "pressure transmitter for chemical plant"];
+const faqs = [
+  { q: 'What is the difference between flameproof (Ex d) and intrinsically safe (Ex i) protection?', a: 'A flameproof (Ex d) transmitter contains any internal ignition inside a certified enclosure, so it can carry enough energy to ignite a gas mixture but is built to contain the explosion. An intrinsically safe (Ex i) transmitter limits electrical energy to a level that can never ignite the atmosphere. Both are accepted approaches for Zone 1 and Zone 2; the right choice depends on your loop architecture and maintenance preferences.' },
+  { q: 'Which zones are explosion proof transmitters suitable for?', a: 'ATEX and IECEx certified models for gas atmospheres cover Zone 1 and Zone 2 locations, and dust versions cover Zone 21 and Zone 22. Always match the transmitter marking (e.g. Ex db IIC T6) against your area classification and gas group before installation.' },
+  { q: 'Do I still need a safety barrier with an intrinsically safe transmitter?', a: 'Yes. Ex i transmitters must be fed through a certified galvanic isolator or zener barrier that limits energy in the hazardous area. The barrier is selected to match the transmitter entity parameters (Ui, Ii, Pi, Ci, Li), so we confirm the pairing before supply.' },
+  { q: 'What pressure ranges and outputs are available on the explosion proof models?', a: 'Standard ranges cover -1 bar to 600 bar with 4-20mA two-wire output as standard, and options such as RS485 Modbus on request. The 316L stainless housing and diaphragm are rated IP66/IP67 with CE marking.' },
+  { q: 'Can the certificate documents be supplied with the order?', a: 'Yes — each certified batch ships with the ATEX / IECEx certificates and the declaration of conformity referenced to the marking on the nameplate. Send your area classification and gas group with your inquiry and we confirm the exact model marking.' },
+];
+---
+
+<Layout title="Explosion Proof Pressure Transmitters | ATEX & IECEx, Zone 1/2" description="Explosion proof pressure transmitters certified to ATEX and IECEx for Zone 1 and Zone 2 hazardous areas. Flameproof 316L housing, 4-20mA output, -1 to 600 bar, IP66/IP67, CE marked. For oil & gas, chemical and mining applications.">
+  <CategoryPageTemplate
+    title="Explosion Proof Pressure Transmitters"
+    kw="explosion proof pressure transmitter"
+    desc="Explosion proof pressure transmitters certified to ATEX and IECEx for pressure measurement in hazardous areas. Built for oil & gas, chemical plants and mining, with a flameproof 316L stainless housing, 4-20mA output and ranges from -1 bar to 600 bar. Intrinsically safe options available for low-energy loops."
+    points={[
+      'ATEX and IECEx certified for gas atmospheres — Zone 1 and Zone 2 models as standard',
+      'Flameproof stainless steel housing (Ex d) with 316L wetted parts for corrosive process media',
+      '4-20mA two-wire output, with intrinsically safe (Ex i) versions for barrier-fed loops',
+      'Pressure ranges from -1 bar vacuum to 600 bar, custom ranges on request',
+      'IP66/IP67 rated enclosure and CE marking, built for outdoor and process plant duty',
+      'Certificates and declaration of conformity supplied with each certified batch',
+    ]}
+    longtail={longtail}
+    faqs={faqs}
+    blogLinks={[
+      { href: '/blog/pressure-transducer-4-20ma/', title: 'Understanding 4-20mA Output' },
+    ]}
+    recommended={[
+      { title: 'Industrial Series', href: '/products/industrial/', desc: 'General-purpose 4-20mA transmitters' },
+      { title: 'High Accuracy Series', href: '/products/high-accuracy/', desc: '±0.1% FS for precise loops' },
+      { title: 'Oil & Gas Applications', href: '/industries/oil-gas/', desc: 'Explosion proof models in the field' },
+    ]}
+  >
+    <section slot="chapters" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <h2 class="text-2xl font-extrabold text-navy-950">Selecting a Transmitter for Hazardous Areas</h2>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Key selection points</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Zone classification</strong> — identify the zone first (Zone 0/1/2 for gas, Zone 20/21/22 for dust). A transmitter suitable for Zone 1 is also acceptable in Zone 2, but not the reverse.</li>
+              <li><strong>Flameproof vs intrinsically safe</strong> — Ex d flameproof enclosures contain an internal explosion and suit high-energy loops; Ex i intrinsically safe transmitters limit energy at the source and simplify maintenance in live areas, but need a certified barrier.</li>
+              <li><strong>Certificate verification</strong> — check the ATEX / IECEx marking on the nameplate (e.g. Ex db IIC T6) against your gas group and temperature class, and keep the certificate documents with your plant records.</li>
+              <li><strong>Gas group & temperature class</strong> — match the transmitter to the gas group (IIA, IIB, IIC) and the surface temperature class (T1-T6) required by the area.</li>
+              <li><strong>Loop design</strong> — 4-20mA two-wire is the standard choice for hazardous area loops; confirm the barrier and cable parameters with the transmitter entity values.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-navy-950">Typical applications</h3>
+            <ul class="mt-4 space-y-3 text-sm text-slate-600">
+              <li><strong>Oil & gas</strong> — wellhead and separator pressure, pipeline monitoring, gas compressor skids in classified areas.</li>
+              <li><strong>Chemical plants</strong> — reactor and storage vessel pressure where flammable solvents and gases are present.</li>
+              <li><strong>Coal mining</strong> — hydraulic roof support pressure and pump station monitoring in gassy underground environments.</li>
+              <li><strong>Refineries & terminals</strong> — tank pressure and transfer line monitoring in Zone 1 and Zone 2 process units.</li>
+              <li><strong>Pharmaceutical & food</strong> — solvent handling and utility pressure where explosion protection is part of plant safety design.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </CategoryPageTemplate>
+</Layout>
