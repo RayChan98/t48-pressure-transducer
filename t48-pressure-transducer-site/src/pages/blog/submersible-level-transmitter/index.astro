@@ -1,0 +1,248 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogPostTemplate from '../../../components/BlogPostTemplate.astro';
+
+const toc = [
+  { id: 'what-is', label: 'What Is a Submersible Level Transmitter?' },
+  { id: 'how-it-measures', label: 'How a Submersible Transmitter Measures Level' },
+  { id: 'range-sizing', label: 'Range Sizing: Depth, Density & Installation Height' },
+  { id: 'cable-vent', label: 'Cable & Vent Tube Considerations' },
+  { id: 'installation', label: 'Installation Best Practices' },
+  { id: 'applications', label: 'Tank, Well & Open-Channel Applications' },
+  { id: 'choosing', label: 'Choosing a Submersible Transmitter' },
+  { id: 'faq', label: 'Frequently Asked Questions' },
+  { id: 'conclusion', label: 'Conclusion' },
+];
+
+const related = [
+  { href: '/blog/hydrostatic-level-measurement/', title: 'Hydrostatic Level Measurement: How Submersible Sensors Work', readTime: 13 },
+  { href: '/blog/pressure-transducer-selection-guide/', title: 'How to Choose a Pressure Transducer: Selection Guide', readTime: 15 },
+  { href: '/blog/pressure-transducer-4-20ma/', title: '4-20 mA Output: Loop, Scaling & Wiring', readTime: 9 },
+];
+---
+
+<Layout
+  title="Submersible Level Transmitter: Complete Engineering Guide"
+  description="Submersible level transmitter guide: hydrostatic P = ρgh principle, vent tube reference, range sizing with density correction, cable selection, installation and IP68 specification."
+>
+  <BlogPostTemplate
+    title="Submersible Level Transmitter: The Complete Engineering Guide"
+    category="Technical Guides"
+    date="2026-08-30"
+    readTime={15}
+    author="PRESSUREPOINT Team"
+    toc={toc}
+    related={related}
+  >
+    <p>
+      A submersible level transmitter is a pressure instrument built to live under water. It hangs at the bottom of a tank, borehole, wet well or river channel and converts the weight of the liquid column above it into a continuous 4-20 mA, 0-10 V or RS485 signal that a PLC or SCADA system reads directly as level. Unlike ultrasonic or radar units that look down at the surface, a submersible transmitter measures from below — which is exactly why it keeps working through foam, vapor, condensation and turbulence. This guide covers the physics, the vent tube that makes the measurement possible, how to size the range correctly (including density corrections that most spec sheets ignore), cable and installation decisions, and how to match a unit to your tank, well or channel.
+    </p>
+
+    <h2 id="what-is">What Is a Submersible Level Transmitter?</h2>
+    <p>
+      A submersible level transmitter is a hydrostatic pressure sensor sealed in a corrosion-resistant body, usually 316L stainless steel, with a flush or recessed diaphragm at one end and a permanently attached cable at the other. The cable does three jobs at once: it carries the signal wires, it carries a small <strong>vent tube</strong> that connects the sensor's reference side to atmosphere, and it doubles as the suspension that lowers the instrument into the liquid. The whole assembly is rated for continuous immersion — a PRESSUREPOINT submersible transmitter, for example, is <strong>IP68 rated</strong> with a vented cable designed for permanent submersion, not just splash resistance.
+    </p>
+    <p>
+      The principle it exploits is hydrostatic pressure: the pressure at any point below a liquid surface depends only on the vertical height of liquid above that point, the liquid's density and gravity. Because the sensor sits below the surface, the reading is unaffected by what happens at the surface — foam, oil sheen, vapor, condensation, even waves. That makes submersible transmitters the default choice for groundwater monitoring, wastewater wet wells, storage tanks, reservoirs and open-channel flow stations where surface-based sensors are unreliable. The pressure range is usually specified directly in metres of water column (m WC) or in bar, and the standard PRESSUREPOINT submersible family covers <strong>0-1 m up to 0-100 m water column (0-0.1 bar up to 0-10 bar)</strong> with 4-20 mA two-wire, 0-10 V and RS485 Modbus outputs. The complete range is detailed on the <a href="/products/submersible/">submersible pressure transducer product page</a>.
+    </p>
+
+    <h2 id="how-it-measures">How a Submersible Transmitter Measures Level</h2>
+    <p>
+      The measurement rests on the hydrostatic pressure equation:
+    </p>
+    <p>
+      <strong>P = ρ × g × h</strong>
+    </p>
+    <p>
+      where <strong>P</strong> is the pressure at the sensing diaphragm in pascals, <strong>ρ</strong> is the liquid density in kg/m³, <strong>g</strong> is standard gravity (9.80665 m/s²), and <strong>h</strong> is the vertical height of liquid above the diaphragm in metres. For fresh water (ρ = 1000 kg/m³), the equation collapses to a rule every instrumentation engineer knows: <strong>one metre of water produces 9.80665 kPa</strong>, about 0.098 bar or 1.42 psi. A 6.0 m deep water tank therefore produces <strong>58.84 kPa (0.588 bar)</strong> of hydrostatic pressure at the bottom — a figure worth remembering, because it is the basis of the range sizing examples below.
+    </p>
+    <p>
+      The critical subtlety is the <strong>reference</strong>. Hydrostatic pressure at depth is a gauge measurement: what the diaphragm actually feels is the liquid pressure minus whatever pressure is applied to the other side of the sensing element. Atmospheric pressure varies with weather and altitude — from roughly 95 kPa in a strong storm to over 105 kPa under a high-pressure system. If the transmitter's reference side were sealed at a fixed pressure, the reading would drift by the full amount of those swings, which at shallow depths can be a 10% error. That is why the cable carries a <strong>vent tube</strong>: a small-bore tube inside the cable that lets the reference side breathe atmosphere continuously. Atmospheric changes press on both sides of the diaphragm equally and cancel out, so the transmitter reports true liquid level regardless of the weather.
+    </p>
+    <p>
+      Two practical consequences follow. First, the relationship is linear — double the depth, double the pressure, which makes scaling the 4-20 mA span trivial: 4 mA at zero level, 20 mA at full scale, with level proportional to current in between. Second, tank geometry is irrelevant: a narrow standpipe and a wide basin at the same liquid level produce identical pressure at the sensor, because pressure depends only on vertical column height. The full physics and its industrial implications are covered in the <a href="/blog/hydrostatic-level-measurement/">hydrostatic level measurement guide</a>.
+    </p>
+
+    <h2 id="range-sizing">Range Sizing: Depth, Density & Installation Height</h2>
+    <p>
+      Range sizing is where most submersible transmitter problems begin, and it involves three numbers: the maximum liquid depth, the liquid density, and the height of the sensor above the tank bottom. The general rule is to select a calibrated range at least <strong>1.25 times the maximum expected hydrostatic pressure</strong>, so the instrument operates comfortably below full scale with headroom for transients and surface waves.
+    </p>
+    <p>
+      For fresh water with the sensor resting on the tank floor, the calculation is direct. The table below lists the hydrostatic pressure for common depths and the nearest standard range above the 1.25× rule:
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Max liquid depth (fresh water)</th>
+            <th>Hydrostatic pressure (P = ρgh)</th>
+            <th>1.25× sizing rule</th>
+            <th>Recommended range</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2.0 m</td>
+            <td>19.61 kPa (0.196 bar)</td>
+            <td>24.5 kPa (0.245 bar)</td>
+            <td>0-3 m WC</td>
+          </tr>
+          <tr>
+            <td>5.0 m</td>
+            <td>49.03 kPa (0.490 bar)</td>
+            <td>61.3 kPa (0.613 bar)</td>
+            <td>0-10 m WC</td>
+          </tr>
+          <tr>
+            <td>6.0 m</td>
+            <td>58.84 kPa (0.588 bar)</td>
+            <td>73.6 kPa (0.736 bar)</td>
+            <td>0-10 m WC</td>
+          </tr>
+          <tr>
+            <td>10.0 m</td>
+            <td>98.07 kPa (0.981 bar)</td>
+            <td>122.6 kPa (1.226 bar)</td>
+            <td>0-15 m WC</td>
+          </tr>
+          <tr>
+            <td>20.0 m</td>
+            <td>196.13 kPa (1.961 bar)</td>
+            <td>245.2 kPa (2.452 bar)</td>
+            <td>0-25 m WC</td>
+          </tr>
+          <tr>
+            <td>50.0 m</td>
+            <td>490.33 kPa (4.903 bar)</td>
+            <td>612.9 kPa (6.129 bar)</td>
+            <td>0-60 m WC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Now the density correction, which is the step most spec sheets get wrong. Hydrostatic pressure scales linearly with density, so for any liquid other than fresh water you multiply the depth by its <strong>specific gravity (SG)</strong> to get the equivalent metres of water column the transmitter must measure. Seawater at SG ≈ 1.025 produces 2.5% more pressure than fresh water at the same depth — usually absorbable. But industrial liquids are another story: a 20% sodium hydroxide (NaOH) solution at 20 °C has a specific gravity of about <strong>1.22</strong>. Six metres of that liquor produces <strong>6.0 × 1.22 = 7.32 m WC</strong> of equivalent pressure — 22% higher than the same depth of fresh water. If you sized the range from depth alone and ordered a 0-6 m WC unit, the transmitter would be driven to 122% of span at full tank and either saturate or read falsely high. Always convert depth to pressure equivalent using the true process density, and state the density explicitly in the RFQ.
+    </p>
+    <p>
+      The third number is installation height. If the sensor is suspended 0.5 m above the tank floor to keep it clear of sludge, the useful measurement range starts at that 0.5 m and the span must cover from the sensor position up to maximum level. For a 6.0 m tank with the sensor at 0.5 m off the bottom, the transmitter sees a maximum of 5.5 m WC of liquid — size the range from that figure, and account for the 0.5 m offset in the controller's zero scaling.
+    </p>
+
+    <h2 id="cable-vent">Cable & Vent Tube Considerations</h2>
+    <p>
+      The cable on a submersible transmitter is a structural component, not an afterthought — it is the only thing between the sensor and the surface, and on deep installations it carries the full suspended weight plus any tension from water movement. Three cable decisions matter.
+    </p>
+    <ul>
+      <li><strong>Vent tube integrity</strong> — the vent is a small tube inside the cable that must stay open from the sensor to a dry termination point. If it kinks, gets crushed by a cable clip, or draws in water at a poorly sealed top end, the reference is lost and the zero drifts. The vent must terminate above the maximum flood level — normally in a junction box or breather with a desiccant filter — never underwater and never where spray can enter. A moisture-blocked vent is the single most common cause of mysterious submersible transmitter drift.</li>
+      <li><strong>Cable construction and suspension</strong> — polyurethane-sheathed cables resist abrasion, oils and UV and are the standard for permanent immersion; PVC suits benign water duties at lower cost. For deep boreholes and fast-flowing channels, use a cable with a strength member (Kevlar or steel wire reinforcement) so the cable itself is load-bearing, or hang the sensor on a separate stainless wire or rope and let the cable trail slack. Never let the signal cable take tension it was not rated for.</li>
+      <li><strong>Length and signal</strong> — specify the exact cable length: the drop distance plus the run to the instrument cabinet plus slack for termination. PRESSUREPOINT supplies custom cable lengths, with continuous-immersion vented cable commonly available up to hundreds of metres. The good news is that signal type barely limits you: a two-wire 4-20 mA loop is immune to cable resistance and runs hundreds of metres on a 24 V supply, and RS485 Modbus is specified for up to 1200 m per segment — see the <a href="/blog/pressure-transducer-4-20ma/">4-20 mA loop guide</a> for wiring details. Voltage outputs (0-10 V) are the one to avoid at long distance, because voltage drop in the signal wires becomes a direct measurement error.</li>
+    </ul>
+    <p>
+      Finally, the cable entry at the surface needs a proper gland or strain relief, and on outdoor installations the junction box should be weatherproof (IP65 or better) with the vent routed to a dry breather inside it. Treat the top termination as part of the instrument: a cheap gland that lets rain creep down the vent will turn a reliable transmitter into a drifting one within one wet season.
+    </p>
+
+    <h2 id="installation">Installation Best Practices</h2>
+    <p>
+      A submersible transmitter is mechanically simple, but its environment is not. Four installation practices separate installations that run for years from those that fail within months:
+    </p>
+    <ul>
+      <li><strong>Surge and lightning protection</strong> — boreholes, river stations and exposed tank farms are prime lightning targets. Fit a surge protector at the instrument end, a lightning arrestor where the cable enters the building, and bond the cable screen to earth at one end only (typically the cabinet end) to avoid ground loops. A direct strike can destroy a transmitter even when the sensor itself is 30 m underwater, because the energy travels down the cable. For long outdoor runs, also consider an opto-isolated RS485 interface or surge-rated 4-20 mA barrier.</li>
+      <li><strong>Anti-clogging and fouling management</strong> — keep the diaphragm away from the sludge line: suspend the sensor at least 0.3-0.5 m above the tank floor in wastewater and silted basins, and use the flush-diaphragm design so solids cannot pack against the sensing element. In media that scale or grow biofilm (sewage, cooling water), plan periodic retrieval for cleaning, which means installing a guide rope or stilling well so the sensor can be pulled and re-lowered without draining the tank.</li>
+      <li><strong>Mechanical fixing and strain relief</strong> — secure the cable at intervals along the wall or well casing with cable clamps that do not crush the vent tube, and leave a drip loop at the top so water runs off the cable rather than into the gland. In fast-flowing channels, a stilling well or perforated standpipe protects the sensor from direct flow forces and debris impact; the transmitter measures the static column inside the pipe, which equals the channel level.</li>
+      <li><strong>Controlled deployment and zero verification</strong> — lower the sensor slowly; dropping a submersible transmitter onto a hard floor can damage the diaphragm and is the classic cause of out-of-range zero readings. Before commissioning, verify zero with the sensor hanging in air (it should read 4 mA / 0%), then confirm a known reference level in the tank. Record the as-installed zero offset — the 0.5 m sensor height above the floor, for example — in the calibration sheet so future maintenance knows the true liquid level, not just the pressure reading.</li>
+    </ul>
+
+    <h2 id="applications">Tank, Well & Open-Channel Applications</h2>
+    <p>
+      Submersible transmitters solve level measurement in three broad categories of installation, each with slightly different selection emphasis:
+    </p>
+    <ul>
+      <li><strong>Tanks and tank farms</strong> — potable water storage, day tanks, bunds and process tanks. The transmitter hangs from a tank-top bracket or guide pipe, and the vent terminates in a weatherproof junction box on the roof. Because the sensor measures from below, tank shape, internal baffles and floating lids do not affect the reading. For fuel and chemical storage, confirm wetted material compatibility before ordering — 316L suits water and most industrial liquids, while aggressive chemicals may need a different diaphragm material.</li>
+      <li><strong>Wells and boreholes</strong> — groundwater monitoring, dewatering wells, pump-station control and piezometer surveys. Cable length is the dominant specification here: wells routinely run 20-100 m deep, and the transmitter hangs on its vented cable with the vent termination above the well head. Battery-logger systems pair well with RS485 or a low-power 4-20 mA loop. In pump-control duty, mount the sensor below the minimum pump-off level but above the pump intake, and protect the cable where it passes the pump column.</li>
+      <li><strong>Open channels, rivers and reservoirs</strong> — level gauging for flood warning, water resource management, and open-channel flow measurement via weirs and flumes. These are the harshest duty: the sensor must survive debris impact, silt, temperature swings and — in rivers — possible dry-out periods. Specify a rugged polyurethane cable with a strength member, protect the sensor in a stilling well, and check the IP rating and cable immersion rating explicitly, since the sensor may sit submerged for months at a time. The level signal converts to flow through the weir or flume equation in the flow computer; see the hydrostatic guide's <a href="/blog/hydrostatic-level-measurement/">applications and calculations section</a> for the conversion formulas.</li>
+    </ul>
+    <p>
+      Across all three, the pattern is the same: the submersible transmitter earns its place where surface conditions would defeat ultrasonic or radar, and where a simple, linear, drift-resistant pressure signal is worth more than any non-contact convenience.
+    </p>
+
+    <h2 id="choosing">Choosing a Submersible Transmitter</h2>
+    <p>
+      Specification reduces to six decisions. Work through them in order and most applications resolve to one sensible model:
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Decision</th>
+            <th>What to specify</th>
+            <th>Typical choice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Range</td>
+            <td>Max hydrostatic pressure = depth × SG, plus 1.25× headroom</td>
+            <td>0-10 m WC for a 6.0 m water tank</td>
+          </tr>
+          <tr>
+            <td>Media &amp; wetted parts</td>
+            <td>Liquid type, density, temperature, solids content</td>
+            <td>316L diaphragm for water/wastewater; confirm for seawater and chemicals</td>
+          </tr>
+          <tr>
+            <td>Output signal</td>
+            <td>Controller input, distance, network topology</td>
+            <td>4-20 mA two-wire for PLC/SCADA; RS485 for multi-drop</td>
+          </tr>
+          <tr>
+            <td>Cable</td>
+            <td>Length, sheath material, load-bearing requirement, vent termination</td>
+            <td>Polyurethane vented cable, custom length, strength member for deep wells</td>
+          </tr>
+          <tr>
+            <td>Protection</td>
+            <td>Immersion rating, outdoor exposure, lightning risk</td>
+            <td>IP68 body with continuous-immersion vented cable; surge protection on long runs</td>
+          </tr>
+          <tr>
+            <td>Accuracy</td>
+            <td>Control vs monitoring duty</td>
+            <td>±0.25% FS standard; ±0.1% FS for custody or quality-critical level</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Two specification shortcuts are worth knowing. First, state the <strong>density explicitly</strong> — "6 m of 20% NaOH, SG 1.22" tells the factory exactly which range to build, whereas "6 m tank" does not. Second, state the <strong>sensor mounting height</strong> and whether the cable must be load-bearing; both change the calibrated span and the mechanical build. For the full decision framework — accuracy classes, output signals, wetted materials and environmental ratings — the <a href="/blog/pressure-transducer-selection-guide/">pressure transducer selection guide</a> walks through every step in depth.
+    </p>
+
+    <h2 id="faq">Frequently Asked Questions</h2>
+    <h3>What level ranges can a submersible transmitter measure?</h3>
+    <p>
+      Standard submersible level transmitters cover roughly 0-1 m to 0-100 m water column, equivalent to 0-0.1 bar up to 0-10 bar. Deeper ranges and intermediate spans are built to order — the range is a calibration decision, not a hardware limit, so tell the factory your exact depth and density and they will set the span to suit.
+    </p>
+    <h3>Why does the vent tube need to stay dry, and where should it end?</h3>
+    <p>
+      The vent tube is the sensor's atmospheric reference. If moisture enters it, the reference pressure is distorted and the zero drifts — often by several percent, sometimes slowly over weeks as water creeps down. Terminate the vent above the maximum flood level in a dry junction box or desiccant-filtered breather, and check it at the same interval as the sensor's calibration.
+    </p>
+    <h3>Can I use a submersible transmitter in seawater or chemicals?</h3>
+    <p>
+      316L stainless steel handles fresh water, wastewater and most industrial liquids. For seawater and aggressive chemicals, chloride attack and media compatibility must be checked against the actual concentration and temperature — confirm wetted materials with the factory before ordering, and consider alternatives such as higher-alloy diaphragms for long-term seawater duty.
+    </p>
+    <h3>What happens if my liquid is denser than water?</h3>
+    <p>
+      The transmitter measures pressure, not depth, so a denser liquid produces more pressure at the same depth. A 20% NaOH solution at SG 1.22 produces 1.22 m WC of equivalent pressure per metre of depth — a 6.0 m depth reads as 7.32 m WC. If the range was sized for fresh water, the reading overstates level by 22%. Correct it by sizing the range with the true density and scaling the controller with the same SG.
+    </p>
+    <h3>Should I choose 4-20 mA or RS485 for a level transmitter?</h3>
+    <p>
+      Two-wire 4-20 mA is the safe default: it is immune to cable resistance, runs hundreds of metres on a 24 V supply, and gives free fault detection through the 4 mA live zero. RS485 Modbus is the better choice for multi-drop networks of several level sensors on one cable pair, remote configuration and direct engineering-unit values. Use 0-10 V only for short runs to a local display or OEM controller.
+    </p>
+
+    <h2 id="conclusion">Conclusion</h2>
+    <p>
+      A submersible level transmitter is one of the most dependable instruments in industrial measurement, but its reliability is earned: the range must be sized from depth and density together, the vent tube treated as a precision component that has to end somewhere dry, the cable specified for length, immersion and mechanical load, and the installation protected against surge, sludge and strain. Get those four things right and a hydrostatic transmitter will report level accurately for years with nothing more than routine cleaning and calibration — in tanks, boreholes and open channels where surface-based sensors simply cannot work.
+    </p>
+    <p>
+      PRESSUREPOINT supplies factory-direct submersible level transmitters with IP68 stainless steel bodies, vented cables for continuous immersion, 316L sensing diaphragms, ranges from 0-1 m to 0-100 m water column, and 4-20 mA, 0-10 V or RS485 Modbus outputs — with custom cable lengths and ranges built to your installation. Send your tank depth, liquid density, cable run and output requirement through the <a href="/contact/">inquiry form</a>, and our engineers will confirm a model, datasheet and pricing — usually within one working day.
+    </p>
+  </BlogPostTemplate>
+</Layout>

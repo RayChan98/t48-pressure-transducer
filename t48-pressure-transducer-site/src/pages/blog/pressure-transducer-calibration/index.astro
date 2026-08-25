@@ -1,0 +1,269 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogPostTemplate from '../../../components/BlogPostTemplate.astro';
+
+const toc = [
+  { id: 'what-calibration-means', label: 'What Calibration Means: As-Found, As-Left and Span' },
+  { id: 'why-drift', label: 'Why Calibration Drift Happens' },
+  { id: 'standards-traceability', label: 'Calibration Standards & Traceability' },
+  { id: 'calibration-procedure', label: 'The Calibration Procedure: Equipment and Steps' },
+  { id: 'calibration-frequency', label: 'How Often to Calibrate: Interval Guidance' },
+  { id: 'certificate-check', label: 'Calibration Certificate: What to Check' },
+  { id: 'in-house-vs-factory', label: 'In-House vs Factory Calibration' },
+  { id: 'faq', label: 'Frequently Asked Questions' },
+  { id: 'conclusion', label: 'Conclusion' },
+];
+
+const related = [
+  { href: '/blog/pressure-transducer-accuracy/', title: 'Pressure Transducer Accuracy: % FS, Errors and What Matters', readTime: 13 },
+  { href: '/blog/pressure-transducer-selection-guide/', title: 'How to Choose a Pressure Transducer: Complete Selection Guide', readTime: 15 },
+  { href: '/blog/pressure-transducer-4-20ma/', title: 'Pressure Transducer 4-20 mA Output: Loop, Scaling and Wiring', readTime: 9 },
+];
+---
+
+<Layout
+  title="Pressure Transducer Calibration: Guide & Intervals"
+  description="Pressure transducer calibration explained: as-found and as-left readings, NIST traceability, the five-point calibration procedure, recalibration intervals and what a certificate must contain."
+>
+  <BlogPostTemplate
+    title="Pressure Transducer Calibration: Procedure, Standards and Intervals"
+    category="Technical Guides"
+    date="2026-08-30"
+    readTime={12}
+    author="PRESSUREPOINT Team"
+    toc={toc}
+    related={related}
+  >
+    <p>
+      Every pressure transducer drifts. The sensing element ages, thermal cycling shifts the zero, and mechanical abuse moves the span — so the instrument that left the factory inside spec will not stay there forever. Calibration is the process that catches that drift: comparing the transducer's output against known reference pressures, adjusting it back into specification, and documenting the result. This guide covers what calibration actually means, why instruments drift, the standards behind traceability, a practical five-point procedure, how to set recalibration intervals, and what a calibration certificate must contain before you accept it.
+    </p>
+
+    <h2 id="what-calibration-means">What Calibration Means: As-Found, As-Left and Span</h2>
+    <p>
+      Calibration is a comparison against a <strong>known reference</strong>. A pressure calibrator applies precise, traceable pressures to the transducer's process port while a precision current or voltage meter measures the output, and the two are compared point by point across the range. Two terms define the outcome of any calibration session:
+    </p>
+    <ul>
+      <li><strong>As-found</strong> — the readings taken before any adjustment. As-found data shows how far the transducer has drifted since its last calibration, which is the only honest measure of whether your interval is too long or too short.</li>
+      <li><strong>As-left</strong> — the final readings after zero and span adjustment. This is what the certificate records as the instrument's verified performance going forward.</li>
+      <li><strong>Span</strong> — the difference between the upper and lower range values (for example 10 bar on a 0-10 bar unit, or 16 mA on a 4-20 mA output). Calibration adjusts two things: <strong>zero</strong> (the output at the lower range value) and <strong>span</strong> (the output at the upper range value). Everything in between is verified, not adjusted.</li>
+    </ul>
+    <p>
+      For a 4-20 mA transducer, zero is the output at 4 mA and span is the output at 20 mA. A unit that reads 4.08 mA at zero bar and 19.94 mA at 10 bar has a zero error of +0.5% of span and a span error of -0.3% of span — both visible only because the calibration compares the output against applied pressure. Calibration is not the same as repair: if the as-found error is far outside the datasheet specification, the transducer may have mechanical damage rather than simple drift, and a repair or replacement decision is needed before recalibration makes sense. For the full picture of what those errors mean in practice, see our <a href="/blog/pressure-transducer-accuracy/">guide to pressure transducer accuracy</a>.
+    </p>
+
+    <h2 id="why-drift">Why Calibration Drift Happens</h2>
+    <p>
+      Drift is not a defect — it is a physical fact. Understanding its sources tells you which instruments need frequent calibration and which can run for years:
+    </p>
+    <ul>
+      <li><strong>Temperature</strong> — thermal cycling changes both the sensing element's mechanical properties and the electronics' behavior. Temperature compensation reduces the effect but cannot eliminate it; a unit that lives through daily 40 °C swings accumulates a different zero than one installed in a climate-controlled room. This is why the datasheet's zero and span temperature coefficients matter as much as the headline accuracy figure.</li>
+      <li><strong>Mechanical stress</strong> — mounting torque, pipe strain, pressure cycling and water hammer all fatigue the diaphragm. A single overload event near the unit's burst limit can permanently shift the zero by more than a year's normal drift. Transducers sized with tight overload margins drift faster than those with headroom.</li>
+      <li><strong>Aging</strong> — the strain gauge or piezoresistive bridge and its electronics change slowly with time. Datasheets express this as long-term stability, typically ±0.1% to ±0.25% of span per year for industrial units. That number is your drift budget: a ±0.25% FS transducer with ±0.1%/year stability can sit comfortably inside spec for two years, while a ±0.1% FS unit with the same stability budget has less room to wander.</li>
+      <li><strong>Moisture and contamination</strong> — condensation drawn into a vent tube, or humidity inside an improperly sealed connector, changes insulation resistance and shifts readings unpredictably. Vent-tube terminations must stay dry, or the transducer needs a sealed-gauge construction.</li>
+    </ul>
+    <p>
+      Drift is cumulative and usually one-directional for a given installation, which is why consecutive certificates are informative: if the as-found error at the zero point was +0.12% FS last year and +0.24% FS this year, the unit is trending and the interval should shorten.
+    </p>
+
+    <h2 id="standards-traceability">Calibration Standards &amp; Traceability</h2>
+    <p>
+      A calibration is only as trustworthy as the reference it is compared against. <strong>Traceability</strong> is the documented, unbroken chain of comparisons from your transducer's test standard back to a national standard — in the United States, NIST; in China, NIM. Every link in the chain must be calibrated by a laboratory whose own reference is traceable, and the chain must be recorded. When a supplier says a calibration is <strong>NIST-traceable</strong>, it means exactly this: the pressure standard used in the test was calibrated by an accredited laboratory, and the certificate lists the standard's identification and its traceability path.
+    </p>
+    <p>
+      <strong>ISO 17025</strong> takes this one step further. An ISO 17025-accredited calibration laboratory has been audited for its procedures, equipment, personnel competence and uncertainty budgets, and its certificates carry the accreditation body's mark. Accreditation does not make the calibration more accurate by itself — it makes the laboratory's claims verifiable. For most industrial monitoring and OEM applications, a manufacturer's certificate with a documented NIST-traceable chain is sufficient. For custody transfer, regulated measurements, and quality records that will be audited, an ISO 17025 certificate is the safer choice.
+    </p>
+    <p>
+      The engineering rule for choosing a reference is the <strong>test uncertainty ratio (TUR)</strong>: the reference should be at least <strong>four times</strong> more accurate than the unit under test. Calibrating a ±0.25% FS transducer with a ±0.1% FS gauge violates this rule and tells you almost nothing. A deadweight tester or a digital pressure calibrator with accuracy better than ±0.05% FS is the usual working reference for industrial work.
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Traceability level</th>
+            <th>What it means</th>
+            <th>Appropriate for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Manufacturer certificate</td>
+            <td>Tested against the maker's in-house standard, no external chain documented</td>
+            <td>General monitoring, alarms, non-regulated OEM duty</td>
+          </tr>
+          <tr>
+            <td>NIST-traceable certificate</td>
+            <td>Reference standard's calibration chain back to NIST documented on the certificate</td>
+            <td>Process control, quality records, most industrial applications</td>
+          </tr>
+          <tr>
+            <td>ISO 17025 accredited</td>
+            <td>Accredited laboratory, audited procedures, published uncertainty budget</td>
+            <td>Custody transfer, regulated measurement, audit-critical records</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Every PRESSUREPOINT transducer is calibrated against reference standards whose calibration chain traces back to NIST, and the certificate lists the standards used and their traceability — ready for quality files and audits.
+    </p>
+
+    <h2 id="calibration-procedure">The Calibration Procedure: Equipment and Steps</h2>
+    <p>
+      A proper calibration needs three things: a pressure source, a reference standard, and a way to read the output. In practice that means either a <strong>deadweight tester</strong> (a piston loaded with certified weights — the most accurate field reference available) or a <strong>digital pressure calibrator</strong> (a precision reference gauge with an integrated pressure pump and a current/voltage input). For 4-20 mA units you also need a stable 24 VDC supply and a current meter with resolution of at least 1 µA (0.00625% of a 16 mA span), because a ±1 µA reading error is already ±0.00625% of span before any pressure error is counted.
+    </p>
+    <p>
+      The standard procedure at PRESSUREPOINT — and the one your own calibration procedure should mirror — is a <strong>five-point ascending and descending run</strong>: test points at 0%, 25%, 50%, 75% and 100% of span, applied upward and then downward, for ten readings in total. Custom test points matched to your operating range are available, and high-accuracy or custody applications can use up to ten points per direction.
+    </p>
+    <ol>
+      <li><strong>Stabilize.</strong> Let the transducer and the reference reach thermal equilibrium — typically 20-25 °C ambient — and record the test temperature. Calibrating a cold instrument that will run warm produces a certificate that does not represent the installation.</li>
+      <li><strong>Warm up.</strong> Power the transducer at its rated supply voltage and allow 15-30 minutes of warm-up before readings begin.</li>
+      <li><strong>As-found run.</strong> Apply pressure at 0%, 25%, 50%, 75% and 100% of span in ascending order, recording the output at each point. Then repeat in descending order from 100% back to 0%. Comparing the two directions at the same point reveals <strong>hysteresis</strong> — the difference between the ascending and descending readings, typically 0.05-0.1% FS on a healthy industrial transducer.</li>
+      <li><strong>Adjust zero.</strong> At the lower range value, trim the zero so the output reads exactly 4 mA (or 0 V / the digital zero value).</li>
+      <li><strong>Adjust span.</strong> At the upper range value, trim the span so the output reads exactly 20 mA (or full-scale voltage).</li>
+      <li><strong>Re-verify.</strong> Repeat the ascending and descending run. Zero and span adjustments interact slightly, so the full loop must be rechecked, not just the two endpoints.</li>
+      <li><strong>Record as-left.</strong> Calculate the error at every point from the as-left run, confirm it is inside the accuracy class, and document it on the certificate.</li>
+    </ol>
+    <p>
+      Two practical notes. First, never calibrate a transducer while it is installed if the process pressure cannot be fully removed — the zero point is meaningless with residual line pressure. Second, for explosion-proof or hazardous-area installations, verify the enclosure is properly sealed and de-energized before the process port is opened; calibration on live classified sites requires the same permits as any other hot work.
+    </p>
+
+    <h2 id="calibration-frequency">How Often to Calibrate: Interval Guidance</h2>
+    <p>
+      The default starting point for most industrial pressure instrumentation is a <strong>12-month interval</strong> — the assumption built into most ISO-style quality systems and OEM recommendations. But the correct interval is the one your own as-found data supports. The table below is a practical starting map:
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Application</th>
+            <th>Typical interval</th>
+            <th>Rationale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Safety functions, custody transfer, regulated metering</td>
+            <td>6 months</td>
+            <td>Errors have legal or safety consequences; drift cannot accumulate</td>
+          </tr>
+          <tr>
+            <td>Quality records, high-accuracy (±0.1% FS) test stands</td>
+            <td>6-12 months</td>
+            <td>Tight accuracy class leaves little drift budget between calibrations</td>
+          </tr>
+          <tr>
+            <td>Standard process control, hydraulics, OEM machinery</td>
+            <td>12 months</td>
+            <td>Matches ISO-style quality systems and most datasheet stability figures</td>
+          </tr>
+          <tr>
+            <td>Alarm and display duty, benign stable environments</td>
+            <td>12-24 months</td>
+            <td>±0.5% FS classes with stable conditions drift slowly</td>
+          </tr>
+          <tr>
+            <td>Permanent installations with a clean drift history</td>
+            <td>Up to 24 months</td>
+            <td>Two consecutive certificates with small as-found errors justify extension</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      The rule: if consecutive certificates show small, stable as-found errors, you may extend the interval; if as-found drift grows or approaches the accuracy class, shorten it. A single unit's interval is not fixed for life — it is a decision that should be reviewed at every calibration against the data on the certificate.
+    </p>
+
+    <h2 id="certificate-check">Calibration Certificate: What to Check</h2>
+    <p>
+      A calibration certificate is a legal and technical document, and it is only worth the paper it is printed on if it contains the data needed to trust it. Before you accept any certificate — factory or third-party — confirm it includes:
+    </p>
+    <ul>
+      <li><strong>The unit's serial number</strong> — a certificate without a serial number could belong to any instrument; it proves nothing about yours.</li>
+      <li><strong>The test points</strong> — the actual pressures applied, normally expressed as % of span (0, 25, 50, 75, 100).</li>
+      <li><strong>Applied pressure versus measured output at each point</strong> — the raw data, not just a pass/fail stamp. The error at each point must be listed.</li>
+      <li><strong>The reference standards used</strong> — identification numbers of the pressure standard and the electrical meter, plus their calibration due dates.</li>
+      <li><strong>Traceability</strong> — the chain from the reference standard back to NIST (or the national equivalent), documented, not merely claimed.</li>
+      <li><strong>The test conditions</strong> — ambient temperature during testing, and the supply voltage used.</li>
+      <li><strong>Date, technician and signature</strong> — who did the work and when; the technician's identity is part of audit traceability.</li>
+    </ul>
+    <p>
+      Red flags that should send the certificate back: no serial number, no standards listed, traceability mentioned without a chain, errors reported only as percentages with no applied/measured data, or a certificate date that does not match the shipment. A certificate that names its test points, its standards and its traceability chain — as the PRESSUREPOINT calibration service issues per serial number — is the kind that survives an audit.
+    </p>
+
+    <h2 id="in-house-vs-factory">In-House vs Factory Calibration</h2>
+    <p>
+      Many plants calibrate their own transducers, and for good reason: speed, cost per unit at volume, and no shipping downtime. But in-house calibration only works if the reference and the procedure are good enough — a shop air gauge is not a calibration standard, and a 4:1 test uncertainty ratio is non-negotiable. The real comparison is:
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>In-house</th>
+            <th>Factory (PRESSUREPOINT)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reference quality</td>
+            <td>Depends on your deadweight tester / digital calibrator and its own calibration schedule</td>
+            <td>NIST-traceable references, chain documented per certificate</td>
+          </tr>
+          <tr>
+            <td>Cost per unit</td>
+            <td>Low at volume, high fixed equipment cost</td>
+            <td>Fixed service fee, no equipment investment</td>
+          </tr>
+          <tr>
+            <td>Turnaround</td>
+            <td>Immediate — instrument never leaves the plant</td>
+            <td>5-7 working days after receipt, with RMA and shipping instructions</td>
+          </tr>
+          <tr>
+            <td>Extra capability</td>
+            <td>Pressure points only</td>
+            <td>Temperature testing, repair or replacement of damaged elements, documentation packages (material certificates, CE declarations)</td>
+          </tr>
+          <tr>
+            <td>Audit value</td>
+            <td>Good if procedure and records are maintained</td>
+            <td>Highest — accredited-chain certificates per serial number</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      The hybrid approach is common and sensible: in-house verification between factory calibrations, with a factory recalibration on a fixed cycle. In-house catches sudden failures; the factory cycle resets the traceability chain. If you choose factory recalibration, the process is simple: request an RMA with the model and serial number, ship the unit, and receive an as-found test, full recalibration against NIST-traceable references, and a certificate — with a quotation before any chargeable repair work starts. See our <a href="/services/calibration/">calibration service page</a> for the full process.
+    </p>
+
+    <h2 id="faq">Frequently Asked Questions</h2>
+    <h3>How often should a pressure transducer be recalibrated?</h3>
+    <p>
+      A 12-month interval is the standard starting point for most industrial applications. Safety-critical, custody and high-accuracy duty commonly use 6 months; stable, benign installations with a clean drift history can extend to 24 months. The right interval is the one your as-found drift data supports — review it at every calibration and shorten it if drift is growing.
+    </p>
+    <h3>What does NIST-traceable calibration actually mean?</h3>
+    <p>
+      It means the reference standard used in the test has its own calibration chain documented back to NIST — an unbroken series of comparisons, each link calibrated by a laboratory whose reference is itself traceable. The certificate lists the standard and its traceability path, so the claim can be verified rather than taken on faith.
+    </p>
+    <h3>What is the difference between as-found and as-left calibration?</h3>
+    <p>
+      As-found is the instrument's performance before adjustment — the honest measure of how much it drifted over the last interval. As-left is its verified performance after zero and span adjustment, which is what the certificate records and what the instrument is expected to maintain until the next calibration.
+    </p>
+    <h3>Can I calibrate a 4-20 mA transducer with a multimeter?</h3>
+    <p>
+      Not alone — you need both a pressure reference and a current measurement. A multimeter reads the loop current, but without a traceable pressure source applied to the process port you have no reference to compare against. A digital pressure calibrator combines both functions; a deadweight tester plus a precision current meter is the classic laboratory setup.
+    </p>
+    <h3>Do I need ISO 17025 calibration for every transducer?</h3>
+    <p>
+      No. ISO 17025 accreditation matters when the measurement feeds custody transfer, regulated metering, or audit-critical quality records. For general process control, monitoring and OEM applications, a manufacturer's certificate with a documented NIST-traceable chain is fully adequate — and it is what most quality systems actually require.
+    </p>
+
+    <h2 id="conclusion">Conclusion</h2>
+    <p>
+      Calibration is cheap insurance against the one failure mode every transducer shares: drift. A scheduled interval, a procedure with a real reference standard, and a certificate that names its test points and traceability chain turn a maintenance task into documented evidence your quality system can use. Start at 12 months, let as-found data drive the interval, verify in-house between factory cycles, and never accept a certificate that cannot show its work. For more background on the specifications calibration protects, see our <a href="/blog/pressure-transducer-accuracy/">accuracy guide</a> or the <a href="/blog/pressure-transducer-selection-guide/">complete selection guide</a>.
+    </p>
+    <p>
+      PRESSUREPOINT supplies factory-direct pressure transducers and transmitters with 4-20 mA, 0-10 V and RS485 outputs, ranges from vacuum to 600 bar, 316L wetted parts as standard (Hastelloy and ceramic options available), and ATEX/IECEx certified explosion-proof models — every unit individually calibrated against NIST-traceable references before shipment. Our <a href="/services/calibration/">factory calibration service</a> covers multi-point recalibration and recertification with per-serial-number certificates. Send your range, media, output and connection through the <a href="/contact/">inquiry form</a>, and our engineers will confirm a suitable model with datasheet and pricing — usually within one working day.
+    </p>
+  </BlogPostTemplate>
+</Layout>

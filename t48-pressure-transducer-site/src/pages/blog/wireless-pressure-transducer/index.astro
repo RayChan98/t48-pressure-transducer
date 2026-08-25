@@ -1,0 +1,282 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import BlogPostTemplate from '../../../components/BlogPostTemplate.astro';
+
+const toc = [
+  { id: 'what-is-wireless', label: 'What Is a Wireless Pressure Transducer' },
+  { id: 'how-it-works', label: 'How Wireless Pressure Measurement Works' },
+  { id: 'wireless-vs-wired', label: 'Wireless vs Wired: When Wireless Makes Sense' },
+  { id: 'protocols', label: 'Signal Types & Protocols for Industrial Wireless' },
+  { id: 'battery-life', label: 'Battery Life & Power Consumption' },
+  { id: 'applications', label: 'Typical Wireless Pressure Applications' },
+  { id: 'selection', label: 'Selection Points: What to Specify' },
+  { id: 'faq', label: 'Frequently Asked Questions' },
+  { id: 'conclusion', label: 'Conclusion' },
+];
+
+const related = [
+  { href: '/blog/pressure-transducer-selection-guide/', title: 'How to Choose a Pressure Transducer: Complete Selection Guide', readTime: 15 },
+  { href: '/blog/hydrostatic-level-measurement/', title: 'Hydrostatic Level Measurement: How Submersible Pressure Sensors Work', readTime: 13 },
+  { href: '/blog/pressure-transducer-4-20ma/', title: 'Pressure Transducer 4-20 mA Output: How the Loop Works, Scaling and Wiring', readTime: 9 },
+];
+---
+
+<Layout
+  title="Wireless Pressure Transducer: The Complete Engineering Guide"
+  description="How wireless pressure transducers work, LoRaWAN vs NB-IoT vs 4G, battery life math, and when wireless beats a wired 4-20 mA loop — with real specification rules."
+>
+  <BlogPostTemplate
+    title="Wireless Pressure Transducer: The Complete Engineering Guide"
+    category="Technical Guides"
+    date="2026-08-30"
+    readTime={13}
+    author="PRESSUREPOINT Team"
+    toc={toc}
+    related={related}
+  >
+    <p>
+      A wireless pressure transducer measures process pressure and sends the reading to a gateway or cloud platform over a radio link instead of a copper cable. The sensing core is the same proven technology used in wired instruments — piezoresistive silicon or thin-film strain gauge — but the power architecture, update rate and radio protocol are engineered for years of unattended operation on a single battery. This guide explains how these instruments work, when they genuinely beat a wired 4-20 mA loop, how to compare LoRaWAN, NB-IoT and 4G options, and the battery-life math that determines whether a wireless installation is viable for your site.
+    </p>
+
+    <h2 id="what-is-wireless">What Is a Wireless Pressure Transducer</h2>
+    <p>
+      A wireless pressure transducer is a self-contained pressure transmitter with an internal battery, a microcontroller, a radio module and (in many models) a local display, all housed in a weatherproof or explosion-protected enclosure. It converts process pressure into engineering units — bar, psi, MPa — and transmits those values at a programmed interval, typically from once per second to once per day. There is no loop wiring, no power supply cable and no signal cable; the instrument is a node in a wireless network, and the only physical connection to the process is the pressure port itself.
+    </p>
+    <p>
+      What does <em>not</em> change when you go wireless is the measurement itself. The sensing element, accuracy class, wetted material and process connection are specified exactly the same way as for a wired unit: a 0-25 bar unit with 316L wetted parts and a G1/4 connection behaves identically at the diaphragm whether the signal leaves over a wire or over the air. If you need a refresher on those decisions, the <a href="/blog/pressure-transducer-selection-guide/">pressure transducer selection guide</a> covers range, accuracy, reference and connection in detail. What changes is everything after the analog-to-digital conversion: instead of a 4-20 mA current loop, the value is stored, timestamped, packetized and transmitted as a radio message.
+    </p>
+    <p>
+      The trade-off is fundamental and worth stating plainly: <strong>wireless buys you installation freedom and costs you update speed and power</strong>. A wired loop can report continuously with millisecond response and unlimited energy; a wireless transducer reports in discrete messages, each one costing battery energy and radio airtime. Good wireless system design is the discipline of choosing the slowest update interval that still satisfies the application.
+    </p>
+
+    <h2 id="how-it-works">How Wireless Pressure Measurement Works</h2>
+    <p>
+      Inside the housing, the signal chain looks like this: the pressure sensing element produces a small millivolt-level output, which is amplified, temperature-compensated and digitized by a low-power ADC. The microcontroller applies calibration coefficients, converts the raw value to engineering units, and stores it in memory. At the programmed interval it wakes the radio, transmits a compact packet (typically 20-40 bytes containing pressure, battery voltage, device ID and a sequence number), and returns to sleep. Between transmissions the instrument is asleep, drawing only a few microamps.
+    </p>
+    <p>
+      That sleep-wake cycle is the single most important design feature of a wireless pressure transducer. A typical unit spends more than 99% of its life asleep. The three biggest consumers of energy are, in order: the radio transmission, the sensing element's excitation and amplification circuitry, and the real-time clock that keeps the sleep schedule. Reducing any of them — fewer messages, shorter airtime, lower transmit power — directly extends battery life, which is why update interval dominates every battery-life estimate in this guide.
+    </p>
+    <p>
+      The <strong>gateway</strong> (also called a base station or concentrator) is the other half of the system. A single gateway can receive messages from hundreds of end devices within range, time-stamp them, and forward them over Ethernet, Wi-Fi or a 4G modem to a SCADA system or cloud platform. Some industrial deployments also use a <strong>repeater or router</strong> where a gateway cannot reach, and many systems support a local handheld receiver for commissioning and spot checks.
+    </p>
+    <p>
+      Long-range sub-GHz radios such as LoRa use <strong>chirp spread spectrum modulation</strong>: the signal is spread across a wide frequency band with a chirp pattern that only a matched receiver can decode. This gives two practical advantages. First, sensitivity is extremely high — receivers can decode signals far below the noise floor, which is what makes multi-kilometre links possible at transmit powers of only 25 mW. Second, the modulation is resistant to interference and multipath fading from buildings and terrain, which matters in industrial sites full of steel structures and rotating machinery.
+    </p>
+
+    <h2 id="wireless-vs-wired">Wireless vs Wired: When Wireless Makes Sense</h2>
+    <p>
+      A wired 4-20 mA loop remains the right answer for many applications, and the decision is not about which technology is "newer". It is an economic and operational question. Cable is cheap per metre; installing it is not. The fully loaded cost of a wired instrument includes trenching, cable trays, conduit, junction boxes, marshalling cabinets, an AI channel on the PLC or DCS, and the engineering time to route and document every circuit. For a single measurement point a few metres from an existing cabinet, wired wins easily. For a pressure point 800 metres from the nearest cabinet, across a road or a river, wireless frequently wins on first cost alone.
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Wired (4-20 mA)</th>
+            <th>Wireless (LoRaWAN/NB-IoT)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Installation cost per point</td>
+            <td>High — cable, trenching, conduit, terminations</td>
+            <td>Low — one instrument, one antenna</td>
+          </tr>
+          <tr>
+            <td>Update rate</td>
+            <td>Continuous, millisecond response</td>
+            <td>Discrete messages, seconds to hours</td>
+          </tr>
+          <tr>
+            <td>Power supply</td>
+            <td>24 V loop-powered</td>
+            <td>Internal battery, 3-10+ years</td>
+          </tr>
+          <tr>
+            <td>Distance limit</td>
+            <td>Practical loop limit, typically &lt;2 km</td>
+            <td>Hundreds of metres to 10+ km line-of-sight</td>
+          </tr>
+          <tr>
+            <td>Best for</td>
+            <td>Control loops, dense plants, safety functions</td>
+            <td>Remote monitoring, retrofit, moving assets</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      The decisive rule is this: <strong>wireless is a monitoring technology, not a control technology</strong>. Closed-loop control — a valve responding to a pressure error in real time — needs the deterministic, millisecond behaviour of a wired signal. Wireless is for the measurements a plant needs to <em>know about</em> rather than <em>act on instantly</em>: tank levels that need a morning report, wellhead pressures that need an alarm at 3 a.m., pipeline pressures that need a trend over a month. Wireless is also the only economical answer for measurements on moving equipment, on assets without any power supply, and in locations where trenching is physically impossible or prohibitively expensive.
+    </p>
+
+    <h2 id="protocols">Signal Types & Protocols for Industrial Wireless</h2>
+    <p>
+      The radio protocol determines range, power consumption, coverage, network cost and regulatory compliance. Four options cover the overwhelming majority of industrial pressure monitoring:
+    </p>
+    <ul>
+      <li><strong>LoRa / LoRaWAN</strong> — sub-GHz spread-spectrum radio on license-free bands (868 MHz in Europe, 915 MHz in the Americas). Long range, very low power, and it can operate as a private network with your own gateway — no monthly fees per device. This is the default for plant and field deployments where you control the infrastructure.</li>
+      <li><strong>NB-IoT (Narrowband IoT)</strong> — licensed cellular technology that rides on mobile operator networks. It penetrates buildings and underground chambers better than any unlicensed option and needs no local gateway, but it requires a SIM per device and a monthly data plan, and its transmit power is higher, which costs battery life.</li>
+      <li><strong>4G / LTE-M</strong> — direct cellular connectivity with higher bandwidth. Useful when a device must push data to a cloud platform from anywhere with coverage, but it is the heaviest consumer of battery energy and is best reserved for devices with mains power or infrequent reporting.</li>
+      <li><strong>Bluetooth Low Energy (BLE)</strong> — very short range (tens of metres) but extremely low cost and low power. BLE appears in industrial transducers mainly as a commissioning and configuration interface — pairing a phone to set range and interval — rather than as the primary telemetry path.</li>
+    </ul>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Protocol</th>
+            <th>Band</th>
+            <th>Typical range</th>
+            <th>Battery impact</th>
+            <th>Network cost</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>LoRaWAN</td>
+            <td>868 / 915 MHz</td>
+            <td>0.5-10 km</td>
+            <td>Very low</td>
+            <td>Private — no per-device fee</td>
+            <td>Plants, fields, tank farms, own gateway</td>
+          </tr>
+          <tr>
+            <td>NB-IoT</td>
+            <td>Licensed cellular</td>
+            <td>Network coverage</td>
+            <td>Medium</td>
+            <td>SIM + monthly plan</td>
+            <td>Underground, remote, no gateway allowed</td>
+          </tr>
+          <tr>
+            <td>4G / LTE-M</td>
+            <td>Licensed cellular</td>
+            <td>Network coverage</td>
+            <td>High</td>
+            <td>SIM + monthly plan</td>
+            <td>Cloud push, high data volume, mains power</td>
+          </tr>
+          <tr>
+            <td>BLE</td>
+            <td>2.4 GHz</td>
+            <td>&lt;50 m</td>
+            <td>Very low</td>
+            <td>None</td>
+            <td>Commissioning, phone configuration</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Regulation matters more than vendors advertise. In Europe, unlicensed sub-GHz transmitters are governed by ETSI EN 300.220, which limits a LoRaWAN end device on 868 MHz to a <strong>1% duty cycle</strong> — no more than 36 seconds of radio airtime per hour. In practical terms, a device that transmits a 2-second uplink packet can send at most 18 messages per hour, and a device reporting every 10 seconds at 250 ms per burst would already be over the legal limit. Duty-cycle rules are one reason industrial wireless pressure monitoring so often uses intervals of 1 minute or longer, and they should be checked before any high-rate design is committed.
+    </p>
+
+    <h2 id="battery-life">Battery Life & Power Consumption</h2>
+    <p>
+      Battery life is the specification every buyer asks about first, and it is entirely determined by four numbers: <strong>update interval, transmission airtime, transmit power and sleep current</strong>. The dominant term is the radio burst. A LoRaWAN transmission at +14 dBm (25 mW) draws roughly 100-130 mA from the battery, but only for the duration of the packet — typically 100-500 ms depending on spreading factor and payload. Everything else the instrument does between messages — wake, sample, convert, average, log — consumes microamps.
+    </p>
+    <p>
+      The standard power source is a <strong>3.6 V lithium thionyl chloride (Li-SOCl₂) primary cell</strong>, chosen for its exceptionally low self-discharge (1-2% per year) and wide temperature range. A common industrial form factor is the 19 Ah D-cell-sized bobbin. The battery-life arithmetic is simple: divide the cell capacity by the mean current. At one reading per hour, with a 250 ms uplink at +14 dBm and a 5 µA sleep current, the mean current is below 0.5 mA — which puts a 19 Ah cell at roughly four to five years of service, with self-discharge rather than consumption becoming the limiting factor beyond about ten years.
+    </p>
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Update interval</th>
+            <th>Messages per hour</th>
+            <th>Airtime per hour</th>
+            <th>Est. battery life (19 Ah cell)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1 minute</td>
+            <td>60</td>
+            <td>15 s (0.42% duty)</td>
+            <td>4-5 years</td>
+          </tr>
+          <tr>
+            <td>5 minutes</td>
+            <td>12</td>
+            <td>3 s (0.08% duty)</td>
+            <td>6-8 years</td>
+          </tr>
+          <tr>
+            <td>15 minutes</td>
+            <td>4</td>
+            <td>1 s (0.03% duty)</td>
+            <td>8-10 years</td>
+          </tr>
+          <tr>
+            <td>1 hour</td>
+            <td>1</td>
+            <td>0.25 s</td>
+            <td>10+ years (self-discharge limited)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Two additional factors quietly destroy battery-life estimates if ignored. First, <strong>temperature</strong>: Li-SOCl₂ cells lose capacity at low temperature, and below roughly -40 °C their pulse capability collapses — a cell that can deliver 25 mAh pulses at 20 °C may manage only a few milliamp-hours at -40 °C, which can abort a transmission mid-packet. Cold-climate installations should use extended-temperature cells and verify the datasheet's low-temperature pulse curve. Second, <strong>poor radio conditions</strong>: if the receiver cannot decode the packet, some devices retransmit, doubling or tripling airtime; a link with marginal signal strength can silently halve battery life. Design the radio link for margin, not for the edge of coverage.
+    </p>
+
+    <h2 id="applications">Typical Wireless Pressure Applications</h2>
+    <p>
+      Wireless pressure transducers earn their keep in the places where cable is expensive, power is absent, or the asset moves. The recurring application patterns:
+    </p>
+    <ul>
+      <li><strong>Remote wellhead and pad monitoring (oil &amp; gas)</strong> — casing, tubing and flowline pressures on wells that may be kilometres from the nearest powered infrastructure. A private LoRaWAN network with a gateway on a mast or an existing tower covers a whole field; a wellhead unit reporting at 15-minute intervals runs for years on one battery.</li>
+      <li><strong>Municipal water distribution networks</strong> — pressure points at hydrants, district metered areas and pump stations. Wireless units with IP68 housings are buried in valve pits or mounted in chambers where no power exists, reporting to a city-wide gateway network for leakage and pressure-zone management.</li>
+      <li><strong>Tank farms and storage</strong> — hydrostatic tank level via a pressure transducer on the tank bottom, or vapour-space pressure on fixed and floating-roof tanks. Wired instrumentation on a large tank farm means kilometres of cable and hazardous-area engineering; wireless nodes with intrinsically safe certification are installed without any of it. See the <a href="/blog/hydrostatic-level-measurement/">hydrostatic level measurement guide</a> for the level-side theory.</li>
+      <li><strong>Pipeline and transfer-line monitoring</strong> — pressure at pumping stations, block-valve sites and high points along long transfers. A sudden pressure drop visible as a transient on a 1-minute trend is the classic signature of a line break or theft point.</li>
+      <li><strong>Mobile and temporary equipment</strong> — concrete pumps, fracturing trailers, test skids and rental compressors, where a permanently wired instrument is impossible and the transducer must simply bolt on and start reporting.</li>
+      <li><strong>Flood and storm monitoring</strong> — water-level and back-pressure monitoring in culverts, pump stations and retention basins, where sensors are deployed for a season and retrieved, and where wiring would need to cross water or flood-prone ground.</li>
+    </ul>
+    <p>
+      A common thread: these applications are dominated by <em>alarms, trends and reports</em>, not by control. The operator needs to know that the pressure crossed a threshold, that the tank is 82% full this morning, or that the well has been stable for a month. Wireless delivers that information at a small fraction of the installed cost of wired infrastructure.
+    </p>
+
+    <h2 id="selection">Selection Points: What to Specify</h2>
+    <p>
+      Specifying a wireless pressure transducer means specifying two things: the instrument (exactly as for a wired unit) and the radio system. The instrument side — range, accuracy, wetted parts, connection — follows the <a href="/products/industrial/">industrial pressure transducer range</a> logic and the <a href="/blog/pressure-transducer-selection-guide/">full selection guide</a>. The radio side adds six decisions:
+    </p>
+    <ul>
+      <li><strong>Update interval</strong> — the slowest interval that satisfies the application. It drives both battery life and duty-cycle compliance, so it should be stated explicitly at ordering, not left as a default.</li>
+      <li><strong>Coverage distance and terrain</strong> — state the distance to the gateway, whether the path is line-of-sight or obstructed, and the antenna elevations. This determines the spreading factor and whether a repeater is needed. As a planning figure, a 6 km line-of-sight link at 868 MHz with a +14 dBm transmitter and a 10 dBi gateway antenna on an elevated mast will typically see an RSSI near -115 dBm at the cell edge — workable, but with little margin for foliage or rain.</li>
+      <li><strong>Enclosure rating</strong> — outdoor and washdown duty needs IP66 or IP67; buried and flooded installations need IP68. Check the rating with the antenna fitted, not just the housing.</li>
+      <li><strong>Hazardous area</strong> — in a classified zone the transducer needs ATEX or IECEx certification, and wireless adds a constraint: intrinsically safe (Ex ia) instruments are preferred because flameproof enclosures are problematic for radio — an antenna cannot pass through a flameproof barrier without its own certification, which most suppliers avoid. Zone 0 instruments with Ex ia certification and an external antenna are the standard answer; confirm the antenna certification with the supplier.</li>
+      <li><strong>Ambient temperature</strong> — verify the battery's low-temperature rating against the coldest expected site condition, especially below -20 °C.</li>
+      <li><strong>Data integration</strong> — how the gateway feeds the host system: Modbus TCP, MQTT, OPC UA or a cloud API. Confirm this early; retrofitting the integration layer is the most common source of wireless project delay.</li>
+    </ul>
+
+    <h2 id="faq">Frequently Asked Questions</h2>
+    <h3>How far can a wireless pressure transducer transmit?</h3>
+    <p>
+      With LoRaWAN on 868/915 MHz, a practical planning figure is 0.5-2 km in industrial terrain with buildings and tanks, and 5-15 km over open ground with elevated antennas at both ends. NB-IoT and 4G reach wherever the mobile operator's network reaches. Distance claims in datasheets are line-of-sight figures — always derate them for foliage, terrain and structures, and verify the actual link before committing to the update interval.
+    </p>
+    <h3>How long does the battery actually last?</h3>
+    <p>
+      For a 19 Ah Li-SOCl₂ cell at one reading per hour with a 250 ms transmission, expect roughly four to five years of service. At 15-minute intervals the same instrument typically runs eight to ten years, and at one reading per hour some units exceed ten years, after which self-discharge rather than consumption is the limit. Cold sites and marginal radio links shorten those figures — plan battery replacement around the conservative estimate.
+    </p>
+    <h3>Do I need a gateway for every device?</h3>
+    <p>
+      No — one gateway serves many devices. A LoRaWAN gateway can handle hundreds of end devices within range, so a tank farm or wellfield typically needs only one or two. If you choose NB-IoT or 4G, there is no gateway at all; each device connects directly to the cellular network, at the cost of a SIM and monthly plan per device.
+    </p>
+    <h3>Can wireless pressure transducers be used in hazardous areas?</h3>
+    <p>
+      Yes, with the right certification. Intrinsically safe (Ex ia) instruments are the standard for wireless in Zones 0, 1 and 2, and they work well with radio because an intrinsically safe antenna feedthrough is much simpler to certify than a flameproof one. Specify the zone and gas group at ordering, and confirm that the antenna itself is included in the certification.
+    </p>
+    <h3>Is a wireless transducer as accurate as a wired one?</h3>
+    <p>
+      The accuracy of the measurement is the same — the sensing element, compensation and calibration are identical to a wired unit, typically ±0.25% FS or better. What differs is the transport: wireless delivers discrete samples rather than a continuous signal, so transient events shorter than the update interval can be missed. Choose the interval based on the fastest event you need to see, and wireless accuracy is not a concern.
+    </p>
+
+    <h2 id="conclusion">Conclusion</h2>
+    <p>
+      Wireless pressure transducers are not a replacement for wired instrumentation — they are a complementary tool for the measurements where cable is the expensive part: remote sites, moving assets, tank farms, water networks and temporary installations. The technology is mature: sub-GHz spread-spectrum radios give multi-kilometre range at 25 mW, battery engineering delivers years of unattended operation, and the sensing core is the same proven element used in wired transmitters. The engineering discipline is in the choices — update interval, protocol, coverage margin and certification — and every one of them is quantifiable before you order.
+    </p>
+    <p>
+      PRESSUREPOINT supplies factory-direct pressure transducers and transmitters with 4-20 mA, 0-10 V and RS485 outputs, ranges from vacuum to 600 bar, 316L wetted parts as standard (Hastelloy and ceramic options available), and ATEX/IECEx certified models. If your application needs wireless telemetry, send us your range, media, update interval and the distance to the nearest gateway or network, and our engineers will recommend the sensor, the radio option and the gateway layout — usually within one working day, through the <a href="/contact/">inquiry form</a>.
+    </p>
+  </BlogPostTemplate>
+</Layout>
