@@ -1,6 +1,7 @@
 ---
 // Industry 场景长尾页模板 v2（2026-08-22 升级：chapters slot + FAQ + blogLinks + recommended，同 CategoryPageTemplate v2 逻辑）
-const { title, kw, desc, points, longtail, faqs = [], blogLinks = [], recommended = [] } = Astro.props;
+const { title, kw, desc, points, longtail, faqs = [], blogLinks = [], recommended = [], shortTitle = "" } = Astro.props;
+const h2Name = shortTitle || title;
 ---
 
 <section class="bg-navy-950 text-white">
@@ -23,7 +24,7 @@ const { title, kw, desc, points, longtail, faqs = [], blogLinks = [], recommende
         <p class="border-t border-slate-100 px-5 py-3 text-sm text-slate-500">Site photos coming soon — request case studies or the full catalog.</p>
       </div>
       <div>
-        <h2 class="text-2xl font-extrabold text-navy-950">Why {title} Needs Pressure Transducers</h2>
+        <h2 class="text-2xl font-extrabold text-navy-950">Why {h2Name} Needs Pressure Transducers</h2>
         <p class="mt-4 text-base leading-relaxed text-slate-600">{desc}</p>
         <ul class="mt-6 space-y-3">
           {points.map((p) => (

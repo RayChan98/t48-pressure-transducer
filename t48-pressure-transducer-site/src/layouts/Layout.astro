@@ -7,7 +7,7 @@ import MobileBottomNav from '../components/MobileBottomNav.astro';
 import InquiryModal from '../components/InquiryModal.astro';
 import SearchModal from '../components/SearchModal.astro';
 
-const { title = 'PRESSUREPOINT', description = 'Pressure Transducer & Transmitter Manufacturer' } = Astro.props;
+const { title = 'PRESSUREPOINT', description = 'Pressure Transducer & Transmitter Manufacturer', robots = 'index, follow' } = Astro.props;
 const canonical = Astro.url.pathname === '/' ? 'https://t48-pressure-transducer.pages.dev/' : `https://t48-pressure-transducer.pages.dev${Astro.url.pathname.replace(/\/$/, '')}/`;
 const organization = {
   '@context': 'https://schema.org',
@@ -40,7 +40,7 @@ const organization = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://t48-pressure-transducer.pages.dev/og-default.png" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robots} />
     <link rel="icon" type="image/svg+xml" href="/logo/logo-icon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/logo/favicon-512.png" />
