@@ -52,6 +52,7 @@
 - [x] 核心词 3000+ 字深度指南 6 篇（内容增量③，2026-08-25 上线，37 页）
 - [x] on-page + technical SEO 终检（2026-08-25：软404全绿/无noindex/canonical正/Product schema/og+twitter图）
 - [x] on-page SEO 批量修正（2026-08-25：36 页 title≤62 + desc 达标 + 行业页 H1 补主词 + 3 处克隆残留清理 + thank-you noindex）
+- [x] 内容增量④ 竞对博客词 5 篇（2026-08-25 夜：wireless/maintenance/calibration/switch-vs/submersible，42 页，指纹已登记）
 - [ ] 域名注册（待主人定，走 CF Registrar）
 - [ ] logo 定稿（Trae 指令，色板后置）
 - [x] git push（af55c80 + 34fcdfa 已推送）
