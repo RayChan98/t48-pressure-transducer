@@ -13,7 +13,6 @@ export const site = {
   url: "https://t48-pressure-transducer.pages.dev",
   email: "cj226144@gmail.com",
   phone: "+86 137 1086 0663",
-  telHref: "tel:+861****0663",
   whatsapp: "8613710860663",
   waNumber: "8613710860663",
 };
