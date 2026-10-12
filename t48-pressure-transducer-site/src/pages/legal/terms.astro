@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+// 触点=src/data/site.ts 单源（补闸单 t_6989122a 10-13）
+import { site } from '../../data/site.ts';
 ---
 
 <Layout title="Terms of Service | PRESSUREPOINT" description="PRESSUREPOINT terms of service for website use and product inquiries.">
@@ -19,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
       <h2>Intellectual Property</h2>
       <p>All content on this website, including text and graphics, is the property of PRESSUREPOINT and may not be reproduced without permission.</p>
       <h2>Contact</h2>
-      <p>Questions about these terms: cj226144@gmail.com.</p>
+      <p>Questions about these terms: {site.email}.</p>
     </div>
   </section>
 </Layout>

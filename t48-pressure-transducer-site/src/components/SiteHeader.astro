@@ -1,5 +1,7 @@
 ---
 // Mega Menu 导航（molditquick 模式：宽面板 + icon + 副标题）+ Topbar（联系方式/搜索/语种/CTA）
+// 触点=src/data/site.ts 单源（补闸单 t_6989122a 10-13，禁组件硬写）
+import { site } from '../data/site.ts';
 const products = [
   { href: '/products/', label: 'All Products', icon: '📦', desc: 'Full pressure sensor catalog' },
   { href: '/products/industrial/', label: 'Industrial Transducers', icon: '🏭', desc: 'General-purpose 4-20mA / 0-10V' },
@@ -74,13 +76,13 @@ const servicesLinks = [
       <!-- 桌面版 Topbar（lg 以上，回退上一版）：邮件+WhatsApp | 搜索框 → 语种 → CTA -->
       <div class="hidden h-10 items-center justify-between text-xs text-slate-300 lg:flex">
         <div class="flex items-center gap-4">
-          <a href="mailto:cj226144@gmail.com" class="inline-flex items-center gap-1.5 transition hover:text-white">
+          <a href={`mailto:${site.email}`} class="inline-flex items-center gap-1.5 transition hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-3.5 w-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
-            cj226144@gmail.com
+            {site.email}
           </a>
-          <a href="https://wa.me/8613710860663" class="inline-flex items-center gap-1.5 transition hover:text-white" rel="noopener">
+          <a href={`https://wa.me/${site.whatsapp}`} class="inline-flex items-center gap-1.5 transition hover:text-white" rel="noopener">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-3.5 w-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.76 9.76 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>
-            +86 137 1086 0663
+            {site.phone}
           </a>
         </div>
         <div class="flex items-center gap-3">

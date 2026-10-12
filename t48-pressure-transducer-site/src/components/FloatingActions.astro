@@ -2,6 +2,8 @@
 // 右侧 sticky 快速联系浮动栏（molditquick 模式）
 // 桌面：展开态带文案（WhatsApp/Call/Quote/Back to top）
 // 移动：纯图标右对齐 + bottom-20 避开底部菜单栏，展开按钮无文案
+// 触点默认值=src/data/site.ts 单源（补闸单 t_6989122a 10-13，禁组件硬写）
+import { site } from '../data/site.ts';
 interface Props {
   whatsappNumber?: string;
   phoneDisplay?: string;
@@ -9,10 +11,10 @@ interface Props {
   email?: string;
 }
 const {
-  whatsappNumber = '8613710860663',
-  phoneDisplay = '+86 137 1086 0663',
+  whatsappNumber = site.whatsapp,
+  phoneDisplay = site.phone,
   welcomeText = "Hello PRESSUREPOINT! I'm interested in your pressure transducers. Could you send me the price list and lead time?",
-  email = 'cj226144@gmail.com',
+  email = site.email,
 } = Astro.props;
 
 const waLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(welcomeText)}`;

@@ -1,6 +1,8 @@
 ---
 // POPUP 询盘表单（全站 CTA 统一指向）——istamping 风格细分字段
-// 字段与全站表单一致 + 细分项：产品类型/数量/应用场景/夜视色彩/连接方式/采购角色
+// 字段与全站表单一致 + 细分项：产品类型/数量/应用场景/介质连接/采购角色
+// 触点=src/data/site.ts 单源（补闸单 t_6989122a 10-13，禁组件/脚本硬写）
+import { site } from '../data/site.ts';
 const productOptions = [
   'Industrial Pressure Transducer',
   'Pressure Transmitter 4-20mA',
@@ -13,8 +15,8 @@ const productOptions = [
   'Other',
 ];
 const qtyOptions = ['1-50 pcs (Sample)', '50-500 pcs', '500-2000 pcs', '2000+ pcs (Container)', 'Not sure yet'];
-const appOptions = ['Home / Apartment', 'Retail / Shop', 'Warehouse / Logistics', 'Industrial / Factory', 'Construction Site', 'School / Campus', 'Business / Office', 'Other'];
-const colorOptions = ['Full-Color Night Vision (Preferred)', 'Standard IR (Black & White)', 'No preference'];
+// 10-13 补闸 t_6989122a：清理 fullcolorcam 克隆残留（安防应用场景/夜视字段）→ 压力测量行业场景
+const appOptions = ['Industrial / Factory Automation', 'Hydraulics / Pneumatics', 'HVAC / Chiller', 'Water & Wastewater', 'Oil & Gas', 'Level / Tank Measurement', 'OEM Integration', 'Other'];
 const connectOptions = ['Air', 'Water', 'Steam', 'Hydraulic Oil', 'Coolant', 'Not sure'];
 const roleOptions = ['End User', 'Installer / Integrator', 'Distributor / Wholesaler', 'OEM / Brand Owner', 'Other'];
 ---
@@ -37,7 +39,7 @@ const roleOptions = ['End User', 'Installer / Integrator', 'Distributor / Wholes
     </div>
 
     <!-- 表单体 -->
-    <form id="inquiry-form" class="max-h-[70vh] overflow-y-auto px-6 py-5" action="/api/contact" method="post">
+    <form id="inquiry-form" data-contact-email={site.email} class="max-h-[70vh] overflow-y-auto px-6 py-5" action="/api/contact" method="post">
       <input type="hidden" name="form_source" value="popup-modal" />
       <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
@@ -79,13 +81,7 @@ const roleOptions = ['End User', 'Installer / Integrator', 'Distributor / Wholes
           </select>
         </div>
         <div>
-          <label for="modal-color" class="mb-1.5 block text-sm font-medium text-navy-950">Night Vision Preference</label>
-          <select id="modal-color" name="night_vision" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/20">
-            {colorOptions.map((o) => <option>{o}</option>)}
-          </select>
-        </div>
-        <div>
-          <label for="modal-connect" class="mb-1.5 block text-sm font-medium text-navy-950">Connection Type</label>
+          <label for="modal-connect" class="mb-1.5 block text-sm font-medium text-navy-950">Process Media / Connection</label>
           <select id="modal-connect" name="connection" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/20">
             {connectOptions.map((o) => <option>{o}</option>)}
           </select>
@@ -100,7 +96,7 @@ const roleOptions = ['End User', 'Installer / Integrator', 'Distributor / Wholes
         Send Inquiry →
       </button>
       <p id="modal-form-status" class="mt-3 hidden text-sm font-medium"></p>
-      <p class="mt-3 text-center text-xs text-slate-400">Prefer direct contact? Email <a href="mailto:cj226144@gmail.com" class="text-brand-blue hover:underline">cj226144@gmail.com</a> or WhatsApp <a href="https://wa.me/8613710860663" target="_blank" rel="noopener" class="text-brand-blue hover:underline">+86 137 1086 0663</a></p>
+      <p class="mt-3 text-center text-xs text-slate-400">Prefer direct contact? Email <a href={`mailto:${site.email}`} class="text-brand-blue hover:underline">{site.email}</a> or WhatsApp <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" class="text-brand-blue hover:underline">{site.phone}</a></p>
     </form>
   </div>
 </div>
@@ -132,6 +128,8 @@ const roleOptions = ['End User', 'Installer / Integrator', 'Distributor / Wholes
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
   if (form) {
+    // 10-13 补闸 t_6989122a：对客邮箱经 data-contact-email 从单源读取，脚本禁硬写
+    const contactEmail = form.dataset.contactEmail || '';
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = form.querySelector('button[type="submit"]');
@@ -145,13 +143,13 @@ const roleOptions = ['End User', 'Installer / Integrator', 'Distributor / Wholes
           window.location.href = '/thank-you/';
         } else {
           statusEl.textContent = data.error === 'mail_not_configured'
-            ? 'Service temporarily unavailable. Please email us directly at cj226144@gmail.com.'
-            : 'Something went wrong. Please email us directly at cj226144@gmail.com.';
+            ? `Service temporarily unavailable. Please email us directly at ${contactEmail}.`
+            : `Something went wrong. Please email us directly at ${contactEmail}.`;
           statusEl.classList.remove('hidden');
           statusEl.classList.add('text-red-600');
         }
       } catch (err) {
-        statusEl.textContent = 'Network error. Please email us directly at cj226144@gmail.com.';
+        statusEl.textContent = `Network error. Please email us directly at ${contactEmail}.`;
         statusEl.classList.remove('hidden');
         statusEl.classList.add('text-red-600');
       }

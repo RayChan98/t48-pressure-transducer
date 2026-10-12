@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+// 触点=src/data/site.ts 单源（补闸单 t_6989122a 10-13）
+import { site } from '../data/site.ts';
 ---
 
 <Layout title="Contact PRESSUREPOINT — Pressure Transducer Quote" description="Contact PRESSUREPOINT for pressure transducer and transmitter pricing: send range, media, output and volume for a quote within 24 hours, with OEM/ODM support.">
@@ -18,11 +20,11 @@ import Layout from '../layouts/Layout.astro';
           <ul class="mt-6 space-y-4 text-sm text-slate-600">
             <li class="flex items-start gap-3">
               <span class="mt-0.5 text-lg">📧</span>
-              <a href="mailto:cj226144@gmail.com" class="hover:text-brand-blue">cj226144@gmail.com</a>
+              <a href={`mailto:${site.email}`} class="hover:text-brand-blue">{site.email}</a>
             </li>
             <li class="flex items-start gap-3">
               <span class="mt-0.5 text-lg">💬</span>
-              <a href="https://wa.me/8613710860663" target="_blank" rel="noopener" class="hover:text-brand-blue">WhatsApp: +86 137 1086 0663</a>
+              <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" class="hover:text-brand-blue">WhatsApp: {site.phone}</a>
             </li>
             <li class="flex items-start gap-3">
               <span class="mt-0.5 text-lg">⏱️</span>
@@ -49,7 +51,7 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </div>
         <div class="lg:col-span-3">
-          <form id="inquiry-form" class="space-y-5" method="post" action="/api/contact">
+          <form id="inquiry-form" data-contact-email={site.email} class="space-y-5" method="post" action="/api/contact">
             <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <input type="hidden" name="form_source" value="contact page" />
             <div class="grid gap-5 sm:grid-cols-2">
@@ -133,7 +135,9 @@ import Layout from '../layouts/Layout.astro';
           alert('Something went wrong: ' + (data.error || 'unknown error'));
         }
       } catch (err) {
-        alert('Network error, please email us directly at cj226144@gmail.com');
+        // 10-13 补闸 t_6989122a：对客邮箱经 data-contact-email 从单源读取，脚本禁硬写
+        const contactEmail = form.dataset.contactEmail || '';
+        alert(`Network error, please email us directly at ${contactEmail}`);
       } finally {
         btn.textContent = original;
         btn.disabled = false;

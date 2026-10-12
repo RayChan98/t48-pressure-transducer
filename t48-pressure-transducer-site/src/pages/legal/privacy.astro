@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+// 触点=src/data/site.ts 单源（补闸单 t_6989122a 10-13）
+import { site } from '../../data/site.ts';
 ---
 
 <Layout title="Privacy Policy | PRESSUREPOINT" description="PRESSUREPOINT privacy policy — how we handle inquiry data and personal information.">
@@ -19,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
       <h2>Data Retention</h2>
       <p>Inquiry data is retained as long as needed to serve your request and meet legal record-keeping requirements.</p>
       <h2>Contact</h2>
-      <p>For any privacy-related questions, contact us at cj226144@gmail.com.</p>
+      <p>For any privacy-related questions, contact us at {site.email}.</p>
     </div>
   </section>
 </Layout>
