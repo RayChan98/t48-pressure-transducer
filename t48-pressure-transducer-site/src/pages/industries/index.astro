@@ -1,0 +1,49 @@
+---
+// Industries hub（卡 t_73b3f574 补闸 K-116 修死链根因：7 个行业页面包屑指 /industries/ 但 hub 页从未建=死链）
+// 照 products/index.astro 简版 hub 制式（hero+面包屑+卡片网格+CtaBand）
+import Layout from '../../layouts/Layout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const industries = [
+  { href: '/industries/hydraulic/', title: 'Hydraulic Systems', desc: 'Presses, excavators and molding machines — pressure points on pumps, accumulators and cylinders.', icon: '🛢️' },
+  { href: '/industries/hvac/', title: 'HVAC & Refrigeration', desc: 'Refrigerant high/low side and duct static pressure monitoring for chillers and AHUs.', icon: '❄️' },
+  { href: '/industries/water/', title: 'Water & Pumps', desc: 'Supply networks, booster sets, wells and tanks — pressure and level in one instrument family.', icon: '💧' },
+  { href: '/industries/compressed-air/', title: 'Compressed Air', desc: 'Receiver and line pressure for compressors, dryers and plant air distribution.', icon: '💨' },
+  { href: '/industries/process/', title: 'Process Industries', desc: 'Chemical, pharma and food lines — hygienic and hazardous-area options where media demands it.', icon: '⚗️' },
+  { href: '/industries/oil-gas/', title: 'Oil & Gas', desc: 'Wellhead, pipeline and skid instrumentation rated for field environments.', icon: '🛢️' },
+  { href: '/industries/automation/', title: 'Automation & OEM', desc: 'Machine builders and integrators — compact sensor formats for embedded designs.', icon: '⚙️' },
+];
+---
+
+<Layout title="Pressure Transducer Applications by Industry | PRESSUREPOINT" description="Pressure measurement solutions for hydraulics, HVAC, water, compressed air, process, oil & gas and OEM machinery — application notes, range selection and instrument recommendations by industry.">
+  <section class="bg-navy-950 py-16 text-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <nav class="text-sm text-slate-400" aria-label="Breadcrumb">
+        <a href="/" class="transition hover:text-white">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-slate-200">Industries</span>
+      </nav>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Pressure Measurement for Every Industry</h1>
+      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-300">
+        The right transducer depends on what the pressure is doing in your system — not just the range. Pick your application below for mounting, media, output and accuracy recommendations from our engineers.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {industries.map((i) => (
+          <a href={i.href} class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-blue/40 hover:shadow-md">
+            <span class="text-3xl">{i.icon}</span>
+            <h2 class="mt-3 text-xl font-bold text-navy-950 group-hover:text-brand-blue">{i.title}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{i.desc}</p>
+            <span class="mt-4 inline-block text-sm font-semibold text-brand-blue">Read the application notes →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

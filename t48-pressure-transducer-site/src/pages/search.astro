@@ -1,0 +1,98 @@
+---
+// 站内搜索落地页（卡 t_73b3f574 G6 补闸新建）：SearchModal 表单 GET /search/?q=… 原指不存在页=404病灶，此页补根因
+// 制式=静态全量索引（42 页 title+description 取自 dist 实测）+ 客户端子串匹配，零依赖零构建负担
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Search | PRESSUREPOINT" description="Search PRESSUREPOINT pressure transducer product lines, industry application notes and engineering guides." robots="noindex">
+  <section class="bg-navy-950 py-14 text-white">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <nav class="text-sm text-slate-400" aria-label="Breadcrumb">
+        <a href="/" class="transition hover:text-white">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-slate-200">Search</span>
+      </nav>
+      <h1 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Search PRESSUREPOINT</h1>
+      <form action="/search/" method="get" class="mt-6">
+        <div class="flex gap-3">
+          <input
+            type="search"
+            name="q"
+            placeholder="e.g. 4-20mA, submersible, calibration…"
+            class="h-12 flex-1 rounded-xl border border-white/15 bg-white/5 px-4 text-white placeholder-slate-400 focus:border-brand-blue focus:outline-none"
+          />
+          <button type="submit" class="rounded-xl bg-cta-orange px-6 text-sm font-semibold text-white transition hover:bg-orange-600">Search</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+      <p id="search-summary" class="text-sm text-slate-500"></p>
+      <div id="search-results" class="mt-6 space-y-6"></div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const INDEX = [
+    { h: "/about/", t: "About PRESSUREPOINT — Pressure Transducer Manufacturer", d: "PRESSUREPOINT is a factory-direct pressure transducer manufacturer: in-house machining, assembly and NIST-traceable calibration, CE marking and ISO 9001 quality." },
+    { h: "/blog/", t: "Pressure Transducer Blog: Guides & Technical Articles", d: "Practical guides on pressure transducers: working principles, 4-20mA output and wiring, sensor types, transducer vs transmitter, choosing the right instrument." },
+    { h: "/blog/differential-pressure-measurement/", t: "Differential Pressure Measurement: How ΔP Works & Uses", d: "How differential pressure (ΔP) measurement works: high/low-side ports, diaphragm sensing, flow, level and filter-clogging applications, plus range and selection." },
+    { h: "/blog/flush-diaphragm-pressure-transducer/", t: "Flush Diaphragm Pressure Transducers: When You Need One", d: "What a flush diaphragm pressure transducer is and when it is required: viscous media, slurries and hygienic processes, plus connection options and selection." },
+    { h: "/blog/hydrostatic-level-measurement/", t: "Hydrostatic Level Measurement: How Submersible Sensors Work", d: "Hydrostatic level measurement explained: the P = ρgh principle, how submersible pressure transmitters with vent tubes work, and practical selection rules." },
+    { h: "/blog/miniature-pressure-sensor-selection/", t: "Miniature Pressure Sensors: OEM & Embedded Selection Guide", d: "How to select a miniature pressure sensor: size classes, pressure ranges, mV vs digital output, mounting options, accuracy trade-offs and OEM volume procurement." },
+    { h: "/blog/pressure-sensor-types/", t: "Pressure Sensor Types: Guide by Technology & Reference", d: "Pressure sensor types explained: piezoresistive, strain gauge and capacitive technologies, plus gauge, absolute and differential references with selection table." },
+    { h: "/blog/pressure-switch-vs-pressure-transducer/", t: "Pressure Switch vs Pressure Transducer: Key Differences", d: "Pressure switch vs pressure transducer: discrete switching versus continuous measurement, setpoint accuracy, cost, wiring and how to choose for pumps, compressors and hydraulics." },
+    { h: "/blog/pressure-transducer-4-20ma/", t: "Pressure Transducer 4-20 mA Output: Wiring & Scaling", d: "Pressure transducer 4-20 mA output explained: two-wire loop wiring, scaling 4 mA to 20 mA into pressure readings, 4-20 mA vs 0-10 V, and common wiring mistakes." },
+    { h: "/blog/pressure-transducer-accuracy/", t: "Pressure Transducer Accuracy: % FS, Errors & What Matters", d: "What pressure transducer accuracy means: % FS error, non-linearity, hysteresis, repeatability, temperature drift, and how to choose ±0.5% or ±0.25% FS classes." },
+    { h: "/blog/pressure-transducer-calibration/", t: "Pressure Transducer Calibration: Guide & Intervals", d: "Pressure transducer calibration explained: as-found and as-left readings, NIST traceability, the five-point calibration procedure, recalibration intervals and what a certificate must contain." },
+    { h: "/blog/pressure-transducer-maintenance/", t: "Pressure Transmitter Maintenance: Guide & Intervals", d: "Pressure transmitter maintenance guide: routine zero-drift and output checks, diaphragm cleaning, calibration intervals and recertification, common failures, and a preventive maintenance schedule." },
+    { h: "/blog/pressure-transducer-selection-guide/", t: "How to Choose a Pressure Transducer: Selection Guide", d: "Step-by-step pressure transducer selection: pressure range, accuracy, output signal, process connection and wetted materials, with practical engineering rules." },
+    { h: "/blog/pressure-transducer-vs-transmitter/", t: "Pressure Transducer vs Transmitter: Key Differences", d: "Pressure transducer vs pressure transmitter: what each term means, how output signals differ, and how to choose the right instrument for your machine or process." },
+    { h: "/blog/pressure-transducer-working-principle/", t: "Pressure Transducer Working Principle: How It Works", d: "Pressure transducer working principle explained: strain gauge and piezoresistive sensing, signal conditioning, and how pressure becomes 4-20 mA output." },
+    { h: "/blog/submersible-level-transmitter/", t: "Submersible Level Transmitter: Complete Engineering Guide", d: "Submersible level transmitter guide: hydrostatic P = ρgh principle, vent tube reference, range sizing with density correction, cable selection, installation and IP68 specification." },
+    { h: "/blog/what-is-a-pressure-transducer/", t: "What Is a Pressure Transducer? Working Principle & Types", d: "A pressure transducer converts pressure into an electrical signal. Learn working principles, output signal types, and how to choose the right transducer." },
+    { h: "/blog/wireless-pressure-transducer/", t: "Wireless Pressure Transducer: The Complete Engineering Guide", d: "How wireless pressure transducers work, LoRaWAN vs NB-IoT vs 4G, battery life math, and when wireless beats a wired 4-20 mA loop — with real specification rules." },
+    { h: "/contact/", t: "Contact PRESSUREPOINT — Pressure Transducer Quote", d: "Contact PRESSUREPOINT for pressure transducer and transmitter pricing: send range, media, output and volume for a quote within 24 hours, with OEM/ODM support." },
+    { h: "/faq/", t: "Pressure Transducer FAQ", d: "Frequently asked questions about pressure transducers and transmitters: output signals, pressure ranges, process connections, custom builds, MOQ and lead times." },
+    { h: "/index/", t: "Pressure Transducer Manufacturer | 4-20mA & 0-10V", d: "PRESSUREPOINT manufactures pressure transducers and transmitters: 4-20mA, 0-10V and RS485 outputs, differential, miniature and submersible models, OEM support." },
+    { h: "/industries/automation/", t: "Pressure Transducers for Automation & OEM Machines", d: "Pressure transducers for machine builders and OEMs: compact embedded modules from 12 mm, 4-20mA, 0-10V, RS485 and mV outputs, custom ranges, small MOQs." },
+    { h: "/industries/compressed-air/", t: "Compressed Air Pressure Transducers | Receiver & Line", d: "Pressure monitoring for compressed air systems: receiver tank, compressor discharge and line pressure, with 7-16 bar ranges and explosion-proof options." },
+    { h: "/industries/hvac/", t: "HVAC Pressure Transducers | Refrigerant & Duct Pressure", d: "Pressure transducers for HVAC and refrigeration: refrigerant suction, discharge and duct static pressure, with 4-20mA and 0-10V outputs for BMS integration." },
+    { h: "/industries/hydraulic/", t: "Hydraulic Pressure Transducers | 250-600 bar, 4-20mA", d: "Pressure transducers for hydraulic systems: system pressure, cylinder load and pump monitoring from 250 to 600 bar, with 4-20mA, 0-10V and RS485 outputs." },
+    { h: "/industries/oil-gas/", t: "Oil & Gas Pressure Transducers | Explosion-Proof", d: "Explosion-proof pressure transmitters for oil and gas: wellhead, pipeline and separator monitoring, 4-20mA outputs, high-temperature options and API/NACE review." },
+    { h: "/industries/process/", t: "Process Pressure Transducers | Sanitary & Chemical", d: "Pressure measurement for chemical, pharmaceutical and food & beverage plants: sanitary flush-diaphragm and explosion-proof transducers from vacuum to 600 bar." },
+    { h: "/industries/water/", t: "Water Pressure Transducers | Pump Stations & Level", d: "Pressure and level measurement for water treatment and distribution: pump monitoring, hydrostatic tank level and IP68 submersible sensors with 4-20mA output." },
+    { h: "/legal/privacy/", t: "Privacy Policy | PRESSUREPOINT", d: "PRESSUREPOINT privacy policy — how we handle inquiry data and personal information." },
+    { h: "/legal/terms/", t: "Terms of Service | PRESSUREPOINT", d: "PRESSUREPOINT terms of service for website use and product inquiries." },
+    { h: "/products/", t: "Pressure Transducers & Transmitters | Product Lines", d: "Pressure transducers and transmitters: industrial, high-accuracy, miniature, differential, flush-diaphragm and submersible, with 4-20mA, 0-10V and RS485 outputs." },
+    { h: "/products/differential/", t: "Differential Pressure Transducers | Wet/Wet 4-20mA", d: "Differential pressure transducers and transmitters in wet/wet and wet/dry versions with 4-20mA, 0-10V and RS485 outputs for filter monitoring, factory-direct." },
+    { h: "/products/explosion-proof/", t: "Explosion Proof Pressure Transmitters | ATEX Zone 1/2", d: "Explosion proof pressure transmitters certified to ATEX and IECEx for Zone 1 and Zone 2 hazardous areas. Flameproof 316L housing, 4-20mA output, -1 to 600 bar." },
+    { h: "/products/flush-diaphragm/", t: "Flush Diaphragm Pressure Transducers | Hygienic", d: "Flush diaphragm pressure transducers for viscous, pasty and hygienic media. 316L stainless wetted parts, clamp and flange connections, 4-20mA and RS485 outputs." },
+    { h: "/products/high-accuracy/", t: "High Accuracy Pressure Transducers | ±0.1% FS, Low Drift", d: "High accuracy pressure transducers with ±0.1% FS accuracy, low temperature drift and long-term stability. 4-20mA, 0-10V and RS485 outputs, vacuum to 600 bar." },
+    { h: "/products/industrial/", t: "Industrial Pressure Transducers | 4-20mA, 0-10V, RS485", d: "Industrial pressure transducers and transmitters with 4-20mA, 0-10V and RS485 outputs, vacuum to 600 bar, stainless steel construction, custom OEM support." },
+    { h: "/products/miniature/", t: "Miniature Pressure Sensors | Compact OEM Modules from 12 mm", d: "Miniature pressure sensors and compact OEM transducer modules with body diameters from 12 mm. 4-20mA, 0-10V and RS485 outputs, vacuum to 600 bar, custom ranges." },
+    { h: "/products/submersible/", t: "Submersible Pressure Transducers & Hydrostatic Level", d: "Submersible pressure transducers and hydrostatic level transmitters with IP68 rating and vented cable for tank, well and open-channel level measurement." },
+    { h: "/services/", t: "Services | OEM/ODM, Calibration & Wholesale", d: "OEM/ODM pressure transducer manufacturing, NIST-traceable calibration and wholesale programs for distributors, factory-direct support and confirmed lead times." },
+    { h: "/services/calibration/", t: "Pressure Transducer Calibration | NIST-Traceable Certificates", d: "NIST-traceable multi-point pressure transducer calibration, per-serial-number certificates and factory recalibration with a typical 5-7 working day turnaround." },
+    { h: "/services/oem-odm/", t: "OEM & ODM Pressure Transducer Manufacturer | Private Label", d: "OEM/ODM pressure transducer manufacturing with custom ranges, outputs and process connections. Prototype in 15-20 days, NIST-traceable calibration on every unit." },
+    { h: "/thank-you/", t: "Thank You | PRESSUREPOINT", d: "Thank you for your inquiry — our team will reply within 24 hours." }
+  ];
+  const q = new URLSearchParams(location.search).get('q')?.trim().toLowerCase() || '';
+  const box = document.getElementById('search-results');
+  const summary = document.getElementById('search-summary');
+  if (!q) {
+    summary.textContent = 'Type a keyword above — product lines, industries and engineering guides are all searchable.';
+  } else {
+    const hits = INDEX.filter(e => (e.t + ' ' + e.d).toLowerCase().includes(q));
+    summary.textContent = hits.length + ' result(s) for "' + q + '"';
+    box.innerHTML = hits.map(e =>
+      '<a href="' + e.h + '" class="block rounded-2xl border border-slate-200 p-5 transition hover:border-brand-blue/40 hover:shadow-md">' +
+      '<span class="text-lg font-bold text-navy-950">' + e.t + '</span>' +
+      '<span class="mt-1 block text-sm text-slate-600">' + e.d + '</span>' +
+      '<span class="mt-2 block text-xs text-slate-400">' + e.h + '</span></a>'
+    ).join('') || '<p class="text-sm text-slate-500">No matches. Try a shorter keyword (e.g. "level", "miniature", "HVAC") or <a href="/contact/" class="font-semibold text-brand-blue">ask our engineers directly</a>.</p>';
+  }
+</script>
