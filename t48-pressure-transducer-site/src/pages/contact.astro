@@ -51,9 +51,20 @@ import { site } from '../data/site.ts';
           </div>
         </div>
         <div class="lg:col-span-3">
-          <form id="inquiry-form" data-contact-email={site.email} class="space-y-5" method="post" action="/api/contact">
+          <form id="inquiry-form" data-contact-email={site.email} data-ajax-form data-attribution class="space-y-5" method="post" action="/api/contact">
             <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <input type="hidden" name="form_source" value="contact page" />
+            {/* K-129 询盘归因三件套（卡 t_2c933fb6）：全部 hidden，不进用户可见填写面；值由 attribution.ts 加载预填 + 提交瞬间回填 */}
+            <input type="hidden" name="landing_page" value="direct" />
+            <input type="hidden" name="first_seen" value="direct" />
+            <input type="hidden" name="cta_slot" value="direct" />
+            <input type="hidden" name="page_path" value="direct" />
+            <input type="hidden" name="page_url" value="direct" />
+            <input type="hidden" name="referrer" value="direct" />
+            <input type="hidden" name="utm_source" value="direct" />
+            <input type="hidden" name="utm_medium" value="direct" />
+            <input type="hidden" name="utm_campaign" value="direct" />
+            <input type="hidden" name="gclid" value="direct" />
             <div class="grid gap-5 sm:grid-cols-2">
               <div>
                 <label for="name" class="mb-1.5 block text-sm font-semibold text-navy-950">Name *</label>
@@ -118,30 +129,8 @@ import { site } from '../data/site.ts';
       </div>
     </div>
   </section>
+  {/* 提交逻辑（含 K-129 归因回填 + form_submit 事件）统一在 src/scripts/form-submit.ts，禁在此另写一套 */}
   <script>
-    document.getElementById('inquiry-form')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const form = e.target;
-      const btn = form.querySelector('button[type=submit]');
-      const original = btn.textContent;
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
-      try {
-        const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
-        const data = await res.json();
-        if (data.ok) {
-          window.location.href = '/thank-you/';
-        } else {
-          alert('Something went wrong: ' + (data.error || 'unknown error'));
-        }
-      } catch (err) {
-        // 10-13 补闸 t_6989122a：对客邮箱经 data-contact-email 从单源读取，脚本禁硬写
-        const contactEmail = form.dataset.contactEmail || '';
-        alert(`Network error, please email us directly at ${contactEmail}`);
-      } finally {
-        btn.textContent = original;
-        btn.disabled = false;
-      }
-    });
+    import '../scripts/form-submit.ts';
   </script>
 </Layout>

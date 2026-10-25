@@ -26,6 +26,20 @@ export async function onRequest(context) {
     const message = (data.get('message') || '').toString().trim();
     const source = (data.get('form_source') || 'website').toString().trim();
 
+    // ── 询盘来源采集（K-129 三件套 S3 面 / 卡 t_2c933fb6）──
+    // 只读采集模块送来的路径/渠道/位点，不读用户填的任何内容（PII 不进本块）。
+    // 清洗：去控制字符防正文注入 + 单值长度上限；缺失/空值一律 direct（空值会让周报统计失真）。
+    const attr = (k, max) => (data.get(k) || '').toString().replace(/[\u0000-\u001f\u007f]+/g, ' ').slice(0, max).trim();
+    const pagePath = attr('page_path', 200) || 'direct';
+    const pageUrl = attr('page_url', 300) || 'direct';
+    const attrReferrer = attr('referrer', 300) || 'direct';
+    const utmSource = attr('utm_source', 120) || 'direct';
+    const utmMedium = attr('utm_medium', 120) || 'direct';
+    const utmCampaign = attr('utm_campaign', 160) || 'direct';
+    const landingPage = attr('landing_page', 512) || 'direct';
+    const firstSeen = attr('first_seen', 40) || 'direct';
+    const ctaSlot = attr('cta_slot', 64) || 'direct';
+
     const text = [
       `New inquiry — ${source}`,
       '━━━━━━━━━━━━━━━━━━━━',
@@ -36,6 +50,14 @@ export async function onRequest(context) {
       `Quantity: ${quantity || '(not specified)'}`,
       `Message:`,
       message || '(not provided)',
+      '━━━━━━━━━━━━━━━━━━━━',
+      // 来源块（K-129 S3）：这单从哪个页面进来、第一次什么时候来、点了哪个位置的询价钮
+      `来源页: ${pagePath}${pageUrl !== 'direct' && pageUrl !== pagePath ? ' (' + pageUrl + ')' : ''}`,
+      `渠道: ${attrReferrer === 'direct' ? 'direct' : attrReferrer}`,
+      `UTM: source=${utmSource} / medium=${utmMedium} / campaign=${utmCampaign}`,
+      `首触着陆: ${landingPage}`,
+      `首次到访: ${firstSeen}`,
+      `CTA位点: ${ctaSlot}`,
       '━━━━━━━━━━━━━━━━━━━━',
       `Visitor IP: ${context.request.headers.get('cf-connecting-ip') || 'unknown'}`,
       `User-Agent: ${context.request.headers.get('user-agent') || 'unknown'}`,

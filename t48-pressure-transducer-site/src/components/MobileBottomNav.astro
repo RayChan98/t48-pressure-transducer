@@ -1,11 +1,11 @@
 ---
 // 移动端底部固定导航（molditquick 模式）：五大核心入口
 const items = [
-  { href: '/', label: 'Home', icon: '🏠' },
-  { href: '/products/', label: 'Products', icon: '📷' },
-  { href: '/services/', label: 'Services', icon: '🛠️' },
-  { href: '/blog/', label: 'Blog', icon: '📰' },
-  { href: '/contact/', label: 'Contact', icon: '✉️' },
+  { href: '/', label: 'Home', icon: '🏠', slot: 'mobile-nav-home' },
+  { href: '/products/', label: 'Products', icon: '📷', slot: 'mobile-nav-products' },
+  { href: '/services/', label: 'Services', icon: '🛠️', slot: 'mobile-nav-services' },
+  { href: '/blog/', label: 'Blog', icon: '📰', slot: 'mobile-nav-blog' },
+  { href: '/contact/', label: 'Contact', icon: '✉️', slot: 'mobile-nav-contact' },
 ];
 ---
 
@@ -14,6 +14,7 @@ const items = [
     {items.map((item) => (
       <a
         href={item.href}
+        data-cta-slot={item.slot}
         class="flex flex-1 flex-col items-center gap-0.5 px-1 py-2 text-[11px] font-medium text-slate-500 transition hover:text-brand-blue"
       >
         <span class="text-lg leading-none">{item.icon}</span>

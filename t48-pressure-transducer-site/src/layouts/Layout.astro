@@ -59,5 +59,10 @@ const organization = {
     <MobileBottomNav />
     <InquiryModal />
     <SearchModal />
+    {/* K-129 询盘归因三件套（卡 t_2c933fb6）：全站壳导入采集模块——任何页面首访即锁首触
+        landing_page / first_seen（含无表单页），CTA 位点走 data-cta-slot 事件委托 */}
+    <script>
+      import '../scripts/attribution.ts';
+    </script>
   </body>
 </html>

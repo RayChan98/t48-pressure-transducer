@@ -39,9 +39,20 @@ const roleOptions = ['End User', 'Installer / Integrator', 'Distributor / Wholes
     </div>
 
     <!-- 表单体 -->
-    <form id="inquiry-form" data-contact-email={site.email} class="max-h-[70vh] overflow-y-auto px-6 py-5" action="/api/contact" method="post">
+    <form id="inquiry-form-modal" data-contact-email={site.email} data-attribution class="max-h-[70vh] overflow-y-auto px-6 py-5" action="/api/contact" method="post">
       <input type="hidden" name="form_source" value="popup-modal" />
       <input type="text" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      {/* K-129 询盘归因三件套（卡 t_2c933fb6）：hidden 不进用户可见填写面；值由 attribution.ts 加载预填 + 提交瞬间回填 */}
+      <input type="hidden" name="landing_page" value="direct" />
+      <input type="hidden" name="first_seen" value="direct" />
+      <input type="hidden" name="cta_slot" value="direct" />
+      <input type="hidden" name="page_path" value="direct" />
+      <input type="hidden" name="page_url" value="direct" />
+      <input type="hidden" name="referrer" value="direct" />
+      <input type="hidden" name="utm_source" value="direct" />
+      <input type="hidden" name="utm_medium" value="direct" />
+      <input type="hidden" name="utm_campaign" value="direct" />
+      <input type="hidden" name="gclid" value="direct" />
 
       <div class="grid gap-4 sm:grid-cols-2">
         <div>
@@ -102,10 +113,16 @@ const roleOptions = ['End User', 'Installer / Integrator', 'Distributor / Wholes
 </div>
 
 <script>
+  // K-129 归因三件套（卡 t_2c933fb6）：采集模块统一出口
+  import { fillAttribution, emitFormSubmit } from '../scripts/attribution';
+
   const modal = document.getElementById('inquiry-modal');
   const openers = document.querySelectorAll('[data-quote-open]');
   const closers = modal ? modal.querySelectorAll('[data-quote-close]') : [];
-  const form = document.getElementById('inquiry-form');
+  // 坑（skill inquiry-attribution-wiring #10）：弹窗表单禁 getElementById 全站取——
+  // contact 页也有一个 id="inquiry-form" 的页内表单，全站取会绑错表单（弹窗提交走原生 POST + 页内表单双发）。
+  // 一律在弹窗作用域内取。
+  const form = modal ? modal.querySelector('form') : null;
   const statusEl = document.getElementById('modal-form-status');
 
   function openModal() {
@@ -136,10 +153,15 @@ const roleOptions = ['End User', 'Installer / Integrator', 'Distributor / Wholes
       btn.disabled = true;
       btn.textContent = 'Sending...';
       statusEl.classList.add('hidden');
+      // K-129 S1：提交瞬间把归因三件（landing_page/first_seen/cta_slot + utm）回填进 hidden
+      fillAttribution(form);
       try {
         const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
         const data = await res.json();
         if (data.ok) {
+          // K-129 S2：提交成功补显式 form_submit 事件（禁改名；GA4 未装时入 dataLayer 留痕）
+          emitFormSubmit(form);
+          await new Promise((r) => setTimeout(r, 400)); // 留 flush 窗防吞事件
           window.location.href = '/thank-you/';
         } else {
           statusEl.textContent = data.error === 'mail_not_configured'
