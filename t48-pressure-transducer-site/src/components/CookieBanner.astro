@@ -1,0 +1,44 @@
+---
+// Cookie 同意底部横条 — 卡 t_303da4ba（照 insertcore-site t_33bd86bb / molditquick-v3 / istamping-v3 样板移植，色板=本站 tokens）
+// 规范真源 = E:\HermesData\assets\建站标准流程-SOP分环节\04-建站设计SOP族\通用壳件-Cookie同意弹窗规范-v0.1草案-20261016.txt
+// C1 全区域统一展示（不分地理）；C2 底部横条；C3 Accept all / Necessary only 同层同尺寸并列无主次诱导；
+// C4 同意前第三方行为脚本不加载 + GA4 按 consent denied 初始化（Layout.astro head 内联段负责）；
+// C5 反悔通道 = 带 data-cookie-reopen / data-cookie-settings 的入口（页脚 Cookie settings 已挂）；
+// C6 一句大白话 + Cookie Policy 链接。
+// 默认 hidden：无 JS 环境永不出条（GA4 保持 denied 初始化 = 安全默认），src/scripts/consent.ts 检测未决才显示。
+// 注：bottom 起点让位 MobileBottomNav（移动端常驻底栏），lg 起底栏隐藏后落底。
+---
+
+<div
+  id="cookie-banner"
+  class="fixed inset-x-0 bottom-[3.5rem] z-[60] hidden border-t border-slate-200 bg-white shadow-[0_-6px_24px_-12px_rgba(11,31,51,0.35)] lg:bottom-0"
+  role="region"
+  aria-label="Cookie consent"
+>
+  <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:gap-6">
+    <p class="text-sm leading-relaxed text-slate-600">
+      We use cookies to see how visitors use this site and to improve it. Choose what you are happy with — you can change your mind any time.
+      <a
+        href="/legal/cookie-policy/"
+        class="whitespace-nowrap rounded-sm font-semibold text-brand-blue underline underline-offset-2 transition hover:text-navy-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+        >Cookie Policy</a
+      >
+    </p>
+    <div class="grid shrink-0 grid-cols-2 gap-3 lg:w-[19rem]">
+      <button
+        type="button"
+        data-cookie-accept
+        class="inline-flex items-center justify-center gap-2 rounded-lg bg-navy-950 px-4 py-3 text-sm font-semibold whitespace-nowrap text-white transition hover:bg-navy-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+      >
+        Accept all
+      </button>
+      <button
+        type="button"
+        data-cookie-necessary
+        class="inline-flex items-center justify-center gap-2 rounded-lg bg-navy-950 px-4 py-3 text-sm font-semibold whitespace-nowrap text-white transition hover:bg-navy-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+      >
+        Necessary only
+      </button>
+    </div>
+  </div>
+</div>

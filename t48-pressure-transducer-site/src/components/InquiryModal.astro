@@ -160,9 +160,10 @@ const roleOptions = ['End User', 'Installer / Integrator', 'Distributor / Wholes
         const data = await res.json();
         if (data.ok) {
           // K-129 S2：提交成功补显式 form_submit 事件（禁改名；GA4 未装时入 dataLayer 留痕）
-          emitFormSubmit(form);
-          await new Promise((r) => setTimeout(r, 400)); // 留 flush 窗防吞事件
-          window.location.href = '/thank-you/';
+          // 导航交给事件出口回调（beacon 发出即跳，最长 1.5s 兜底）——固定 sleep 补不住事件丢失（卡 t_303da4ba 实测）
+          emitFormSubmit(form, () => {
+            window.location.href = '/thank-you/';
+          });
         } else {
           statusEl.textContent = data.error === 'mail_not_configured'
             ? `Service temporarily unavailable. Please email us directly at ${contactEmail}.`

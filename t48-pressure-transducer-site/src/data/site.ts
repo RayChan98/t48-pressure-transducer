@@ -15,6 +15,13 @@ export const site = {
   phone: "+86 137 1086 0663",
   whatsapp: "8613710860663",
   waNumber: "8613710860663",
+  // —— 分析埋点单点开关（卡 t_303da4ba 2026-10-26：K-129 S2 面 GA4 真上报）——
+  //   ga4Id 空串 = 不挂载 gtag（安全默认）；填 G-XXXX 即全站生效（Layout head 双段+consent 门控现成）。
+  //   换号纪律（skill ga4-analytics-ops 坑⑤）：改本行→build→部署→线上实扫旧 ID 0 命中才算换成功。
+  //   禁在 Layout/组件里手贴第二份 ID（双份=换号必漏一处）。
+  ga4Id: "G-2KKBHVWHM7",
+  //   clarityId 空串 = 不加载微软 Clarity（同意后由 src/scripts/consent.ts 注入；空 ID 即开关关）。
+  clarityId: "",
 };
 
 export default site;

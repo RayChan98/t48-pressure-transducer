@@ -6,6 +6,15 @@ import FloatingActions from '../components/FloatingActions.astro';
 import MobileBottomNav from '../components/MobileBottomNav.astro';
 import InquiryModal from '../components/InquiryModal.astro';
 import SearchModal from '../components/SearchModal.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+// 触点/埋点单源（卡 t_303da4ba）：ga4Id / clarityId 只在本文件取值，禁组件内硬写
+import { site } from '../data/site.ts';
+
+// Cookie 同意偏好存储键：head 内联段与 src/scripts/consent.ts 必须同值（禁单边改名）
+const CONSENT_KEY = 't48_pressurepoint_cookie_consent';
+// 埋点总开关（卡 t_303da4ba 坑⑦）：ga4Id/clarityId 全空 = 本站零埋点 → 横幅与同意脚本一律不渲染，
+// 保证「开关关 = 站上零可见变化、零 cookie、零第三方请求」；任一 ID 填上才出同意条。
+const TRACKING_ON = Boolean(site.ga4Id || site.clarityId);
 
 const { title = 'PRESSUREPOINT', description = 'Pressure Transducer & Transmitter Manufacturer', robots = 'index, follow' } = Astro.props;
 const canonical = Astro.url.pathname === '/' ? 'https://t48-pressure-transducer.pages.dev/' : `https://t48-pressure-transducer.pages.dev${Astro.url.pathname.replace(/\/$/, '')}/`;
@@ -48,6 +57,28 @@ const organization = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+    {/* GA4 埋点（卡 t_303da4ba；测量 ID 单点开关 = src/data/site.ts 的 ga4Id，空串=不挂载）
+        姿势 = insertcore-site t_33bd86bb 已验证两段制（SOP06件 v1.0 步骤4 + Consent Mode C4）：
+        ① consent default（未决/拒绝=analytics denied，不写 _ga cookie）→ ② js + config → ③ loader 自注入。
+        同意后由 src/scripts/consent.ts 调 gtag('consent','update') 升级 granted；
+        事件面统一出口 = src/scripts/attribution.ts 的 emitFormSubmit()（window.gtag 存在即真调 gtag 上报）。 */}
+    {site.ga4Id && (
+      <script is:inline define:vars={{ gaId: site.ga4Id, consentKey: CONSENT_KEY }}>
+        window.dataLayer = window.dataLayer || [];
+        var gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag = gtag;
+        var __cc = (function () { try { return localStorage.getItem(consentKey); } catch (e) { return null; } })();
+        gtag('consent', 'default', { analytics_storage: __cc === 'granted' ? 'granted' : 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 3000 });
+        gtag('js', new Date());
+        gtag('config', gaId);
+        (function (d, id) {
+          var s = d.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+          d.head.appendChild(s);
+        })(document, gaId);
+      </script>
+    )}
   </head>
   <body class="flex min-h-screen flex-col">
     <SiteHeader />
@@ -59,6 +90,15 @@ const organization = {
     <MobileBottomNav />
     <InquiryModal />
     <SearchModal />
+    {TRACKING_ON && (
+      <>
+        <CookieBanner />
+        {/* 同意门控（卡 t_303da4ba）：横幅显隐 + 两键决策 + consent update 升级 + Clarity 同意后注入 */}
+        <script>
+          import '../scripts/consent.ts';
+        </script>
+      </>
+    )}
     {/* K-129 询盘归因三件套（卡 t_2c933fb6）：全站壳导入采集模块——任何页面首访即锁首触
         landing_page / first_seen（含无表单页），CTA 位点走 data-cta-slot 事件委托 */}
     <script>

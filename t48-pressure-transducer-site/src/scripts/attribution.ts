@@ -10,8 +10,10 @@
 //   · cta_slot = 最近一次点击的询盘 CTA 位点（组件挂 data-cta-slot，事件委托 capture 采集）
 //   · 无值一律写 direct（禁留空，空值会让周报统计失真）
 // 存储纪律：每键 ≤512 字符、总占用 <4KB。隐私模式存储被禁时降级为「本次提交用当前值」不抛错。
-// 事件面：emitFormSubmit() 统一出口——GA4 在则 gtag('event','form_submit',…)；
-//         GA4 未装（本站暂无 measurement ID，禁编造 ID）则事件入 dataLayer 队列留痕，不伪造上报。
+// 事件面：emitFormSubmit() 统一出口——「先存后发」：提交页把事件参数存 sessionStorage，
+//         落地页（/thank-you/）加载时 flushPendingFormSubmit() 补发；
+//         GA4 在则 gtag('event','form_submit',…) 真上报，GA4 未装则入 dataLayer 队列留痕，不伪造上报。
+//         （为什么不能提交页直接发完再跳：gtag.js 事件是异步批量发送，跳页会吞掉，卡 t_303da4ba 实锤）
 // ============================================================
 
 export const ATTR_FIELDS = [
@@ -44,6 +46,31 @@ function lsSet(key: string, value: string): void {
     localStorage.setItem(V(key), value);
   } catch {
     /* 隐私模式/存储被禁：降级为本次提交直接用当前值 */
+  }
+}
+
+// —— 待发事件缓存（卡 t_303da4ba：「先存后发」机制的存储层）——
+// 键 = t48_pressurepoint_pending_form_submit_v1（个人线前缀，禁与公司线件混）
+const PENDING_KEY = 't48_pressurepoint_pending_form_submit_v1';
+
+function stashPending(payload: Record<string, string>): boolean {
+  try {
+    sessionStorage.setItem(PENDING_KEY, JSON.stringify(payload));
+    return true;
+  } catch {
+    return false; // 隐私模式/存储被禁 → 调用方退回直发
+  }
+}
+
+function takePending(): Record<string, string> | null {
+  try {
+    const raw = sessionStorage.getItem(PENDING_KEY);
+    if (!raw) return null;
+    sessionStorage.removeItem(PENDING_KEY); // 取出即删 = 恰好一次，不重复计数
+    const parsed = JSON.parse(raw) as Record<string, string>;
+    return parsed && typeof parsed === 'object' ? parsed : null;
+  } catch {
+    return null;
   }
 }
 
@@ -157,9 +184,21 @@ export function fillAttribution(form: HTMLFormElement): void {
   }
 }
 
-/** 询盘提交成功的统一事件出口（禁改事件名、禁另开一套：仍 form_submit） */
-export function emitFormSubmit(form: HTMLFormElement): void {
-  if (!form) return;
+/** 询盘提交成功的统一事件出口（禁改事件名、禁另开一套：仍 form_submit）
+ *
+ * 为什么不是「提交页直接 gtag 发完再跳」（卡 t_303da4ba 实测两次否决）：
+ *   gtag.js 处理 dataLayer 里的事件是**异步批量**的，本机实测同一页面上手动发事件要 4~8s 才落地
+ *   （对照实验：极简官方片段页同样如此），而本站提交成功即跳 /thank-you/，跳页会把队列里的事件吞掉，
+ *   结果 = dataLayer 里有、谷歌侧 0 命中（前两轮探针 FAIL 的真因）。
+ * 现在的姿势 = 「先存后发」：提交页把事件参数同步写进 sessionStorage（跨页保留、同步、不会丢），
+ *   由落地页（/thank-you/）加载时 flushPendingFormSubmit() 取出补发；取出即删 = 恰好一次，不重复计数，
+ *   也不拖慢跳转。存储不可用（隐私模式）时退回直发：可能丢，但绝不假报。
+ */
+export function emitFormSubmit(form: HTMLFormElement, done?: () => void): void {
+  if (!form) {
+    done?.();
+    return;
+  }
   const a = collectAttribution();
   const srcEl = form.elements.namedItem('form_source') as HTMLInputElement | null;
   const payload = {
@@ -177,18 +216,40 @@ export function emitFormSubmit(form: HTMLFormElement): void {
     gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
   };
+  if (stashPending(payload)) {
+    done?.(); // 存住即可跳，事件由目标页补发
+    return;
+  }
+  if (typeof w.gtag === 'function') {
+    w.gtag('event', 'form_submit', payload);
+  } else {
+    // GA4 标签尚未安装（本站无 measurement ID）：事件只入 dataLayer 留痕，禁伪造上报
+    w.dataLayer = w.dataLayer || [];
+    w.dataLayer.push({ event: 'form_submit', ...payload });
+  }
+  done?.();
+}
+
+/** 落地页补发：取出即删（恰好一次）。ga4 未装时同样入 dataLayer 留痕 */
+export function flushPendingFormSubmit(): void {
+  const payload = takePending();
+  if (!payload) return;
+  const w = window as unknown as {
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+  };
   if (typeof w.gtag === 'function') {
     w.gtag('event', 'form_submit', payload);
     return;
   }
-  // GA4 标签尚未安装（本站无 measurement ID）：事件只入 dataLayer 留痕，禁伪造上报
   w.dataLayer = w.dataLayer || [];
   w.dataLayer.push({ event: 'form_submit', ...payload });
 }
 
-/** 页面加载即初始化：锁首触 + 预填所有表单 + 全站委托（无表单页也必须调用一次落锁） */
+/** 页面加载即初始化：锁首触 + 补发上一页待发事件 + 预填所有表单 + 全站委托（无表单页也必须调用一次落锁） */
 export function initAttribution(): void {
   initCtaTracker();
+  flushPendingFormSubmit(); // 上一页（提交页）存下的 form_submit：落地页第一时间补发，跳页不吞事件
   collectAttribution(); // 首触锁定（landing_page / first_seen 在落地页首次就写死）
   const run = () => {
     document.querySelectorAll<HTMLFormElement>('form[data-attribution]').forEach(fillAttribution);

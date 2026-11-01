@@ -29,10 +29,10 @@ document.addEventListener('submit', async (e) => {
     const data = await res.json();
     if (data.ok) {
       // S2：提交成功补显式事件（参数带归因三件 + utm；GA4 未装时入 dataLayer 留痕，见 attribution.ts）
-      emitFormSubmit(form);
-      // 立即导航会吞掉队列里未发的事件——留 400ms
-      await new Promise((r) => setTimeout(r, 400));
-      window.location.href = '/thank-you/';
+      // 导航交给事件出口回调（beacon 发出即跳，最长 1.5s 兜底）——固定 sleep 补不住事件丢失（卡 t_303da4ba 实测）
+      emitFormSubmit(form, () => {
+        window.location.href = '/thank-you/';
+      });
       return; // 保持按钮 disabled，跳转前不重复提交
     }
     alert('Something went wrong: ' + (data.error || 'unknown error'));
